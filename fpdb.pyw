@@ -88,7 +88,7 @@ try:
     VERSION = subprocess.Popen(["git", "describe", "--tags", "--dirty"], stdout=subprocess.PIPE).communicate()[0]
     VERSION = VERSION[:-1]
 except:
-    VERSION = "0.40.5"
+    VERSION = "0.40.6"
 
 
 class fpdb:
@@ -213,11 +213,11 @@ class fpdb:
         self.quit(widget)
 
     def dia_about(self, widget, data=None):
-        _VERSION = "0.40.5"
+        _VERSION = "0.40.6"
         dia = gtk.AboutDialog()
         dia.set_name("Free Poker Database (FPDB)")
         dia.set_version(_VERSION)
-        dia.set_copyright("Copyright 2008-2013. See contributors.txt for details")   #do not translate copyright message
+        dia.set_copyright("Copyright 2008-2023. See contributors.txt for details")   #do not translate copyright message
         dia.set_comments(_("You are free to change, and distribute original or changed versions of fpdb within the rules set out by the license"))
         dia.set_license(_("Please see the help screen for license information"))
         dia.set_website("http://fpdb.sourceforge.net/")
@@ -1237,7 +1237,7 @@ You can find the full license texts in agpl-3.0.txt, gpl-2.0.txt, gpl-3.0.txt an
         self.add_and_display_tab(tab, _("Stove"))
 
     def __init__(self):
-        _VERSION = "0.40.5"
+        _VERSION = "0.40.6"
         # no more than 1 process can this lock at a time:
         self.lock = interlocks.InterProcessLock(name="fpdb_global_lock")
         self.db = None

@@ -43,7 +43,7 @@ class Hand(object):
     MS = {'horse' : 'HORSE', '8game' : '8-Game', 'hose'  : 'HOSE', 'ha': 'HA'}
     ACTION = {'ante': 1, 'small blind': 2, 'secondsb': 3, 'big blind': 4, 'both': 5, 'calls': 6, 'raises': 7,
               'bets': 8, 'stands pat': 9, 'folds': 10, 'checks': 11, 'discards': 12, 'bringin': 13, 'completes': 14,
-              'straddle': 15, 'button blind': 16}
+              'straddle': 15, 'button blind': 16, 'walk': 17}
 
     def __init__(self, config, sitename, gametype, handText, builtFrom = "HHC"):
         self.config = config
@@ -566,6 +566,8 @@ class Hand(object):
                 self.addBlind(name, 'straddle', bet)
             elif act == 16:
                 self.addBlind(name, 'button blind', bet)
+            elif act == 17:
+                self.addBlind(name, 'big blind', bet)
             else:
                 print "DEBUG: unknown action: '%s'" % act
 
@@ -971,6 +973,8 @@ class Hand(object):
             return ("%s: posts small blind %s%s%s" %(act[0], self.sym, act[2], ' and is all-in' if act[3] else ''))
         elif(act[1] == "big blind"):
             return ("%s: posts big blind %s%s%s" %(act[0], self.sym, act[2], ' and is all-in' if act[3] else ''))
+        elif(act[1] == "walk"):
+            return ("%s: posts big blind %s%s%s and walk" %(act[0], self.sym, act[2], ' and is all-in' if act[3] else ''))
         elif(act[1] == "straddle"):
             return ("%s: straddles %s%s%s" %(act[0], self.sym, act[2], ' and is all-in' if act[3] else ''))
         elif(act[1] == "button blind"):

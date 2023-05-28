@@ -455,6 +455,25 @@ class Sql:
                             playersAtStreet3 SMALLINT NOT NULL,
                             playersAtStreet4 SMALLINT NOT NULL,
                             playersAtShowdown SMALLINT NOT NULL,
+                            
+                            street0Callers TINYINT NOT NULL,
+                            street1Callers TINYINT NOT NULL,
+                            street2Callers TINYINT NOT NULL,
+                            street3Callers TINYINT NOT NULL,
+                            street4Callers TINYINT NOT NULL,
+                            
+                            street0Aggressors TINYINT NOT NULL,
+                            street1Aggressors TINYINT NOT NULL,
+                            street2Aggressors TINYINT NOT NULL,
+                            street3Aggressors TINYINT NOT NULL,
+                            street4Aggressors TINYINT NOT NULL,
+                                                        
+                            street0Calls TINYINT NOT NULL,
+                            street1Calls TINYINT NOT NULL,
+                            street2Calls TINYINT NOT NULL,
+                            street3Calls TINYINT NOT NULL,
+                            street4Calls TINYINT NOT NULL,
+                                                        
                             street0Raises TINYINT NOT NULL, /* num small bets paid to see flop/street4, including blind */
                             street1Raises TINYINT NOT NULL, /* num small bets paid to see turn/street5 */
                             street2Raises TINYINT NOT NULL, /* num big bets paid to see river/street6 */
@@ -496,6 +515,25 @@ class Sql:
                             playersAtStreet3 SMALLINT NOT NULL,
                             playersAtStreet4 SMALLINT NOT NULL,
                             playersAtShowdown SMALLINT NOT NULL,
+                            
+                            street0Callers SMALLINT NOT NULL,
+                            street1Callers SMALLINT NOT NULL,
+                            street2Callers SMALLINT NOT NULL,
+                            street3Callers SMALLINT NOT NULL,
+                            street4Callers SMALLINT NOT NULL,
+                            
+                            street0Aggressors SMALLINT NOT NULL,
+                            street1Aggressors SMALLINT NOT NULL,
+                            street2Aggressors SMALLINT NOT NULL,
+                            street3Aggressors SMALLINT NOT NULL,
+                            street4Aggressors SMALLINT NOT NULL,
+                                                        
+                            street0Calls SMALLINT NOT NULL,
+                            street1Calls SMALLINT NOT NULL,
+                            street2Calls SMALLINT NOT NULL,
+                            street3Calls SMALLINT NOT NULL,
+                            street4Calls SMALLINT NOT NULL,
+                            
                             street0Raises SMALLINT NOT NULL, /* num small bets paid to see flop/street4, including blind */
                             street1Raises SMALLINT NOT NULL, /* num small bets paid to see turn/street5 */
                             street2Raises SMALLINT NOT NULL, /* num big bets paid to see river/street6 */
@@ -536,6 +574,25 @@ class Sql:
                             playersAtStreet3 INT NOT NULL,
                             playersAtStreet4 INT NOT NULL,
                             playersAtShowdown INT NOT NULL,
+                            
+                            street0Callers INT NOT NULL,
+                            street1Callers INT NOT NULL,
+                            street2Callers INT NOT NULL,
+                            street3Callers INT NOT NULL,
+                            street4Callers INT NOT NULL,
+                            
+                            street0Aggressors INT NOT NULL,
+                            street1Aggressors INT NOT NULL,
+                            street2Aggressors INT NOT NULL,
+                            street3Aggressors INT NOT NULL,
+                            street4Aggressors INT NOT NULL,
+                                                        
+                            street0Calls INT NOT NULL,
+                            street1Calls INT NOT NULL,
+                            street2Calls INT NOT NULL,
+                            street3Calls INT NOT NULL,
+                            street4Calls INT NOT NULL,
+                            
                             street0Raises INT NOT NULL, /* num small bets paid to see flop/street4, including blind */
                             street1Raises INT NOT NULL, /* num small bets paid to see turn/street5 */
                             street2Raises INT NOT NULL, /* num big bets paid to see river/street6 */
@@ -801,7 +858,12 @@ class Sql:
                         handId BIGINT UNSIGNED NOT NULL, FOREIGN KEY (handId) REFERENCES Hands(id),
                         playerId INT UNSIGNED NOT NULL, FOREIGN KEY (playerId) REFERENCES Players(id),
                         startCash BIGINT NOT NULL,
+                        bigblind BIGINT NOT NULL,
                         effStack BIGINT NOT NULL,
+                        effActiveStack BIGINT NOT NULL,
+                        effMzone FLOAT NOT NULL,
+                        effActiveMzone FLOAT NOT NULL,
+                        tableMzone FLOAT NOT NULL,
                         startBounty BIGINT,
                         endBounty BIGINT,
                         position CHAR(1),
@@ -860,8 +922,8 @@ class Sql:
                         street0_3BChance BOOLEAN,
                         street0_3BDone BOOLEAN,
                         street0_4BChance BOOLEAN,
-                        street0_C4BChance BOOLEAN,
                         street0_4BDone BOOLEAN,
+                        street0_C4BChance BOOLEAN,
                         street0_C4BDone BOOLEAN,
                         street0_FoldTo2BChance BOOLEAN,
                         street0_FoldTo2BDone BOOLEAN,
@@ -871,6 +933,65 @@ class Sql:
                         street0_FoldTo4BDone BOOLEAN,
                         street0_SqueezeChance BOOLEAN,
                         street0_SqueezeDone BOOLEAN,
+                        street0_FoldToSqueezeChance BOOLEAN,
+                        street0_FoldToSqueezeDone BOOLEAN,
+                        
+                        street1_2BChance BOOLEAN,
+                        street1_2BDone BOOLEAN,
+                        street1_3BChance BOOLEAN,
+                        street1_3BDone BOOLEAN,
+                        street1_4BChance BOOLEAN,
+                        street1_4BDone BOOLEAN,
+                        street1_C4BChance BOOLEAN,
+                        street1_C4BDone BOOLEAN,
+                        street1_FoldTo2BChance BOOLEAN,
+                        street1_FoldTo2BDone BOOLEAN,
+                        street1_FoldTo3BChance BOOLEAN,
+                        street1_FoldTo3BDone BOOLEAN,
+                        street1_FoldTo4BChance BOOLEAN,
+                        street1_FoldTo4BDone BOOLEAN,
+                        street1_SqueezeChance BOOLEAN,
+                        street1_SqueezeDone BOOLEAN,
+                        street1_FoldToSqueezeChance BOOLEAN,
+                        street1_FoldToSqueezeDone BOOLEAN,
+                        
+                        street2_2BChance BOOLEAN,
+                        street2_2BDone BOOLEAN,
+                        street2_3BChance BOOLEAN,
+                        street2_3BDone BOOLEAN,
+                        street2_4BChance BOOLEAN,
+                        street2_4BDone BOOLEAN,
+                        street2_C4BChance BOOLEAN,
+                        street2_C4BDone BOOLEAN,
+                        street2_FoldTo2BChance BOOLEAN,
+                        street2_FoldTo2BDone BOOLEAN,
+                        street2_FoldTo3BChance BOOLEAN,
+                        street2_FoldTo3BDone BOOLEAN,
+                        street2_FoldTo4BChance BOOLEAN,
+                        street2_FoldTo4BDone BOOLEAN,
+                        street2_SqueezeChance BOOLEAN,
+                        street2_SqueezeDone BOOLEAN,
+                        street2_FoldToSqueezeChance BOOLEAN,
+                        street2_FoldToSqueezeDone BOOLEAN,
+                        
+                        street3_2BChance BOOLEAN,
+                        street3_2BDone BOOLEAN,
+                        street3_3BChance BOOLEAN,
+                        street3_3BDone BOOLEAN,
+                        street3_4BChance BOOLEAN,
+                        street3_4BDone BOOLEAN,
+                        street3_C4BChance BOOLEAN,
+                        street3_C4BDone BOOLEAN,
+                        street3_FoldTo2BChance BOOLEAN,
+                        street3_FoldTo2BDone BOOLEAN,
+                        street3_FoldTo3BChance BOOLEAN,
+                        street3_FoldTo3BDone BOOLEAN,
+                        street3_FoldTo4BChance BOOLEAN,
+                        street3_FoldTo4BDone BOOLEAN,
+                        street3_SqueezeChance BOOLEAN,
+                        street3_SqueezeDone BOOLEAN,
+                        street3_FoldToSqueezeChance BOOLEAN,
+                        street3_FoldToSqueezeDone BOOLEAN,
 
                         raiseToStealChance BOOLEAN,
                         raiseToStealDone BOOLEAN,
@@ -918,6 +1039,16 @@ class Sql:
                         foldToOtherRaisedStreet2 BOOLEAN,
                         foldToOtherRaisedStreet3 BOOLEAN,
                         foldToOtherRaisedStreet4 BOOLEAN,
+                        callToOtherRaisedStreet0 BOOLEAN,
+                        callToOtherRaisedStreet1 BOOLEAN,
+                        callToOtherRaisedStreet2 BOOLEAN,
+                        callToOtherRaisedStreet3 BOOLEAN,
+                        callToOtherRaisedStreet4 BOOLEAN,
+                        raiseToOtherRaisedStreet0 BOOLEAN,
+                        raiseToOtherRaisedStreet1 BOOLEAN,
+                        raiseToOtherRaisedStreet2 BOOLEAN,
+                        raiseToOtherRaisedStreet3 BOOLEAN,
+                        raiseToOtherRaisedStreet4 BOOLEAN,
 
                         raiseFirstInChance BOOLEAN,
                         raisedFirstIn BOOLEAN,
@@ -944,6 +1075,24 @@ class Sql:
                         foldToStreet4CBChance BOOLEAN,
                         foldToStreet4CBDone BOOLEAN,
 
+                        callToStreet1CBChance BOOLEAN,
+                        callToStreet1CBDone BOOLEAN,
+                        callToStreet2CBChance BOOLEAN,
+                        callToStreet2CBDone BOOLEAN,
+                        callToStreet3CBChance BOOLEAN,
+                        callToStreet3CBDone BOOLEAN,
+                        callToStreet4CBChance BOOLEAN,
+                        callToStreet4CBDone BOOLEAN,
+
+                        raiseToStreet1CBChance BOOLEAN,
+                        raiseToStreet1CBDone BOOLEAN,
+                        raiseToStreet2CBChance BOOLEAN,
+                        raiseToStreet2CBDone BOOLEAN,
+                        raiseToStreet3CBChance BOOLEAN,
+                        raiseToStreet3CBDone BOOLEAN,
+                        raiseToStreet4CBChance BOOLEAN,
+                        raiseToStreet4CBDone BOOLEAN,
+
                         street1CheckCallRaiseChance BOOLEAN,
                         street1CheckCallDone BOOLEAN,
                         street1CheckRaiseDone BOOLEAN,
@@ -956,17 +1105,21 @@ class Sql:
                         street4CheckCallRaiseChance BOOLEAN,
                         street4CheckCallDone BOOLEAN,
                         street4CheckRaiseDone BOOLEAN,
+                        street1foldToCheckRaiseChance BOOLEAN,
+                        street1foldToCheckRaiseDone BOOLEAN,
+                        street2foldToCheckRaiseChance BOOLEAN,
+                        street2foldToCheckRaiseDone BOOLEAN,
+                        street3foldToCheckRaiseChance BOOLEAN,
+                        street3foldToCheckRaiseDone BOOLEAN,
+                        street4foldToCheckRaiseChance BOOLEAN,
+                        street4foldToCheckRaiseDone BOOLEAN,
 
                         street0Calls TINYINT,
                         street1Calls TINYINT,
                         street2Calls TINYINT,
                         street3Calls TINYINT,
                         street4Calls TINYINT,
-                        street0Bets TINYINT,
-                        street1Bets TINYINT,
-                        street2Bets TINYINT,
-                        street3Bets TINYINT,
-                        street4Bets TINYINT,
+                        
                         street0Raises TINYINT,
                         street1Raises TINYINT,
                         street2Raises TINYINT,
@@ -975,6 +1128,18 @@ class Sql:
                         street1Discards TINYINT,
                         street2Discards TINYINT,
                         street3Discards TINYINT,
+                        
+                        street0Callers TINYINT,
+                        street1Callers TINYINT,
+                        street2Callers TINYINT,
+                        street3Callers TINYINT,
+                        street4Callers TINYINT,
+                        
+                        street0Aggressors TINYINT,
+                        street1Aggressors TINYINT,
+                        street2Aggressors TINYINT,
+                        street3Aggressors TINYINT,
+                        street4Aggressors TINYINT,
                         
                         handString TEXT,
                         actionString VARCHAR(15))
@@ -985,7 +1150,12 @@ class Sql:
                         handId BIGINT NOT NULL, FOREIGN KEY (handId) REFERENCES Hands(id),
                         playerId INT NOT NULL, FOREIGN KEY (playerId) REFERENCES Players(id),
                         startCash BIGINT NOT NULL,
+                        bigblind BIGINT NOT NULL,
                         effStack BIGINT NOT NULL,
+                        effActiveStack BIGINT NOT NULL,
+                        effMzone FLOAT NOT NULL,
+                        effActiveMzone FLOAT NOT NULL,
+                        tableMzone FLOAT NOT NULL,
                         startBounty BIGINT,
                         endBounty BIGINT,
                         position CHAR(1),
@@ -1032,7 +1202,7 @@ class Sql:
                         wonWhenSeenStreet3 BOOLEAN,
                         wonWhenSeenStreet4 BOOLEAN,
                         wonAtSD BOOLEAN,
-
+                                               
                         street0VPIChance BOOLEAN,
                         street0VPI BOOLEAN,
                         street0AggrChance BOOLEAN,
@@ -1055,6 +1225,65 @@ class Sql:
                         street0_FoldTo4BDone BOOLEAN,
                         street0_SqueezeChance BOOLEAN,
                         street0_SqueezeDone BOOLEAN,
+                        street0_FoldToSqueezeChance BOOLEAN,
+                        street0_FoldToSqueezeDone BOOLEAN,
+                        
+                        street1_2BChance BOOLEAN,
+                        street1_2BDone BOOLEAN,
+                        street1_3BChance BOOLEAN,
+                        street1_3BDone BOOLEAN,
+                        street1_4BChance BOOLEAN,
+                        street1_4BDone BOOLEAN,
+                        street1_C4BChance BOOLEAN,
+                        street1_C4BDone BOOLEAN,
+                        street1_FoldTo2BChance BOOLEAN,
+                        street1_FoldTo2BDone BOOLEAN,
+                        street1_FoldTo3BChance BOOLEAN,
+                        street1_FoldTo3BDone BOOLEAN,
+                        street1_FoldTo4BChance BOOLEAN,
+                        street1_FoldTo4BDone BOOLEAN,
+                        street1_SqueezeChance BOOLEAN,
+                        street1_SqueezeDone BOOLEAN,
+                        street1_FoldToSqueezeChance BOOLEAN,
+                        street1_FoldToSqueezeDone BOOLEAN,
+                        
+                        street2_2BChance BOOLEAN,
+                        street2_2BDone BOOLEAN,
+                        street2_3BChance BOOLEAN,
+                        street2_3BDone BOOLEAN,
+                        street2_4BChance BOOLEAN,
+                        street2_4BDone BOOLEAN,
+                        street2_C4BChance BOOLEAN,
+                        street2_C4BDone BOOLEAN,
+                        street2_FoldTo2BChance BOOLEAN,
+                        street2_FoldTo2BDone BOOLEAN,
+                        street2_FoldTo3BChance BOOLEAN,
+                        street2_FoldTo3BDone BOOLEAN,
+                        street2_FoldTo4BChance BOOLEAN,
+                        street2_FoldTo4BDone BOOLEAN,
+                        street2_SqueezeChance BOOLEAN,
+                        street2_SqueezeDone BOOLEAN,
+                        street2_FoldToSqueezeChance BOOLEAN,
+                        street2_FoldToSqueezeDone BOOLEAN,
+                        
+                        street3_2BChance BOOLEAN,
+                        street3_2BDone BOOLEAN,
+                        street3_3BChance BOOLEAN,
+                        street3_3BDone BOOLEAN,
+                        street3_4BChance BOOLEAN,
+                        street3_4BDone BOOLEAN,
+                        street3_C4BChance BOOLEAN,
+                        street3_C4BDone BOOLEAN,
+                        street3_FoldTo2BChance BOOLEAN,
+                        street3_FoldTo2BDone BOOLEAN,
+                        street3_FoldTo3BChance BOOLEAN,
+                        street3_FoldTo3BDone BOOLEAN,
+                        street3_FoldTo4BChance BOOLEAN,
+                        street3_FoldTo4BDone BOOLEAN,
+                        street3_SqueezeChance BOOLEAN,
+                        street3_SqueezeDone BOOLEAN,
+                        street3_FoldToSqueezeChance BOOLEAN,
+                        street3_FoldToSqueezeDone BOOLEAN,
 
                         raiseToStealChance BOOLEAN,
                         raiseToStealDone BOOLEAN,
@@ -1102,6 +1331,16 @@ class Sql:
                         foldToOtherRaisedStreet2 BOOLEAN,
                         foldToOtherRaisedStreet3 BOOLEAN,
                         foldToOtherRaisedStreet4 BOOLEAN,
+                        callToOtherRaisedStreet0 BOOLEAN,
+                        callToOtherRaisedStreet1 BOOLEAN,
+                        callToOtherRaisedStreet2 BOOLEAN,
+                        callToOtherRaisedStreet3 BOOLEAN,
+                        callToOtherRaisedStreet4 BOOLEAN,
+                        raiseToOtherRaisedStreet0 BOOLEAN,
+                        raiseToOtherRaisedStreet1 BOOLEAN,
+                        raiseToOtherRaisedStreet2 BOOLEAN,
+                        raiseToOtherRaisedStreet3 BOOLEAN,
+                        raiseToOtherRaisedStreet4 BOOLEAN,
 
                         raiseFirstInChance BOOLEAN,
                         raisedFirstIn BOOLEAN,
@@ -1128,6 +1367,24 @@ class Sql:
                         foldToStreet4CBChance BOOLEAN,
                         foldToStreet4CBDone BOOLEAN,
 
+                        callToStreet1CBChance BOOLEAN,
+                        callToStreet1CBDone BOOLEAN,
+                        callToStreet2CBChance BOOLEAN,
+                        callToStreet2CBDone BOOLEAN,
+                        callToStreet3CBChance BOOLEAN,
+                        callToStreet3CBDone BOOLEAN,
+                        callToStreet4CBChance BOOLEAN,
+                        callToStreet4CBDone BOOLEAN,
+
+                        raiseToStreet1CBChance BOOLEAN,
+                        raiseToStreet1CBDone BOOLEAN,
+                        raiseToStreet2CBChance BOOLEAN,
+                        raiseToStreet2CBDone BOOLEAN,
+                        raiseToStreet3CBChance BOOLEAN,
+                        raiseToStreet3CBDone BOOLEAN,
+                        raiseToStreet4CBChance BOOLEAN,
+                        raiseToStreet4CBDone BOOLEAN,
+
                         street1CheckCallRaiseChance BOOLEAN,
                         street1CheckCallDone BOOLEAN,
                         street1CheckRaiseDone BOOLEAN,
@@ -1140,17 +1397,21 @@ class Sql:
                         street4CheckCallRaiseChance BOOLEAN,
                         street4CheckCallDone BOOLEAN,
                         street4CheckRaiseDone BOOLEAN,
+                        street1foldToCheckRaiseChance BOOLEAN,
+                        street1foldToCheckRaiseDone BOOLEAN,
+                        street2foldToCheckRaiseChance BOOLEAN,
+                        street2foldToCheckRaiseDone BOOLEAN,
+                        street3foldToCheckRaiseChance BOOLEAN,
+                        street3foldToCheckRaiseDone BOOLEAN,
+                        street4foldToCheckRaiseChance BOOLEAN,
+                        street4foldToCheckRaiseDone BOOLEAN,
 
                         street0Calls SMALLINT,
                         street1Calls SMALLINT,
                         street2Calls SMALLINT,
                         street3Calls SMALLINT,
                         street4Calls SMALLINT,
-                        street0Bets SMALLINT,
-                        street1Bets SMALLINT,
-                        street2Bets SMALLINT,
-                        street3Bets SMALLINT,
-                        street4Bets SMALLINT,
+                        
                         street0Raises SMALLINT,
                         street1Raises SMALLINT,
                         street2Raises SMALLINT,
@@ -1160,6 +1421,18 @@ class Sql:
                         street2Discards SMALLINT,
                         street3Discards SMALLINT,
                         
+                        street0Callers SMALLINT,
+                        street1Callers SMALLINT,
+                        street2Callers SMALLINT,
+                        street3Callers SMALLINT,
+                        street4Callers SMALLINT,
+                        
+                        street0Aggressors SMALLINT,
+                        street1Aggressors SMALLINT,
+                        street2Aggressors SMALLINT,
+                        street3Aggressors SMALLINT,
+                        street4Aggressors SMALLINT,
+                        
                         handString TEXT,
                         actionString VARCHAR(15))"""
         elif db_server == 'sqlite':
@@ -1168,7 +1441,12 @@ class Sql:
                         handId INT NOT NULL,
                         playerId INT NOT NULL,
                         startCash INT NOT NULL,
+                        bigblind INT NOT NULL,
                         effStack INT NOT NULL,
+                        effActiveStack INT NOT NULL,
+                        effMzone FLOAT NOT NULL,
+                        effActiveMzone FLOAT NOT NULL,
+                        tableMzone FLOAT NOT NULL,
                         startBounty INT,
                         endBounty INT,
                         position TEXT,
@@ -1214,8 +1492,8 @@ class Sql:
                         wonWhenSeenStreet2 INT,
                         wonWhenSeenStreet3 INT,
                         wonWhenSeenStreet4 INT,
-                        wonAtSD INT,
-                        
+                        wonAtSD INT,  
+                                               
                         street0VPIChance INT,
                         street0VPI INT,
                         street0AggrChance INT,
@@ -1238,6 +1516,65 @@ class Sql:
                         street0_FoldTo4BDone INT,
                         street0_SqueezeChance INT,
                         street0_SqueezeDone INT,
+                        street0_FoldToSqueezeChance INT,
+                        street0_FoldToSqueezeDone INT,
+                        
+                        street1_2BChance INT,
+                        street1_2BDone INT,
+                        street1_3BChance INT,
+                        street1_3BDone INT,
+                        street1_4BChance INT,
+                        street1_4BDone INT,
+                        street1_C4BChance INT,
+                        street1_C4BDone INT,
+                        street1_FoldTo2BChance INT,
+                        street1_FoldTo2BDone INT,
+                        street1_FoldTo3BChance INT,
+                        street1_FoldTo3BDone INT,
+                        street1_FoldTo4BChance INT,
+                        street1_FoldTo4BDone INT,
+                        street1_SqueezeChance INT,
+                        street1_SqueezeDone INT,
+                        street1_FoldToSqueezeChance INT,
+                        street1_FoldToSqueezeDone INT,
+                        
+                        street2_2BChance INT,
+                        street2_2BDone INT,
+                        street2_3BChance INT,
+                        street2_3BDone INT,
+                        street2_4BChance INT,
+                        street2_4BDone INT,
+                        street2_C4BChance INT,
+                        street2_C4BDone INT,
+                        street2_FoldTo2BChance INT,
+                        street2_FoldTo2BDone INT,
+                        street2_FoldTo3BChance INT,
+                        street2_FoldTo3BDone INT,
+                        street2_FoldTo4BChance INT,
+                        street2_FoldTo4BDone INT,
+                        street2_SqueezeChance INT,
+                        street2_SqueezeDone INT,
+                        street2_FoldToSqueezeChance INT,
+                        street2_FoldToSqueezeDone INT,
+                        
+                        street3_2BChance INT,
+                        street3_2BDone INT,
+                        street3_3BChance INT,
+                        street3_3BDone INT,
+                        street3_4BChance INT,
+                        street3_4BDone INT,
+                        street3_C4BChance INT,
+                        street3_C4BDone INT,
+                        street3_FoldTo2BChance INT,
+                        street3_FoldTo2BDone INT,
+                        street3_FoldTo3BChance INT,
+                        street3_FoldTo3BDone INT,
+                        street3_FoldTo4BChance INT,
+                        street3_FoldTo4BDone INT,
+                        street3_SqueezeChance INT,
+                        street3_SqueezeDone INT,
+                        street3_FoldToSqueezeChance INT,
+                        street3_FoldToSqueezeDone INT,
 
                         raiseToStealChance INT,
                         raiseToStealDone INT,
@@ -1285,6 +1622,16 @@ class Sql:
                         foldToOtherRaisedStreet2 INT,
                         foldToOtherRaisedStreet3 INT,
                         foldToOtherRaisedStreet4 INT,
+                        callToOtherRaisedStreet0 INT,
+                        callToOtherRaisedStreet1 INT,
+                        callToOtherRaisedStreet2 INT,
+                        callToOtherRaisedStreet3 INT,
+                        callToOtherRaisedStreet4 INT,
+                        raiseToOtherRaisedStreet0 INT,
+                        raiseToOtherRaisedStreet1 INT,
+                        raiseToOtherRaisedStreet2 INT,
+                        raiseToOtherRaisedStreet3 INT,
+                        raiseToOtherRaisedStreet4 INT,
 
                         raiseFirstInChance INT,
                         raisedFirstIn INT,
@@ -1311,6 +1658,24 @@ class Sql:
                         foldToStreet4CBChance INT,
                         foldToStreet4CBDone INT,
 
+                        callToStreet1CBChance INT,
+                        callToStreet1CBDone INT,
+                        callToStreet2CBChance INT,
+                        callToStreet2CBDone INT,
+                        callToStreet3CBChance INT,
+                        callToStreet3CBDone INT,
+                        callToStreet4CBChance INT,
+                        callToStreet4CBDone INT,
+
+                        raiseToStreet1CBChance INT,
+                        raiseToStreet1CBDone INT,
+                        raiseToStreet2CBChance INT,
+                        raiseToStreet2CBDone INT,
+                        raiseToStreet3CBChance INT,
+                        raiseToStreet3CBDone INT,
+                        raiseToStreet4CBChance INT,
+                        raiseToStreet4CBDone INT,
+
                         street1CheckCallRaiseChance INT,
                         street1CheckCallDone INT,
                         street1CheckRaiseDone INT,
@@ -1323,17 +1688,21 @@ class Sql:
                         street4CheckCallRaiseChance INT,
                         street4CheckCallDone INT,
                         street4CheckRaiseDone INT,
+                        street1foldToCheckRaiseChance INT,
+                        street1foldToCheckRaiseDone INT,
+                        street2foldToCheckRaiseChance INT,
+                        street2foldToCheckRaiseDone INT,
+                        street3foldToCheckRaiseChance INT,
+                        street3foldToCheckRaiseDone INT,
+                        street4foldToCheckRaiseChance INT,
+                        street4foldToCheckRaiseDone INT,
 
                         street0Calls INT,
                         street1Calls INT,
                         street2Calls INT,
                         street3Calls INT,
                         street4Calls INT,
-                        street0Bets INT,
-                        street1Bets INT,
-                        street2Bets INT,
-                        street3Bets INT,
-                        street4Bets INT,
+                        
                         street0Raises INT,
                         street1Raises INT,
                         street2Raises INT,
@@ -1342,6 +1711,18 @@ class Sql:
                         street1Discards INT,
                         street2Discards INT,
                         street3Discards INT,
+                        
+                        street0Callers INT,
+                        street1Callers INT,
+                        street2Callers INT,
+                        street3Callers INT,
+                        street4Callers INT,
+                        
+                        street0Aggressors INT,
+                        street1Aggressors INT,
+                        street2Aggressors INT,
+                        street3Aggressors INT,
+                        street4Aggressors INT,
                         
                         handString TEXT,
                         actionString VARCHAR(15))
@@ -1607,7 +1988,8 @@ class Sql:
                         position CHAR(1),
                         tourneyTypeId SMALLINT UNSIGNED, FOREIGN KEY (tourneyTypeId) REFERENCES TourneyTypes(id),
                         styleKey CHAR(7) NOT NULL,  /* 1st char is style (A/T/H/S), other 6 are the key */
-                        n INT NOT NULL,                        
+                        n INT NOT NULL,
+                                               
                         street0VPIChance INT,
                         street0VPI INT,
                         street0AggrChance INT,
@@ -1630,6 +2012,66 @@ class Sql:
                         street0_FoldTo4BDone INT,
                         street0_SqueezeChance INT,
                         street0_SqueezeDone INT,
+                        street0_FoldToSqueezeChance INT,
+                        street0_FoldToSqueezeDone INT,
+                        
+                        street1_2BChance INT,
+                        street1_2BDone INT,
+                        street1_3BChance INT,
+                        street1_3BDone INT,
+                        street1_4BChance INT,
+                        street1_4BDone INT,
+                        street1_C4BChance INT,
+                        street1_C4BDone INT,
+                        street1_FoldTo2BChance INT,
+                        street1_FoldTo2BDone INT,
+                        street1_FoldTo3BChance INT,
+                        street1_FoldTo3BDone INT,
+                        street1_FoldTo4BChance INT,
+                        street1_FoldTo4BDone INT,
+                        street1_SqueezeChance INT,
+                        street1_SqueezeDone INT,
+                        street1_FoldToSqueezeChance INT,
+                        street1_FoldToSqueezeDone INT,
+                        
+                        street2_2BChance INT,
+                        street2_2BDone INT,
+                        street2_3BChance INT,
+                        street2_3BDone INT,
+                        street2_4BChance INT,
+                        street2_4BDone INT,
+                        street2_C4BChance INT,
+                        street2_C4BDone INT,
+                        street2_FoldTo2BChance INT,
+                        street2_FoldTo2BDone INT,
+                        street2_FoldTo3BChance INT,
+                        street2_FoldTo3BDone INT,
+                        street2_FoldTo4BChance INT,
+                        street2_FoldTo4BDone INT,
+                        street2_SqueezeChance INT,
+                        street2_SqueezeDone INT,
+                        street2_FoldToSqueezeChance INT,
+                        street2_FoldToSqueezeDone INT,
+                        
+                        street3_2BChance INT,
+                        street3_2BDone INT,
+                        street3_3BChance INT,
+                        street3_3BDone INT,
+                        street3_4BChance INT,
+                        street3_4BDone INT,
+                        street3_C4BChance INT,
+                        street3_C4BDone INT,
+                        street3_FoldTo2BChance INT,
+                        street3_FoldTo2BDone INT,
+                        street3_FoldTo3BChance INT,
+                        street3_FoldTo3BDone INT,
+                        street3_FoldTo4BChance INT,
+                        street3_FoldTo4BDone INT,
+                        street3_SqueezeChance INT,
+                        street3_SqueezeDone INT,
+                        street3_FoldToSqueezeChance INT,
+                        street3_FoldToSqueezeDone INT,
+
                         raiseToStealChance INT,
                         raiseToStealDone INT,
                         stealChance INT,
@@ -1654,6 +2096,16 @@ class Sql:
                         foldToOtherRaisedStreet2 INT,
                         foldToOtherRaisedStreet3 INT,
                         foldToOtherRaisedStreet4 INT,
+                        callToOtherRaisedStreet0 INT,
+                        callToOtherRaisedStreet1 INT,
+                        callToOtherRaisedStreet2 INT,
+                        callToOtherRaisedStreet3 INT,
+                        callToOtherRaisedStreet4 INT,
+                        raiseToOtherRaisedStreet0 INT,
+                        raiseToOtherRaisedStreet1 INT,
+                        raiseToOtherRaisedStreet2 INT,
+                        raiseToOtherRaisedStreet3 INT,
+                        raiseToOtherRaisedStreet4 INT,
                         wonWhenSeenStreet1 INT,
                         wonWhenSeenStreet2 INT,
                         wonWhenSeenStreet3 INT,
@@ -1680,7 +2132,23 @@ class Sql:
                         foldToStreet3CBChance INT,
                         foldToStreet3CBDone INT,
                         foldToStreet4CBChance INT,
-                        foldToStreet4CBDone INT,                        
+                        foldToStreet4CBDone INT, 
+                        callToStreet1CBChance INT,
+                        callToStreet1CBDone INT,
+                        callToStreet2CBChance INT,
+                        callToStreet2CBDone INT,
+                        callToStreet3CBChance INT,
+                        callToStreet3CBDone INT,
+                        callToStreet4CBChance INT,
+                        callToStreet4CBDone INT,
+                        raiseToStreet1CBChance INT,
+                        raiseToStreet1CBDone INT,
+                        raiseToStreet2CBChance INT,
+                        raiseToStreet2CBDone INT,
+                        raiseToStreet3CBChance INT,
+                        raiseToStreet3CBDone INT,
+                        raiseToStreet4CBChance INT,
+                        raiseToStreet4CBDone INT,                       
                         common BIGINT,
                         committed BIGINT,
                         winnings BIGINT,
@@ -1704,16 +2172,20 @@ class Sql:
                         street4CheckCallRaiseChance INT,
                         street4CheckCallDone INT,
                         street4CheckRaiseDone INT,
+                        street1foldToCheckRaiseChance INT,
+                        street1foldToCheckRaiseDone INT,
+                        street2foldToCheckRaiseChance INT,
+                        street2foldToCheckRaiseDone INT,
+                        street3foldToCheckRaiseChance INT,
+                        street3foldToCheckRaiseDone INT,
+                        street4foldToCheckRaiseChance INT,
+                        street4foldToCheckRaiseDone INT,
                         street0Calls INT,
                         street1Calls INT,
                         street2Calls INT,
                         street3Calls INT,
                         street4Calls INT,
-                        street0Bets INT,
-                        street1Bets INT,
-                        street2Bets INT,
-                        street3Bets INT,
-                        street4Bets INT,
+                        
                         street0Raises INT,
                         street1Raises INT,
                         street2Raises INT,
@@ -1721,7 +2193,19 @@ class Sql:
                         street4Raises INT,                        
                         street1Discards INT,
                         street2Discards INT,
-                        street3Discards INT)
+                        street3Discards INT,
+                        
+                        street0Callers INT,
+                        street1Callers INT,
+                        street2Callers INT,
+                        street3Callers INT,
+                        street4Callers INT,
+                        
+                        street0Aggressors INT,
+                        street1Aggressors INT,
+                        street2Aggressors INT,
+                        street3Aggressors INT,
+                        street4Aggressors INT)
                         ENGINE=INNODB"""
         elif db_server == 'postgresql':
             self.query['createHudCacheTable'] = """CREATE TABLE HudCache (
@@ -1732,7 +2216,8 @@ class Sql:
                         position CHAR(1),
                         tourneyTypeId INT, FOREIGN KEY (tourneyTypeId) REFERENCES TourneyTypes(id),
                         styleKey CHAR(7) NOT NULL,  /* 1st char is style (A/T/H/S), other 6 are the key */
-                        n INT,                        
+                        n INT,
+                                               
                         street0VPIChance INT,
                         street0VPI INT,
                         street0AggrChance INT,
@@ -1755,6 +2240,66 @@ class Sql:
                         street0_FoldTo4BDone INT,
                         street0_SqueezeChance INT,
                         street0_SqueezeDone INT,
+                        street0_FoldToSqueezeChance INT,
+                        street0_FoldToSqueezeDone INT,
+                        
+                        street1_2BChance INT,
+                        street1_2BDone INT,
+                        street1_3BChance INT,
+                        street1_3BDone INT,
+                        street1_4BChance INT,
+                        street1_4BDone INT,
+                        street1_C4BChance INT,
+                        street1_C4BDone INT,
+                        street1_FoldTo2BChance INT,
+                        street1_FoldTo2BDone INT,
+                        street1_FoldTo3BChance INT,
+                        street1_FoldTo3BDone INT,
+                        street1_FoldTo4BChance INT,
+                        street1_FoldTo4BDone INT,
+                        street1_SqueezeChance INT,
+                        street1_SqueezeDone INT,
+                        street1_FoldToSqueezeChance INT,
+                        street1_FoldToSqueezeDone INT,
+                        
+                        street2_2BChance INT,
+                        street2_2BDone INT,
+                        street2_3BChance INT,
+                        street2_3BDone INT,
+                        street2_4BChance INT,
+                        street2_4BDone INT,
+                        street2_C4BChance INT,
+                        street2_C4BDone INT,
+                        street2_FoldTo2BChance INT,
+                        street2_FoldTo2BDone INT,
+                        street2_FoldTo3BChance INT,
+                        street2_FoldTo3BDone INT,
+                        street2_FoldTo4BChance INT,
+                        street2_FoldTo4BDone INT,
+                        street2_SqueezeChance INT,
+                        street2_SqueezeDone INT,
+                        street2_FoldToSqueezeChance INT,
+                        street2_FoldToSqueezeDone INT,
+                        
+                        street3_2BChance INT,
+                        street3_2BDone INT,
+                        street3_3BChance INT,
+                        street3_3BDone INT,
+                        street3_4BChance INT,
+                        street3_4BDone INT,
+                        street3_C4BChance INT,
+                        street3_C4BDone INT,
+                        street3_FoldTo2BChance INT,
+                        street3_FoldTo2BDone INT,
+                        street3_FoldTo3BChance INT,
+                        street3_FoldTo3BDone INT,
+                        street3_FoldTo4BChance INT,
+                        street3_FoldTo4BDone INT,
+                        street3_SqueezeChance INT,
+                        street3_SqueezeDone INT,
+                        street3_FoldToSqueezeChance INT,
+                        street3_FoldToSqueezeDone INT,
+
                         raiseToStealChance INT,
                         raiseToStealDone INT,
                         stealChance INT,
@@ -1779,6 +2324,16 @@ class Sql:
                         foldToOtherRaisedStreet2 INT,
                         foldToOtherRaisedStreet3 INT,
                         foldToOtherRaisedStreet4 INT,
+                        callToOtherRaisedStreet0 INT,
+                        callToOtherRaisedStreet1 INT,
+                        callToOtherRaisedStreet2 INT,
+                        callToOtherRaisedStreet3 INT,
+                        callToOtherRaisedStreet4 INT,
+                        raiseToOtherRaisedStreet0 INT,
+                        raiseToOtherRaisedStreet1 INT,
+                        raiseToOtherRaisedStreet2 INT,
+                        raiseToOtherRaisedStreet3 INT,
+                        raiseToOtherRaisedStreet4 INT,
                         wonWhenSeenStreet1 INT,
                         wonWhenSeenStreet2 INT,
                         wonWhenSeenStreet3 INT,
@@ -1806,6 +2361,22 @@ class Sql:
                         foldToStreet3CBDone INT,
                         foldToStreet4CBChance INT,
                         foldToStreet4CBDone INT,
+                        callToStreet1CBChance INT,
+                        callToStreet1CBDone INT,
+                        callToStreet2CBChance INT,
+                        callToStreet2CBDone INT,
+                        callToStreet3CBChance INT,
+                        callToStreet3CBDone INT,
+                        callToStreet4CBChance INT,
+                        callToStreet4CBDone INT,
+                        raiseToStreet1CBChance INT,
+                        raiseToStreet1CBDone INT,
+                        raiseToStreet2CBChance INT,
+                        raiseToStreet2CBDone INT,
+                        raiseToStreet3CBChance INT,
+                        raiseToStreet3CBDone INT,
+                        raiseToStreet4CBChance INT,
+                        raiseToStreet4CBDone INT,
                         common BIGINT,
                         committed BIGINT,
                         winnings BIGINT,
@@ -1829,16 +2400,20 @@ class Sql:
                         street4CheckCallRaiseChance INT,
                         street4CheckCallDone INT,
                         street4CheckRaiseDone INT,
+                        street1foldToCheckRaiseChance INT,
+                        street1foldToCheckRaiseDone INT,
+                        street2foldToCheckRaiseChance INT,
+                        street2foldToCheckRaiseDone INT,
+                        street3foldToCheckRaiseChance INT,
+                        street3foldToCheckRaiseDone INT,
+                        street4foldToCheckRaiseChance INT,
+                        street4foldToCheckRaiseDone INT,
                         street0Calls INT,
                         street1Calls INT,
                         street2Calls INT,
                         street3Calls INT,
                         street4Calls INT,
-                        street0Bets INT,
-                        street1Bets INT,
-                        street2Bets INT,
-                        street3Bets INT,
-                        street4Bets INT,
+                        
                         street0Raises INT,
                         street1Raises INT,
                         street2Raises INT,
@@ -1846,7 +2421,19 @@ class Sql:
                         street4Raises INT,
                         street1Discards INT,
                         street2Discards INT,
-                        street3Discards INT)
+                        street3Discards INT,
+                        
+                        street0Callers INT,
+                        street1Callers INT,
+                        street2Callers INT,
+                        street3Callers INT,
+                        street4Callers INT,
+                        
+                        street0Aggressors INT,
+                        street1Aggressors INT,
+                        street2Aggressors INT,
+                        street3Aggressors INT,
+                        street4Aggressors INT)
                         """
         elif db_server == 'sqlite':
             self.query['createHudCacheTable'] = """CREATE TABLE HudCache (
@@ -1857,7 +2444,8 @@ class Sql:
                         position TEXT,
                         tourneyTypeId INT,
                         styleKey TEXT NOT NULL,  /* 1st char is style (A/T/H/S), other 6 are the key */
-                        n INT,                        
+                        n INT,
+                                               
                         street0VPIChance INT,
                         street0VPI INT,
                         street0AggrChance INT,
@@ -1880,6 +2468,66 @@ class Sql:
                         street0_FoldTo4BDone INT,
                         street0_SqueezeChance INT,
                         street0_SqueezeDone INT,
+                        street0_FoldToSqueezeChance INT,
+                        street0_FoldToSqueezeDone INT,
+                        
+                        street1_2BChance INT,
+                        street1_2BDone INT,
+                        street1_3BChance INT,
+                        street1_3BDone INT,
+                        street1_4BChance INT,
+                        street1_4BDone INT,
+                        street1_C4BChance INT,
+                        street1_C4BDone INT,
+                        street1_FoldTo2BChance INT,
+                        street1_FoldTo2BDone INT,
+                        street1_FoldTo3BChance INT,
+                        street1_FoldTo3BDone INT,
+                        street1_FoldTo4BChance INT,
+                        street1_FoldTo4BDone INT,
+                        street1_SqueezeChance INT,
+                        street1_SqueezeDone INT,
+                        street1_FoldToSqueezeChance INT,
+                        street1_FoldToSqueezeDone INT,
+                        
+                        street2_2BChance INT,
+                        street2_2BDone INT,
+                        street2_3BChance INT,
+                        street2_3BDone INT,
+                        street2_4BChance INT,
+                        street2_4BDone INT,
+                        street2_C4BChance INT,
+                        street2_C4BDone INT,
+                        street2_FoldTo2BChance INT,
+                        street2_FoldTo2BDone INT,
+                        street2_FoldTo3BChance INT,
+                        street2_FoldTo3BDone INT,
+                        street2_FoldTo4BChance INT,
+                        street2_FoldTo4BDone INT,
+                        street2_SqueezeChance INT,
+                        street2_SqueezeDone INT,
+                        street2_FoldToSqueezeChance INT,
+                        street2_FoldToSqueezeDone INT,
+                        
+                        street3_2BChance INT,
+                        street3_2BDone INT,
+                        street3_3BChance INT,
+                        street3_3BDone INT,
+                        street3_4BChance INT,
+                        street3_4BDone INT,
+                        street3_C4BChance INT,
+                        street3_C4BDone INT,
+                        street3_FoldTo2BChance INT,
+                        street3_FoldTo2BDone INT,
+                        street3_FoldTo3BChance INT,
+                        street3_FoldTo3BDone INT,
+                        street3_FoldTo4BChance INT,
+                        street3_FoldTo4BDone INT,
+                        street3_SqueezeChance INT,
+                        street3_SqueezeDone INT,
+                        street3_FoldToSqueezeChance INT,
+                        street3_FoldToSqueezeDone INT,
+
                         raiseToStealChance INT,
                         raiseToStealDone INT,
                         stealChance INT,
@@ -1904,6 +2552,16 @@ class Sql:
                         foldToOtherRaisedStreet2 INT,
                         foldToOtherRaisedStreet3 INT,
                         foldToOtherRaisedStreet4 INT,
+                        callToOtherRaisedStreet0 INT,
+                        callToOtherRaisedStreet1 INT,
+                        callToOtherRaisedStreet2 INT,
+                        callToOtherRaisedStreet3 INT,
+                        callToOtherRaisedStreet4 INT,
+                        raiseToOtherRaisedStreet0 INT,
+                        raiseToOtherRaisedStreet1 INT,
+                        raiseToOtherRaisedStreet2 INT,
+                        raiseToOtherRaisedStreet3 INT,
+                        raiseToOtherRaisedStreet4 INT,
                         wonWhenSeenStreet1 INT,
                         wonWhenSeenStreet2 INT,
                         wonWhenSeenStreet3 INT,
@@ -1931,6 +2589,22 @@ class Sql:
                         foldToStreet3CBDone INT,
                         foldToStreet4CBChance INT,
                         foldToStreet4CBDone INT,
+                        callToStreet1CBChance INT,
+                        callToStreet1CBDone INT,
+                        callToStreet2CBChance INT,
+                        callToStreet2CBDone INT,
+                        callToStreet3CBChance INT,
+                        callToStreet3CBDone INT,
+                        callToStreet4CBChance INT,
+                        callToStreet4CBDone INT,
+                        raiseToStreet1CBChance INT,
+                        raiseToStreet1CBDone INT,
+                        raiseToStreet2CBChance INT,
+                        raiseToStreet2CBDone INT,
+                        raiseToStreet3CBChance INT,
+                        raiseToStreet3CBDone INT,
+                        raiseToStreet4CBChance INT,
+                        raiseToStreet4CBDone INT,
                         common INT,
                         committed INT,
                         winnings INT,
@@ -1954,16 +2628,20 @@ class Sql:
                         street4CheckCallRaiseChance INT,
                         street4CheckCallDone INT,
                         street4CheckRaiseDone INT,
+                        street1foldToCheckRaiseChance INT,
+                        street1foldToCheckRaiseDone INT,
+                        street2foldToCheckRaiseChance INT,
+                        street2foldToCheckRaiseDone INT,
+                        street3foldToCheckRaiseChance INT,
+                        street3foldToCheckRaiseDone INT,
+                        street4foldToCheckRaiseChance INT,
+                        street4foldToCheckRaiseDone INT,
                         street0Calls INT,
                         street1Calls INT,
                         street2Calls INT,
                         street3Calls INT,
                         street4Calls INT,
-                        street0Bets INT,
-                        street1Bets INT,
-                        street2Bets INT,
-                        street3Bets INT,
-                        street4Bets INT,
+                        
                         street0Raises INT,
                         street1Raises INT,
                         street2Raises INT,
@@ -1971,7 +2649,19 @@ class Sql:
                         street4Raises INT,
                         street1Discards INT,
                         street2Discards INT,
-                        street3Discards INT)
+                        street3Discards INT,
+                        
+                        street0Callers INT,
+                        street1Callers INT,
+                        street2Callers INT,
+                        street3Callers INT,
+                        street4Callers INT,
+                        
+                        street0Aggressors INT,
+                        street1Aggressors INT,
+                        street2Aggressors INT,
+                        street3Aggressors INT,
+                        street4Aggressors INT)
                         """
                         
         ################################
@@ -1987,7 +2677,8 @@ class Sql:
                         tourneyTypeId SMALLINT UNSIGNED, FOREIGN KEY (tourneyTypeId) REFERENCES TourneyTypes(id),
                         playerId INT UNSIGNED NOT NULL, FOREIGN KEY (playerId) REFERENCES Players(id),
                         startCards SMALLINT UNSIGNED NOT NULL, FOREIGN KEY (startCards) REFERENCES StartCards(id),
-                        n INT NOT NULL,                        
+                        n INT NOT NULL,
+                                               
                         street0VPIChance INT,
                         street0VPI INT,
                         street0AggrChance INT,
@@ -2010,6 +2701,66 @@ class Sql:
                         street0_FoldTo4BDone INT,
                         street0_SqueezeChance INT,
                         street0_SqueezeDone INT,
+                        street0_FoldToSqueezeChance INT,
+                        street0_FoldToSqueezeDone INT,
+                        
+                        street1_2BChance INT,
+                        street1_2BDone INT,
+                        street1_3BChance INT,
+                        street1_3BDone INT,
+                        street1_4BChance INT,
+                        street1_4BDone INT,
+                        street1_C4BChance INT,
+                        street1_C4BDone INT,
+                        street1_FoldTo2BChance INT,
+                        street1_FoldTo2BDone INT,
+                        street1_FoldTo3BChance INT,
+                        street1_FoldTo3BDone INT,
+                        street1_FoldTo4BChance INT,
+                        street1_FoldTo4BDone INT,
+                        street1_SqueezeChance INT,
+                        street1_SqueezeDone INT,
+                        street1_FoldToSqueezeChance INT,
+                        street1_FoldToSqueezeDone INT,
+                        
+                        street2_2BChance INT,
+                        street2_2BDone INT,
+                        street2_3BChance INT,
+                        street2_3BDone INT,
+                        street2_4BChance INT,
+                        street2_4BDone INT,
+                        street2_C4BChance INT,
+                        street2_C4BDone INT,
+                        street2_FoldTo2BChance INT,
+                        street2_FoldTo2BDone INT,
+                        street2_FoldTo3BChance INT,
+                        street2_FoldTo3BDone INT,
+                        street2_FoldTo4BChance INT,
+                        street2_FoldTo4BDone INT,
+                        street2_SqueezeChance INT,
+                        street2_SqueezeDone INT,
+                        street2_FoldToSqueezeChance INT,
+                        street2_FoldToSqueezeDone INT,
+                        
+                        street3_2BChance INT,
+                        street3_2BDone INT,
+                        street3_3BChance INT,
+                        street3_3BDone INT,
+                        street3_4BChance INT,
+                        street3_4BDone INT,
+                        street3_C4BChance INT,
+                        street3_C4BDone INT,
+                        street3_FoldTo2BChance INT,
+                        street3_FoldTo2BDone INT,
+                        street3_FoldTo3BChance INT,
+                        street3_FoldTo3BDone INT,
+                        street3_FoldTo4BChance INT,
+                        street3_FoldTo4BDone INT,
+                        street3_SqueezeChance INT,
+                        street3_SqueezeDone INT,
+                        street3_FoldToSqueezeChance INT,
+                        street3_FoldToSqueezeDone INT,
+                        
                         raiseToStealChance INT,
                         raiseToStealDone INT,
                         stealChance INT,
@@ -2034,6 +2785,16 @@ class Sql:
                         foldToOtherRaisedStreet2 INT,
                         foldToOtherRaisedStreet3 INT,
                         foldToOtherRaisedStreet4 INT,
+                        callToOtherRaisedStreet0 INT,
+                        callToOtherRaisedStreet1 INT,
+                        callToOtherRaisedStreet2 INT,
+                        callToOtherRaisedStreet3 INT,
+                        callToOtherRaisedStreet4 INT,
+                        raiseToOtherRaisedStreet0 INT,
+                        raiseToOtherRaisedStreet1 INT,
+                        raiseToOtherRaisedStreet2 INT,
+                        raiseToOtherRaisedStreet3 INT,
+                        raiseToOtherRaisedStreet4 INT,
                         wonWhenSeenStreet1 INT,
                         wonWhenSeenStreet2 INT,
                         wonWhenSeenStreet3 INT,
@@ -2060,7 +2821,23 @@ class Sql:
                         foldToStreet3CBChance INT,
                         foldToStreet3CBDone INT,
                         foldToStreet4CBChance INT,
-                        foldToStreet4CBDone INT,                        
+                        foldToStreet4CBDone INT,
+                        callToStreet1CBChance INT,
+                        callToStreet1CBDone INT,
+                        callToStreet2CBChance INT,
+                        callToStreet2CBDone INT,
+                        callToStreet3CBChance INT,
+                        callToStreet3CBDone INT,
+                        callToStreet4CBChance INT,
+                        callToStreet4CBDone INT,
+                        raiseToStreet1CBChance INT,
+                        raiseToStreet1CBDone INT,
+                        raiseToStreet2CBChance INT,
+                        raiseToStreet2CBDone INT,
+                        raiseToStreet3CBChance INT,
+                        raiseToStreet3CBDone INT,
+                        raiseToStreet4CBChance INT,
+                        raiseToStreet4CBDone INT,                        
                         common BIGINT,
                         committed BIGINT,
                         winnings BIGINT,
@@ -2084,16 +2861,20 @@ class Sql:
                         street4CheckCallRaiseChance INT,
                         street4CheckCallDone INT,
                         street4CheckRaiseDone INT,
+                        street1foldToCheckRaiseChance INT,
+                        street1foldToCheckRaiseDone INT,
+                        street2foldToCheckRaiseChance INT,
+                        street2foldToCheckRaiseDone INT,
+                        street3foldToCheckRaiseChance INT,
+                        street3foldToCheckRaiseDone INT,
+                        street4foldToCheckRaiseChance INT,
+                        street4foldToCheckRaiseDone INT,
                         street0Calls INT,
                         street1Calls INT,
                         street2Calls INT,
                         street3Calls INT,
                         street4Calls INT,
-                        street0Bets INT,
-                        street1Bets INT,
-                        street2Bets INT,
-                        street3Bets INT,
-                        street4Bets INT,
+                        
                         street0Raises INT,
                         street1Raises INT,
                         street2Raises INT,
@@ -2101,7 +2882,19 @@ class Sql:
                         street4Raises INT,
                         street1Discards INT,
                         street2Discards INT,
-                        street3Discards INT)
+                        street3Discards INT,
+                        
+                        street0Callers INT,
+                        street1Callers INT,
+                        street2Callers INT,
+                        street3Callers INT,
+                        street4Callers INT,
+                        
+                        street0Aggressors INT,
+                        street1Aggressors INT,
+                        street2Aggressors INT,
+                        street3Aggressors INT,
+                        street4Aggressors INT)
                         ENGINE=INNODB"""
         elif db_server == 'postgresql':
             self.query['createCardsCacheTable'] = """CREATE TABLE CardsCache (
@@ -2112,7 +2905,8 @@ class Sql:
                         tourneyTypeId INT, FOREIGN KEY (tourneyTypeId) REFERENCES TourneyTypes(id),
                         playerId INT, FOREIGN KEY (playerId) REFERENCES Players(id),
                         startCards SMALLINT, FOREIGN KEY (startCards) REFERENCES StartCards(id),
-                        n INT,                        
+                        n INT,
+                                               
                         street0VPIChance INT,
                         street0VPI INT,
                         street0AggrChance INT,
@@ -2135,6 +2929,66 @@ class Sql:
                         street0_FoldTo4BDone INT,
                         street0_SqueezeChance INT,
                         street0_SqueezeDone INT,
+                        street0_FoldToSqueezeChance INT,
+                        street0_FoldToSqueezeDone INT,
+                        
+                        street1_2BChance INT,
+                        street1_2BDone INT,
+                        street1_3BChance INT,
+                        street1_3BDone INT,
+                        street1_4BChance INT,
+                        street1_4BDone INT,
+                        street1_C4BChance INT,
+                        street1_C4BDone INT,
+                        street1_FoldTo2BChance INT,
+                        street1_FoldTo2BDone INT,
+                        street1_FoldTo3BChance INT,
+                        street1_FoldTo3BDone INT,
+                        street1_FoldTo4BChance INT,
+                        street1_FoldTo4BDone INT,
+                        street1_SqueezeChance INT,
+                        street1_SqueezeDone INT,
+                        street1_FoldToSqueezeChance INT,
+                        street1_FoldToSqueezeDone INT,
+                        
+                        street2_2BChance INT,
+                        street2_2BDone INT,
+                        street2_3BChance INT,
+                        street2_3BDone INT,
+                        street2_4BChance INT,
+                        street2_4BDone INT,
+                        street2_C4BChance INT,
+                        street2_C4BDone INT,
+                        street2_FoldTo2BChance INT,
+                        street2_FoldTo2BDone INT,
+                        street2_FoldTo3BChance INT,
+                        street2_FoldTo3BDone INT,
+                        street2_FoldTo4BChance INT,
+                        street2_FoldTo4BDone INT,
+                        street2_SqueezeChance INT,
+                        street2_SqueezeDone INT,
+                        street2_FoldToSqueezeChance INT,
+                        street2_FoldToSqueezeDone INT,
+                        
+                        street3_2BChance INT,
+                        street3_2BDone INT,
+                        street3_3BChance INT,
+                        street3_3BDone INT,
+                        street3_4BChance INT,
+                        street3_4BDone INT,
+                        street3_C4BChance INT,
+                        street3_C4BDone INT,
+                        street3_FoldTo2BChance INT,
+                        street3_FoldTo2BDone INT,
+                        street3_FoldTo3BChance INT,
+                        street3_FoldTo3BDone INT,
+                        street3_FoldTo4BChance INT,
+                        street3_FoldTo4BDone INT,
+                        street3_SqueezeChance INT,
+                        street3_SqueezeDone INT,
+                        street3_FoldToSqueezeChance INT,
+                        street3_FoldToSqueezeDone INT,
+                        
                         raiseToStealChance INT,
                         raiseToStealDone INT,
                         stealChance INT,
@@ -2159,6 +3013,16 @@ class Sql:
                         foldToOtherRaisedStreet2 INT,
                         foldToOtherRaisedStreet3 INT,
                         foldToOtherRaisedStreet4 INT,
+                        callToOtherRaisedStreet0 INT,
+                        callToOtherRaisedStreet1 INT,
+                        callToOtherRaisedStreet2 INT,
+                        callToOtherRaisedStreet3 INT,
+                        callToOtherRaisedStreet4 INT,
+                        raiseToOtherRaisedStreet0 INT,
+                        raiseToOtherRaisedStreet1 INT,
+                        raiseToOtherRaisedStreet2 INT,
+                        raiseToOtherRaisedStreet3 INT,
+                        raiseToOtherRaisedStreet4 INT,
                         wonWhenSeenStreet1 INT,
                         wonWhenSeenStreet2 INT,
                         wonWhenSeenStreet3 INT,
@@ -2186,6 +3050,22 @@ class Sql:
                         foldToStreet3CBDone INT,
                         foldToStreet4CBChance INT,
                         foldToStreet4CBDone INT,
+                        callToStreet1CBChance INT,
+                        callToStreet1CBDone INT,
+                        callToStreet2CBChance INT,
+                        callToStreet2CBDone INT,
+                        callToStreet3CBChance INT,
+                        callToStreet3CBDone INT,
+                        callToStreet4CBChance INT,
+                        callToStreet4CBDone INT,
+                        raiseToStreet1CBChance INT,
+                        raiseToStreet1CBDone INT,
+                        raiseToStreet2CBChance INT,
+                        raiseToStreet2CBDone INT,
+                        raiseToStreet3CBChance INT,
+                        raiseToStreet3CBDone INT,
+                        raiseToStreet4CBChance INT,
+                        raiseToStreet4CBDone INT,
                         common BIGINT,
                         committed BIGINT,
                         winnings BIGINT,
@@ -2209,16 +3089,20 @@ class Sql:
                         street4CheckCallRaiseChance INT,
                         street4CheckCallDone INT,
                         street4CheckRaiseDone INT,
+                        street1foldToCheckRaiseChance INT,
+                        street1foldToCheckRaiseDone INT,
+                        street2foldToCheckRaiseChance INT,
+                        street2foldToCheckRaiseDone INT,
+                        street3foldToCheckRaiseChance INT,
+                        street3foldToCheckRaiseDone INT,
+                        street4foldToCheckRaiseChance INT,
+                        street4foldToCheckRaiseDone INT,
                         street0Calls INT,
                         street1Calls INT,
                         street2Calls INT,
                         street3Calls INT,
                         street4Calls INT,
-                        street0Bets INT,
-                        street1Bets INT,
-                        street2Bets INT,
-                        street3Bets INT,
-                        street4Bets INT,
+                        
                         street0Raises INT,
                         street1Raises INT,
                         street2Raises INT,
@@ -2226,7 +3110,19 @@ class Sql:
                         street4Raises INT,
                         street1Discards INT,
                         street2Discards INT,
-                        street3Discards INT)
+                        street3Discards INT,
+                        
+                        street0Callers INT,
+                        street1Callers INT,
+                        street2Callers INT,
+                        street3Callers INT,
+                        street4Callers INT,
+                        
+                        street0Aggressors INT,
+                        street1Aggressors INT,
+                        street2Aggressors INT,
+                        street3Aggressors INT,
+                        street4Aggressors INT)
                         """
         elif db_server == 'sqlite':
             self.query['createCardsCacheTable'] = """CREATE TABLE CardsCache (
@@ -2237,7 +3133,8 @@ class Sql:
                         tourneyTypeId INT,
                         playerId INT,
                         startCards INT,
-                        n INT,                        
+                        n INT,
+                                               
                         street0VPIChance INT,
                         street0VPI INT,
                         street0AggrChance INT,
@@ -2260,6 +3157,66 @@ class Sql:
                         street0_FoldTo4BDone INT,
                         street0_SqueezeChance INT,
                         street0_SqueezeDone INT,
+                        street0_FoldToSqueezeChance INT,
+                        street0_FoldToSqueezeDone INT,
+                        
+                        street1_2BChance INT,
+                        street1_2BDone INT,
+                        street1_3BChance INT,
+                        street1_3BDone INT,
+                        street1_4BChance INT,
+                        street1_4BDone INT,
+                        street1_C4BChance INT,
+                        street1_C4BDone INT,
+                        street1_FoldTo2BChance INT,
+                        street1_FoldTo2BDone INT,
+                        street1_FoldTo3BChance INT,
+                        street1_FoldTo3BDone INT,
+                        street1_FoldTo4BChance INT,
+                        street1_FoldTo4BDone INT,
+                        street1_SqueezeChance INT,
+                        street1_SqueezeDone INT,
+                        street1_FoldToSqueezeChance INT,
+                        street1_FoldToSqueezeDone INT,
+                        
+                        street2_2BChance INT,
+                        street2_2BDone INT,
+                        street2_3BChance INT,
+                        street2_3BDone INT,
+                        street2_4BChance INT,
+                        street2_4BDone INT,
+                        street2_C4BChance INT,
+                        street2_C4BDone INT,
+                        street2_FoldTo2BChance INT,
+                        street2_FoldTo2BDone INT,
+                        street2_FoldTo3BChance INT,
+                        street2_FoldTo3BDone INT,
+                        street2_FoldTo4BChance INT,
+                        street2_FoldTo4BDone INT,
+                        street2_SqueezeChance INT,
+                        street2_SqueezeDone INT,
+                        street2_FoldToSqueezeChance INT,
+                        street2_FoldToSqueezeDone INT,
+                        
+                        street3_2BChance INT,
+                        street3_2BDone INT,
+                        street3_3BChance INT,
+                        street3_3BDone INT,
+                        street3_4BChance INT,
+                        street3_4BDone INT,
+                        street3_C4BChance INT,
+                        street3_C4BDone INT,
+                        street3_FoldTo2BChance INT,
+                        street3_FoldTo2BDone INT,
+                        street3_FoldTo3BChance INT,
+                        street3_FoldTo3BDone INT,
+                        street3_FoldTo4BChance INT,
+                        street3_FoldTo4BDone INT,
+                        street3_SqueezeChance INT,
+                        street3_SqueezeDone INT,
+                        street3_FoldToSqueezeChance INT,
+                        street3_FoldToSqueezeDone INT,
+                        
                         raiseToStealChance INT,
                         raiseToStealDone INT,
                         stealChance INT,
@@ -2284,6 +3241,16 @@ class Sql:
                         foldToOtherRaisedStreet2 INT,
                         foldToOtherRaisedStreet3 INT,
                         foldToOtherRaisedStreet4 INT,
+                        callToOtherRaisedStreet0 INT,
+                        callToOtherRaisedStreet1 INT,
+                        callToOtherRaisedStreet2 INT,
+                        callToOtherRaisedStreet3 INT,
+                        callToOtherRaisedStreet4 INT,
+                        raiseToOtherRaisedStreet0 INT,
+                        raiseToOtherRaisedStreet1 INT,
+                        raiseToOtherRaisedStreet2 INT,
+                        raiseToOtherRaisedStreet3 INT,
+                        raiseToOtherRaisedStreet4 INT,
                         wonWhenSeenStreet1 INT,
                         wonWhenSeenStreet2 INT,
                         wonWhenSeenStreet3 INT,
@@ -2311,6 +3278,22 @@ class Sql:
                         foldToStreet3CBDone INT,
                         foldToStreet4CBChance INT,
                         foldToStreet4CBDone INT,
+                        callToStreet1CBChance INT,
+                        callToStreet1CBDone INT,
+                        callToStreet2CBChance INT,
+                        callToStreet2CBDone INT,
+                        callToStreet3CBChance INT,
+                        callToStreet3CBDone INT,
+                        callToStreet4CBChance INT,
+                        callToStreet4CBDone INT,
+                        raiseToStreet1CBChance INT,
+                        raiseToStreet1CBDone INT,
+                        raiseToStreet2CBChance INT,
+                        raiseToStreet2CBDone INT,
+                        raiseToStreet3CBChance INT,
+                        raiseToStreet3CBDone INT,
+                        raiseToStreet4CBChance INT,
+                        raiseToStreet4CBDone INT,
                         common INT,
                         committed INT,
                         winnings INT,
@@ -2334,16 +3317,20 @@ class Sql:
                         street4CheckCallRaiseChance INT,
                         street4CheckCallDone INT,
                         street4CheckRaiseDone INT,
+                        street1foldToCheckRaiseChance INT,
+                        street1foldToCheckRaiseDone INT,
+                        street2foldToCheckRaiseChance INT,
+                        street2foldToCheckRaiseDone INT,
+                        street3foldToCheckRaiseChance INT,
+                        street3foldToCheckRaiseDone INT,
+                        street4foldToCheckRaiseChance INT,
+                        street4foldToCheckRaiseDone INT,
                         street0Calls INT,
                         street1Calls INT,
                         street2Calls INT,
                         street3Calls INT,
                         street4Calls INT,
-                        street0Bets INT,
-                        street1Bets INT,
-                        street2Bets INT,
-                        street3Bets INT,
-                        street4Bets INT,
+                        
                         street0Raises INT,
                         street1Raises INT,
                         street2Raises INT,
@@ -2351,7 +3338,19 @@ class Sql:
                         street4Raises INT,
                         street1Discards INT,
                         street2Discards INT,
-                        street3Discards INT)
+                        street3Discards INT,
+                        
+                        street0Callers INT,
+                        street1Callers INT,
+                        street2Callers INT,
+                        street3Callers INT,
+                        street4Callers INT,
+                        
+                        street0Aggressors INT,
+                        street1Aggressors INT,
+                        street2Aggressors INT,
+                        street3Aggressors INT,
+                        street4Aggressors INT)
                         """
                         
         ################################
@@ -2369,7 +3368,8 @@ class Sql:
                         seats SMALLINT NOT NULL,
                         maxPosition TINYINT NOT NULL,
                         position CHAR(1),
-                        n INT NOT NULL,                        
+                        n INT NOT NULL,
+                                               
                         street0VPIChance INT,
                         street0VPI INT,
                         street0AggrChance INT,
@@ -2392,6 +3392,66 @@ class Sql:
                         street0_FoldTo4BDone INT,
                         street0_SqueezeChance INT,
                         street0_SqueezeDone INT,
+                        street0_FoldToSqueezeChance INT,
+                        street0_FoldToSqueezeDone INT,
+                        
+                        street1_2BChance INT,
+                        street1_2BDone INT,
+                        street1_3BChance INT,
+                        street1_3BDone INT,
+                        street1_4BChance INT,
+                        street1_4BDone INT,
+                        street1_C4BChance INT,
+                        street1_C4BDone INT,
+                        street1_FoldTo2BChance INT,
+                        street1_FoldTo2BDone INT,
+                        street1_FoldTo3BChance INT,
+                        street1_FoldTo3BDone INT,
+                        street1_FoldTo4BChance INT,
+                        street1_FoldTo4BDone INT,
+                        street1_SqueezeChance INT,
+                        street1_SqueezeDone INT,
+                        street1_FoldToSqueezeChance INT,
+                        street1_FoldToSqueezeDone INT,
+                        
+                        street2_2BChance INT,
+                        street2_2BDone INT,
+                        street2_3BChance INT,
+                        street2_3BDone INT,
+                        street2_4BChance INT,
+                        street2_4BDone INT,
+                        street2_C4BChance INT,
+                        street2_C4BDone INT,
+                        street2_FoldTo2BChance INT,
+                        street2_FoldTo2BDone INT,
+                        street2_FoldTo3BChance INT,
+                        street2_FoldTo3BDone INT,
+                        street2_FoldTo4BChance INT,
+                        street2_FoldTo4BDone INT,
+                        street2_SqueezeChance INT,
+                        street2_SqueezeDone INT,
+                        street2_FoldToSqueezeChance INT,
+                        street2_FoldToSqueezeDone INT,
+                        
+                        street3_2BChance INT,
+                        street3_2BDone INT,
+                        street3_3BChance INT,
+                        street3_3BDone INT,
+                        street3_4BChance INT,
+                        street3_4BDone INT,
+                        street3_C4BChance INT,
+                        street3_C4BDone INT,
+                        street3_FoldTo2BChance INT,
+                        street3_FoldTo2BDone INT,
+                        street3_FoldTo3BChance INT,
+                        street3_FoldTo3BDone INT,
+                        street3_FoldTo4BChance INT,
+                        street3_FoldTo4BDone INT,
+                        street3_SqueezeChance INT,
+                        street3_SqueezeDone INT,
+                        street3_FoldToSqueezeChance INT,
+                        street3_FoldToSqueezeDone INT,
+                        
                         raiseToStealChance INT,
                         raiseToStealDone INT,
                         stealChance INT,
@@ -2416,6 +3476,16 @@ class Sql:
                         foldToOtherRaisedStreet2 INT,
                         foldToOtherRaisedStreet3 INT,
                         foldToOtherRaisedStreet4 INT,
+                        callToOtherRaisedStreet0 INT,
+                        callToOtherRaisedStreet1 INT,
+                        callToOtherRaisedStreet2 INT,
+                        callToOtherRaisedStreet3 INT,
+                        callToOtherRaisedStreet4 INT,
+                        raiseToOtherRaisedStreet0 INT,
+                        raiseToOtherRaisedStreet1 INT,
+                        raiseToOtherRaisedStreet2 INT,
+                        raiseToOtherRaisedStreet3 INT,
+                        raiseToOtherRaisedStreet4 INT,
                         wonWhenSeenStreet1 INT,
                         wonWhenSeenStreet2 INT,
                         wonWhenSeenStreet3 INT,
@@ -2442,7 +3512,23 @@ class Sql:
                         foldToStreet3CBChance INT,
                         foldToStreet3CBDone INT,
                         foldToStreet4CBChance INT,
-                        foldToStreet4CBDone INT,                        
+                        foldToStreet4CBDone INT,
+                        callToStreet1CBChance INT,
+                        callToStreet1CBDone INT,
+                        callToStreet2CBChance INT,
+                        callToStreet2CBDone INT,
+                        callToStreet3CBChance INT,
+                        callToStreet3CBDone INT,
+                        callToStreet4CBChance INT,
+                        callToStreet4CBDone INT,
+                        raiseToStreet1CBChance INT,
+                        raiseToStreet1CBDone INT,
+                        raiseToStreet2CBChance INT,
+                        raiseToStreet2CBDone INT,
+                        raiseToStreet3CBChance INT,
+                        raiseToStreet3CBDone INT,
+                        raiseToStreet4CBChance INT,
+                        raiseToStreet4CBDone INT,                        
                         common BIGINT,
                         committed BIGINT,
                         winnings BIGINT,
@@ -2466,16 +3552,20 @@ class Sql:
                         street4CheckCallRaiseChance INT,
                         street4CheckCallDone INT,
                         street4CheckRaiseDone INT,
+                        street1foldToCheckRaiseChance INT,
+                        street1foldToCheckRaiseDone INT,
+                        street2foldToCheckRaiseChance INT,
+                        street2foldToCheckRaiseDone INT,
+                        street3foldToCheckRaiseChance INT,
+                        street3foldToCheckRaiseDone INT,
+                        street4foldToCheckRaiseChance INT,
+                        street4foldToCheckRaiseDone INT,
                         street0Calls INT,
                         street1Calls INT,
                         street2Calls INT,
                         street3Calls INT,
                         street4Calls INT,
-                        street0Bets INT,
-                        street1Bets INT,
-                        street2Bets INT,
-                        street3Bets INT,
-                        street4Bets INT,
+                        
                         street0Raises INT,
                         street1Raises INT,
                         street2Raises INT,
@@ -2483,7 +3573,19 @@ class Sql:
                         street4Raises INT,
                         street1Discards INT,
                         street2Discards INT,
-                        street3Discards INT)
+                        street3Discards INT,
+                        
+                        street0Callers INT,
+                        street1Callers INT,
+                        street2Callers INT,
+                        street3Callers INT,
+                        street4Callers INT,
+                        
+                        street0Aggressors INT,
+                        street1Aggressors INT,
+                        street2Aggressors INT,
+                        street3Aggressors INT,
+                        street4Aggressors INT)
                         ENGINE=INNODB"""
         elif db_server == 'postgresql':
             self.query['createPositionsCacheTable'] = """CREATE TABLE PositionsCache (
@@ -2497,6 +3599,7 @@ class Sql:
                         maxPosition SMALLINT NOT NULL,
                         position CHAR(1),
                         n INT,
+                                               
                         street0VPIChance INT,
                         street0VPI INT,
                         street0AggrChance INT,
@@ -2519,6 +3622,66 @@ class Sql:
                         street0_FoldTo4BDone INT,
                         street0_SqueezeChance INT,
                         street0_SqueezeDone INT,
+                        street0_FoldToSqueezeChance INT,
+                        street0_FoldToSqueezeDone INT,
+                        
+                        street1_2BChance INT,
+                        street1_2BDone INT,
+                        street1_3BChance INT,
+                        street1_3BDone INT,
+                        street1_4BChance INT,
+                        street1_4BDone INT,
+                        street1_C4BChance INT,
+                        street1_C4BDone INT,
+                        street1_FoldTo2BChance INT,
+                        street1_FoldTo2BDone INT,
+                        street1_FoldTo3BChance INT,
+                        street1_FoldTo3BDone INT,
+                        street1_FoldTo4BChance INT,
+                        street1_FoldTo4BDone INT,
+                        street1_SqueezeChance INT,
+                        street1_SqueezeDone INT,
+                        street1_FoldToSqueezeChance INT,
+                        street1_FoldToSqueezeDone INT,
+                        
+                        street2_2BChance INT,
+                        street2_2BDone INT,
+                        street2_3BChance INT,
+                        street2_3BDone INT,
+                        street2_4BChance INT,
+                        street2_4BDone INT,
+                        street2_C4BChance INT,
+                        street2_C4BDone INT,
+                        street2_FoldTo2BChance INT,
+                        street2_FoldTo2BDone INT,
+                        street2_FoldTo3BChance INT,
+                        street2_FoldTo3BDone INT,
+                        street2_FoldTo4BChance INT,
+                        street2_FoldTo4BDone INT,
+                        street2_SqueezeChance INT,
+                        street2_SqueezeDone INT,
+                        street2_FoldToSqueezeChance INT,
+                        street2_FoldToSqueezeDone INT,
+                        
+                        street3_2BChance INT,
+                        street3_2BDone INT,
+                        street3_3BChance INT,
+                        street3_3BDone INT,
+                        street3_4BChance INT,
+                        street3_4BDone INT,
+                        street3_C4BChance INT,
+                        street3_C4BDone INT,
+                        street3_FoldTo2BChance INT,
+                        street3_FoldTo2BDone INT,
+                        street3_FoldTo3BChance INT,
+                        street3_FoldTo3BDone INT,
+                        street3_FoldTo4BChance INT,
+                        street3_FoldTo4BDone INT,
+                        street3_SqueezeChance INT,
+                        street3_SqueezeDone INT,
+                        street3_FoldToSqueezeChance INT,
+                        street3_FoldToSqueezeDone INT,
+                        
                         raiseToStealChance INT,
                         raiseToStealDone INT,
                         stealChance INT,
@@ -2543,6 +3706,16 @@ class Sql:
                         foldToOtherRaisedStreet2 INT,
                         foldToOtherRaisedStreet3 INT,
                         foldToOtherRaisedStreet4 INT,
+                        callToOtherRaisedStreet0 INT,
+                        callToOtherRaisedStreet1 INT,
+                        callToOtherRaisedStreet2 INT,
+                        callToOtherRaisedStreet3 INT,
+                        callToOtherRaisedStreet4 INT,
+                        raiseToOtherRaisedStreet0 INT,
+                        raiseToOtherRaisedStreet1 INT,
+                        raiseToOtherRaisedStreet2 INT,
+                        raiseToOtherRaisedStreet3 INT,
+                        raiseToOtherRaisedStreet4 INT,
                         wonWhenSeenStreet1 INT,
                         wonWhenSeenStreet2 INT,
                         wonWhenSeenStreet3 INT,
@@ -2570,6 +3743,22 @@ class Sql:
                         foldToStreet3CBDone INT,
                         foldToStreet4CBChance INT,
                         foldToStreet4CBDone INT,
+                        callToStreet1CBChance INT,
+                        callToStreet1CBDone INT,
+                        callToStreet2CBChance INT,
+                        callToStreet2CBDone INT,
+                        callToStreet3CBChance INT,
+                        callToStreet3CBDone INT,
+                        callToStreet4CBChance INT,
+                        callToStreet4CBDone INT,
+                        raiseToStreet1CBChance INT,
+                        raiseToStreet1CBDone INT,
+                        raiseToStreet2CBChance INT,
+                        raiseToStreet2CBDone INT,
+                        raiseToStreet3CBChance INT,
+                        raiseToStreet3CBDone INT,
+                        raiseToStreet4CBChance INT,
+                        raiseToStreet4CBDone INT,
                         common BIGINT,
                         committed BIGINT,
                         winnings BIGINT,
@@ -2593,16 +3782,20 @@ class Sql:
                         street4CheckCallRaiseChance INT,
                         street4CheckCallDone INT,
                         street4CheckRaiseDone INT,
+                        street1foldToCheckRaiseChance INT,
+                        street1foldToCheckRaiseDone INT,
+                        street2foldToCheckRaiseChance INT,
+                        street2foldToCheckRaiseDone INT,
+                        street3foldToCheckRaiseChance INT,
+                        street3foldToCheckRaiseDone INT,
+                        street4foldToCheckRaiseChance INT,
+                        street4foldToCheckRaiseDone INT,
                         street0Calls INT,
                         street1Calls INT,
                         street2Calls INT,
                         street3Calls INT,
                         street4Calls INT,
-                        street0Bets INT,
-                        street1Bets INT,
-                        street2Bets INT,
-                        street3Bets INT,
-                        street4Bets INT,
+                        
                         street0Raises INT,
                         street1Raises INT,
                         street2Raises INT,
@@ -2610,7 +3803,19 @@ class Sql:
                         street4Raises INT,
                         street1Discards INT,
                         street2Discards INT,
-                        street3Discards INT)
+                        street3Discards INT,
+                        
+                        street0Callers INT,
+                        street1Callers INT,
+                        street2Callers INT,
+                        street3Callers INT,
+                        street4Callers INT,
+                        
+                        street0Aggressors INT,
+                        street1Aggressors INT,
+                        street2Aggressors INT,
+                        street3Aggressors INT,
+                        street4Aggressors INT)
                         """
         elif db_server == 'sqlite':
             self.query['createPositionsCacheTable'] = """CREATE TABLE PositionsCache (
@@ -2624,6 +3829,7 @@ class Sql:
                         maxPosition INT NOT NULL,
                         position TEXT,
                         n INT,
+                                               
                         street0VPIChance INT,
                         street0VPI INT,
                         street0AggrChance INT,
@@ -2646,6 +3852,66 @@ class Sql:
                         street0_FoldTo4BDone INT,
                         street0_SqueezeChance INT,
                         street0_SqueezeDone INT,
+                        street0_FoldToSqueezeChance INT,
+                        street0_FoldToSqueezeDone INT,
+                        
+                        street1_2BChance INT,
+                        street1_2BDone INT,
+                        street1_3BChance INT,
+                        street1_3BDone INT,
+                        street1_4BChance INT,
+                        street1_4BDone INT,
+                        street1_C4BChance INT,
+                        street1_C4BDone INT,
+                        street1_FoldTo2BChance INT,
+                        street1_FoldTo2BDone INT,
+                        street1_FoldTo3BChance INT,
+                        street1_FoldTo3BDone INT,
+                        street1_FoldTo4BChance INT,
+                        street1_FoldTo4BDone INT,
+                        street1_SqueezeChance INT,
+                        street1_SqueezeDone INT,
+                        street1_FoldToSqueezeChance INT,
+                        street1_FoldToSqueezeDone INT,
+                        
+                        street2_2BChance INT,
+                        street2_2BDone INT,
+                        street2_3BChance INT,
+                        street2_3BDone INT,
+                        street2_4BChance INT,
+                        street2_4BDone INT,
+                        street2_C4BChance INT,
+                        street2_C4BDone INT,
+                        street2_FoldTo2BChance INT,
+                        street2_FoldTo2BDone INT,
+                        street2_FoldTo3BChance INT,
+                        street2_FoldTo3BDone INT,
+                        street2_FoldTo4BChance INT,
+                        street2_FoldTo4BDone INT,
+                        street2_SqueezeChance INT,
+                        street2_SqueezeDone INT,
+                        street2_FoldToSqueezeChance INT,
+                        street2_FoldToSqueezeDone INT,
+                        
+                        street3_2BChance INT,
+                        street3_2BDone INT,
+                        street3_3BChance INT,
+                        street3_3BDone INT,
+                        street3_4BChance INT,
+                        street3_4BDone INT,
+                        street3_C4BChance INT,
+                        street3_C4BDone INT,
+                        street3_FoldTo2BChance INT,
+                        street3_FoldTo2BDone INT,
+                        street3_FoldTo3BChance INT,
+                        street3_FoldTo3BDone INT,
+                        street3_FoldTo4BChance INT,
+                        street3_FoldTo4BDone INT,
+                        street3_SqueezeChance INT,
+                        street3_SqueezeDone INT,
+                        street3_FoldToSqueezeChance INT,
+                        street3_FoldToSqueezeDone INT,
+                        
                         raiseToStealChance INT,
                         raiseToStealDone INT,
                         stealChance INT,
@@ -2670,6 +3936,16 @@ class Sql:
                         foldToOtherRaisedStreet2 INT,
                         foldToOtherRaisedStreet3 INT,
                         foldToOtherRaisedStreet4 INT,
+                        callToOtherRaisedStreet0 INT,
+                        callToOtherRaisedStreet1 INT,
+                        callToOtherRaisedStreet2 INT,
+                        callToOtherRaisedStreet3 INT,
+                        callToOtherRaisedStreet4 INT,
+                        raiseToOtherRaisedStreet0 INT,
+                        raiseToOtherRaisedStreet1 INT,
+                        raiseToOtherRaisedStreet2 INT,
+                        raiseToOtherRaisedStreet3 INT,
+                        raiseToOtherRaisedStreet4 INT,
                         wonWhenSeenStreet1 INT,
                         wonWhenSeenStreet2 INT,
                         wonWhenSeenStreet3 INT,
@@ -2697,6 +3973,22 @@ class Sql:
                         foldToStreet3CBDone INT,
                         foldToStreet4CBChance INT,
                         foldToStreet4CBDone INT,
+                        callToStreet1CBChance INT,
+                        callToStreet1CBDone INT,
+                        callToStreet2CBChance INT,
+                        callToStreet2CBDone INT,
+                        callToStreet3CBChance INT,
+                        callToStreet3CBDone INT,
+                        callToStreet4CBChance INT,
+                        callToStreet4CBDone INT,
+                        raiseToStreet1CBChance INT,
+                        raiseToStreet1CBDone INT,
+                        raiseToStreet2CBChance INT,
+                        raiseToStreet2CBDone INT,
+                        raiseToStreet3CBChance INT,
+                        raiseToStreet3CBDone INT,
+                        raiseToStreet4CBChance INT,
+                        raiseToStreet4CBDone INT,
                         common INT,
                         committed INT,
                         winnings INT,
@@ -2720,16 +4012,20 @@ class Sql:
                         street4CheckCallRaiseChance INT,
                         street4CheckCallDone INT,
                         street4CheckRaiseDone INT,
+                        street1foldToCheckRaiseChance INT,
+                        street1foldToCheckRaiseDone INT,
+                        street2foldToCheckRaiseChance INT,
+                        street2foldToCheckRaiseDone INT,
+                        street3foldToCheckRaiseChance INT,
+                        street3foldToCheckRaiseDone INT,
+                        street4foldToCheckRaiseChance INT,
+                        street4foldToCheckRaiseDone INT,
                         street0Calls INT,
                         street1Calls INT,
                         street2Calls INT,
                         street3Calls INT,
                         street4Calls INT,
-                        street0Bets INT,
-                        street1Bets INT,
-                        street2Bets INT,
-                        street3Bets INT,
-                        street4Bets INT,
+                        
                         street0Raises INT,
                         street1Raises INT,
                         street2Raises INT,
@@ -2737,7 +4033,19 @@ class Sql:
                         street4Raises INT,
                         street1Discards INT,
                         street2Discards INT,
-                        street3Discards INT)
+                        street3Discards INT,
+                        
+                        street0Callers INT,
+                        street1Callers INT,
+                        street2Callers INT,
+                        street3Callers INT,
+                        street4Callers INT,
+                        
+                        street0Aggressors INT,
+                        street1Aggressors INT,
+                        street2Aggressors INT,
+                        street3Aggressors INT,
+                        street4Aggressors INT)
                         """
                         
         ################################
@@ -2830,7 +4138,8 @@ class Sql:
                         endTime DATETIME NOT NULL,
                         gametypeId SMALLINT UNSIGNED, FOREIGN KEY (gametypeId) REFERENCES Gametypes(id),
                         playerId INT UNSIGNED NOT NULL, FOREIGN KEY (playerId) REFERENCES Players(id),
-                        n INT NOT NULL,                        
+                        n INT NOT NULL,
+                                               
                         street0VPIChance INT,
                         street0VPI INT,
                         street0AggrChance INT,
@@ -2853,6 +4162,66 @@ class Sql:
                         street0_FoldTo4BDone INT,
                         street0_SqueezeChance INT,
                         street0_SqueezeDone INT,
+                        street0_FoldToSqueezeChance INT,
+                        street0_FoldToSqueezeDone INT,
+                        
+                        street1_2BChance INT,
+                        street1_2BDone INT,
+                        street1_3BChance INT,
+                        street1_3BDone INT,
+                        street1_4BChance INT,
+                        street1_4BDone INT,
+                        street1_C4BChance INT,
+                        street1_C4BDone INT,
+                        street1_FoldTo2BChance INT,
+                        street1_FoldTo2BDone INT,
+                        street1_FoldTo3BChance INT,
+                        street1_FoldTo3BDone INT,
+                        street1_FoldTo4BChance INT,
+                        street1_FoldTo4BDone INT,
+                        street1_SqueezeChance INT,
+                        street1_SqueezeDone INT,
+                        street1_FoldToSqueezeChance INT,
+                        street1_FoldToSqueezeDone INT,
+                        
+                        street2_2BChance INT,
+                        street2_2BDone INT,
+                        street2_3BChance INT,
+                        street2_3BDone INT,
+                        street2_4BChance INT,
+                        street2_4BDone INT,
+                        street2_C4BChance INT,
+                        street2_C4BDone INT,
+                        street2_FoldTo2BChance INT,
+                        street2_FoldTo2BDone INT,
+                        street2_FoldTo3BChance INT,
+                        street2_FoldTo3BDone INT,
+                        street2_FoldTo4BChance INT,
+                        street2_FoldTo4BDone INT,
+                        street2_SqueezeChance INT,
+                        street2_SqueezeDone INT,
+                        street2_FoldToSqueezeChance INT,
+                        street2_FoldToSqueezeDone INT,
+                        
+                        street3_2BChance INT,
+                        street3_2BDone INT,
+                        street3_3BChance INT,
+                        street3_3BDone INT,
+                        street3_4BChance INT,
+                        street3_4BDone INT,
+                        street3_C4BChance INT,
+                        street3_C4BDone INT,
+                        street3_FoldTo2BChance INT,
+                        street3_FoldTo2BDone INT,
+                        street3_FoldTo3BChance INT,
+                        street3_FoldTo3BDone INT,
+                        street3_FoldTo4BChance INT,
+                        street3_FoldTo4BDone INT,
+                        street3_SqueezeChance INT,
+                        street3_SqueezeDone INT,
+                        street3_FoldToSqueezeChance INT,
+                        street3_FoldToSqueezeDone INT,
+                        
                         raiseToStealChance INT,
                         raiseToStealDone INT,
                         stealChance INT,
@@ -2862,7 +4231,7 @@ class Sql:
                         street2Seen INT,
                         street3Seen INT,
                         street4Seen INT,
-                        sawShowdown INT,                        
+                        sawShowdown INT,
                         street1Aggr INT,
                         street2Aggr INT,
                         street3Aggr INT,
@@ -2876,7 +4245,17 @@ class Sql:
                         foldToOtherRaisedStreet1 INT,
                         foldToOtherRaisedStreet2 INT,
                         foldToOtherRaisedStreet3 INT,
-                        foldToOtherRaisedStreet4 INT,                        
+                        foldToOtherRaisedStreet4 INT,
+                        callToOtherRaisedStreet0 INT,
+                        callToOtherRaisedStreet1 INT,
+                        callToOtherRaisedStreet2 INT,
+                        callToOtherRaisedStreet3 INT,
+                        callToOtherRaisedStreet4 INT,
+                        raiseToOtherRaisedStreet0 INT,
+                        raiseToOtherRaisedStreet1 INT,
+                        raiseToOtherRaisedStreet2 INT,
+                        raiseToOtherRaisedStreet3 INT,
+                        raiseToOtherRaisedStreet4 INT,                        
                         wonWhenSeenStreet1 INT,
                         wonWhenSeenStreet2 INT,
                         wonWhenSeenStreet3 INT,
@@ -2903,7 +4282,23 @@ class Sql:
                         foldToStreet3CBChance INT,
                         foldToStreet3CBDone INT,
                         foldToStreet4CBChance INT,
-                        foldToStreet4CBDone INT,                        
+                        foldToStreet4CBDone INT,
+                        callToStreet1CBChance INT,
+                        callToStreet1CBDone INT,
+                        callToStreet2CBChance INT,
+                        callToStreet2CBDone INT,
+                        callToStreet3CBChance INT,
+                        callToStreet3CBDone INT,
+                        callToStreet4CBChance INT,
+                        callToStreet4CBDone INT,
+                        raiseToStreet1CBChance INT,
+                        raiseToStreet1CBDone INT,
+                        raiseToStreet2CBChance INT,
+                        raiseToStreet2CBDone INT,
+                        raiseToStreet3CBChance INT,
+                        raiseToStreet3CBDone INT,
+                        raiseToStreet4CBChance INT,
+                        raiseToStreet4CBDone INT,                        
                         common BIGINT,
                         committed BIGINT,
                         winnings BIGINT,
@@ -2927,16 +4322,20 @@ class Sql:
                         street4CheckCallRaiseChance INT,
                         street4CheckCallDone INT,
                         street4CheckRaiseDone INT,
+                        street1foldToCheckRaiseChance INT,
+                        street1foldToCheckRaiseDone INT,
+                        street2foldToCheckRaiseChance INT,
+                        street2foldToCheckRaiseDone INT,
+                        street3foldToCheckRaiseChance INT,
+                        street3foldToCheckRaiseDone INT,
+                        street4foldToCheckRaiseChance INT,
+                        street4foldToCheckRaiseDone INT,
                         street0Calls INT,
                         street1Calls INT,
                         street2Calls INT,
                         street3Calls INT,
                         street4Calls INT,
-                        street0Bets INT,
-                        street1Bets INT,
-                        street2Bets INT,
-                        street3Bets INT,
-                        street4Bets INT,
+                        
                         street0Raises INT,
                         street1Raises INT,
                         street2Raises INT,
@@ -2944,7 +4343,19 @@ class Sql:
                         street4Raises INT,
                         street1Discards INT,
                         street2Discards INT,
-                        street3Discards INT)
+                        street3Discards INT,
+                        
+                        street0Callers INT,
+                        street1Callers INT,
+                        street2Callers INT,
+                        street3Callers INT,
+                        street4Callers INT,
+                        
+                        street0Aggressors INT,
+                        street1Aggressors INT,
+                        street2Aggressors INT,
+                        street3Aggressors INT,
+                        street4Aggressors INT)
                         ENGINE=INNODB
                         """
                         
@@ -2956,7 +4367,8 @@ class Sql:
                         endTime timestamp without time zone NOT NULL,
                         gametypeId INT, FOREIGN KEY (gametypeId) REFERENCES Gametypes(id),
                         playerId INT, FOREIGN KEY (playerId) REFERENCES Players(id),
-                        n INT,                        
+                        n INT,       
+                                         
                         street0VPIChance INT,
                         street0VPI INT,
                         street0AggrChance INT,
@@ -2979,6 +4391,66 @@ class Sql:
                         street0_FoldTo4BDone INT,
                         street0_SqueezeChance INT,
                         street0_SqueezeDone INT,
+                        street0_FoldToSqueezeChance INT,
+                        street0_FoldToSqueezeDone INT,
+                        
+                        street1_2BChance INT,
+                        street1_2BDone INT,
+                        street1_3BChance INT,
+                        street1_3BDone INT,
+                        street1_4BChance INT,
+                        street1_4BDone INT,
+                        street1_C4BChance INT,
+                        street1_C4BDone INT,
+                        street1_FoldTo2BChance INT,
+                        street1_FoldTo2BDone INT,
+                        street1_FoldTo3BChance INT,
+                        street1_FoldTo3BDone INT,
+                        street1_FoldTo4BChance INT,
+                        street1_FoldTo4BDone INT,
+                        street1_SqueezeChance INT,
+                        street1_SqueezeDone INT,
+                        street1_FoldToSqueezeChance INT,
+                        street1_FoldToSqueezeDone INT,
+                        
+                        street2_2BChance INT,
+                        street2_2BDone INT,
+                        street2_3BChance INT,
+                        street2_3BDone INT,
+                        street2_4BChance INT,
+                        street2_4BDone INT,
+                        street2_C4BChance INT,
+                        street2_C4BDone INT,
+                        street2_FoldTo2BChance INT,
+                        street2_FoldTo2BDone INT,
+                        street2_FoldTo3BChance INT,
+                        street2_FoldTo3BDone INT,
+                        street2_FoldTo4BChance INT,
+                        street2_FoldTo4BDone INT,
+                        street2_SqueezeChance INT,
+                        street2_SqueezeDone INT,
+                        street2_FoldToSqueezeChance INT,
+                        street2_FoldToSqueezeDone INT,
+                        
+                        street3_2BChance INT,
+                        street3_2BDone INT,
+                        street3_3BChance INT,
+                        street3_3BDone INT,
+                        street3_4BChance INT,
+                        street3_4BDone INT,
+                        street3_C4BChance INT,
+                        street3_C4BDone INT,
+                        street3_FoldTo2BChance INT,
+                        street3_FoldTo2BDone INT,
+                        street3_FoldTo3BChance INT,
+                        street3_FoldTo3BDone INT,
+                        street3_FoldTo4BChance INT,
+                        street3_FoldTo4BDone INT,
+                        street3_SqueezeChance INT,
+                        street3_SqueezeDone INT,
+                        street3_FoldToSqueezeChance INT,
+                        street3_FoldToSqueezeDone INT,
+                        
                         raiseToStealChance INT,
                         raiseToStealDone INT,
                         stealChance INT,
@@ -3002,7 +4474,17 @@ class Sql:
                         foldToOtherRaisedStreet1 INT,
                         foldToOtherRaisedStreet2 INT,
                         foldToOtherRaisedStreet3 INT,
-                        foldToOtherRaisedStreet4 INT,                        
+                        foldToOtherRaisedStreet4 INT,
+                        callToOtherRaisedStreet0 INT,
+                        callToOtherRaisedStreet1 INT,
+                        callToOtherRaisedStreet2 INT,
+                        callToOtherRaisedStreet3 INT,
+                        callToOtherRaisedStreet4 INT,
+                        raiseToOtherRaisedStreet0 INT,
+                        raiseToOtherRaisedStreet1 INT,
+                        raiseToOtherRaisedStreet2 INT,
+                        raiseToOtherRaisedStreet3 INT,
+                        raiseToOtherRaisedStreet4 INT,                        
                         wonWhenSeenStreet1 INT,
                         wonWhenSeenStreet2 INT,
                         wonWhenSeenStreet3 INT,
@@ -3030,6 +4512,22 @@ class Sql:
                         foldToStreet3CBDone INT,
                         foldToStreet4CBChance INT,
                         foldToStreet4CBDone INT,
+                        callToStreet1CBChance INT,
+                        callToStreet1CBDone INT,
+                        callToStreet2CBChance INT,
+                        callToStreet2CBDone INT,
+                        callToStreet3CBChance INT,
+                        callToStreet3CBDone INT,
+                        callToStreet4CBChance INT,
+                        callToStreet4CBDone INT,
+                        raiseToStreet1CBChance INT,
+                        raiseToStreet1CBDone INT,
+                        raiseToStreet2CBChance INT,
+                        raiseToStreet2CBDone INT,
+                        raiseToStreet3CBChance INT,
+                        raiseToStreet3CBDone INT,
+                        raiseToStreet4CBChance INT,
+                        raiseToStreet4CBDone INT,
                         common BIGINT,
                         committed BIGINT,
                         winnings BIGINT,
@@ -3053,16 +4551,20 @@ class Sql:
                         street4CheckCallRaiseChance INT,
                         street4CheckCallDone INT,
                         street4CheckRaiseDone INT,
+                        street1foldToCheckRaiseChance INT,
+                        street1foldToCheckRaiseDone INT,
+                        street2foldToCheckRaiseChance INT,
+                        street2foldToCheckRaiseDone INT,
+                        street3foldToCheckRaiseChance INT,
+                        street3foldToCheckRaiseDone INT,
+                        street4foldToCheckRaiseChance INT,
+                        street4foldToCheckRaiseDone INT,
                         street0Calls INT,
                         street1Calls INT,
                         street2Calls INT,
                         street3Calls INT,
                         street4Calls INT,
-                        street0Bets INT,
-                        street1Bets INT,
-                        street2Bets INT,
-                        street3Bets INT,
-                        street4Bets INT,
+                        
                         street0Raises INT,
                         street1Raises INT,
                         street2Raises INT,
@@ -3070,7 +4572,19 @@ class Sql:
                         street4Raises INT,
                         street1Discards INT,
                         street2Discards INT,
-                        street3Discards INT)
+                        street3Discards INT,
+                        
+                        street0Callers INT,
+                        street1Callers INT,
+                        street2Callers INT,
+                        street3Callers INT,
+                        street4Callers INT,
+                        
+                        street0Aggressors INT,
+                        street1Aggressors INT,
+                        street2Aggressors INT,
+                        street3Aggressors INT,
+                        street4Aggressors INT)
                         """
                         
         elif db_server == 'sqlite':
@@ -3082,6 +4596,7 @@ class Sql:
                         gametypeId INT,
                         playerId INT,
                         n INT,
+                        
                         street0VPIChance INT,
                         street0VPI INT,
                         street0AggrChance INT,
@@ -3104,6 +4619,66 @@ class Sql:
                         street0_FoldTo4BDone INT,
                         street0_SqueezeChance INT,
                         street0_SqueezeDone INT,
+                        street0_FoldToSqueezeChance INT,
+                        street0_FoldToSqueezeDone INT,
+                        
+                        street1_2BChance INT,
+                        street1_2BDone INT,
+                        street1_3BChance INT,
+                        street1_3BDone INT,
+                        street1_4BChance INT,
+                        street1_4BDone INT,
+                        street1_C4BChance INT,
+                        street1_C4BDone INT,
+                        street1_FoldTo2BChance INT,
+                        street1_FoldTo2BDone INT,
+                        street1_FoldTo3BChance INT,
+                        street1_FoldTo3BDone INT,
+                        street1_FoldTo4BChance INT,
+                        street1_FoldTo4BDone INT,
+                        street1_SqueezeChance INT,
+                        street1_SqueezeDone INT,
+                        street1_FoldToSqueezeChance INT,
+                        street1_FoldToSqueezeDone INT,
+                        
+                        street2_2BChance INT,
+                        street2_2BDone INT,
+                        street2_3BChance INT,
+                        street2_3BDone INT,
+                        street2_4BChance INT,
+                        street2_4BDone INT,
+                        street2_C4BChance INT,
+                        street2_C4BDone INT,
+                        street2_FoldTo2BChance INT,
+                        street2_FoldTo2BDone INT,
+                        street2_FoldTo3BChance INT,
+                        street2_FoldTo3BDone INT,
+                        street2_FoldTo4BChance INT,
+                        street2_FoldTo4BDone INT,
+                        street2_SqueezeChance INT,
+                        street2_SqueezeDone INT,
+                        street2_FoldToSqueezeChance INT,
+                        street2_FoldToSqueezeDone INT,
+                        
+                        street3_2BChance INT,
+                        street3_2BDone INT,
+                        street3_3BChance INT,
+                        street3_3BDone INT,
+                        street3_4BChance INT,
+                        street3_4BDone INT,
+                        street3_C4BChance INT,
+                        street3_C4BDone INT,
+                        street3_FoldTo2BChance INT,
+                        street3_FoldTo2BDone INT,
+                        street3_FoldTo3BChance INT,
+                        street3_FoldTo3BDone INT,
+                        street3_FoldTo4BChance INT,
+                        street3_FoldTo4BDone INT,
+                        street3_SqueezeChance INT,
+                        street3_SqueezeDone INT,
+                        street3_FoldToSqueezeChance INT,
+                        street3_FoldToSqueezeDone INT,
+                        
                         raiseToStealChance INT,
                         raiseToStealDone INT,
                         stealChance INT,
@@ -3127,7 +4702,17 @@ class Sql:
                         foldToOtherRaisedStreet1 INT,
                         foldToOtherRaisedStreet2 INT,
                         foldToOtherRaisedStreet3 INT,
-                        foldToOtherRaisedStreet4 INT,                        
+                        foldToOtherRaisedStreet4 INT,
+                        callToOtherRaisedStreet0 INT,
+                        callToOtherRaisedStreet1 INT,
+                        callToOtherRaisedStreet2 INT,
+                        callToOtherRaisedStreet3 INT,
+                        callToOtherRaisedStreet4 INT,
+                        raiseToOtherRaisedStreet0 INT,
+                        raiseToOtherRaisedStreet1 INT,
+                        raiseToOtherRaisedStreet2 INT,
+                        raiseToOtherRaisedStreet3 INT,
+                        raiseToOtherRaisedStreet4 INT,                        
                         wonWhenSeenStreet1 INT,
                         wonWhenSeenStreet2 INT,
                         wonWhenSeenStreet3 INT,
@@ -3155,6 +4740,22 @@ class Sql:
                         foldToStreet3CBDone INT,
                         foldToStreet4CBChance INT,
                         foldToStreet4CBDone INT,
+                        callToStreet1CBChance INT,
+                        callToStreet1CBDone INT,
+                        callToStreet2CBChance INT,
+                        callToStreet2CBDone INT,
+                        callToStreet3CBChance INT,
+                        callToStreet3CBDone INT,
+                        callToStreet4CBChance INT,
+                        callToStreet4CBDone INT,
+                        raiseToStreet1CBChance INT,
+                        raiseToStreet1CBDone INT,
+                        raiseToStreet2CBChance INT,
+                        raiseToStreet2CBDone INT,
+                        raiseToStreet3CBChance INT,
+                        raiseToStreet3CBDone INT,
+                        raiseToStreet4CBChance INT,
+                        raiseToStreet4CBDone INT,
                         common INT,
                         committed INT,
                         winnings INT,
@@ -3178,16 +4779,20 @@ class Sql:
                         street4CheckCallRaiseChance INT,
                         street4CheckCallDone INT,
                         street4CheckRaiseDone INT,
+                        street1foldToCheckRaiseChance INT,
+                        street1foldToCheckRaiseDone INT,
+                        street2foldToCheckRaiseChance INT,
+                        street2foldToCheckRaiseDone INT,
+                        street3foldToCheckRaiseChance INT,
+                        street3foldToCheckRaiseDone INT,
+                        street4foldToCheckRaiseChance INT,
+                        street4foldToCheckRaiseDone INT,
                         street0Calls INT,
                         street1Calls INT,
                         street2Calls INT,
                         street3Calls INT,
                         street4Calls INT,
-                        street0Bets INT,
-                        street1Bets INT,
-                        street2Bets INT,
-                        street3Bets INT,
-                        street4Bets INT,
+                        
                         street0Raises INT,
                         street1Raises INT,
                         street2Raises INT,
@@ -3195,7 +4800,19 @@ class Sql:
                         street4Raises INT,
                         street1Discards INT,
                         street2Discards INT,
-                        street3Discards INT)
+                        street3Discards INT,
+                        
+                        street0Callers INT,
+                        street1Callers INT,
+                        street2Callers INT,
+                        street3Callers INT,
+                        street4Callers INT,
+                        
+                        street0Aggressors INT,
+                        street1Aggressors INT,
+                        street2Aggressors INT,
+                        street3Aggressors INT,
+                        street4Aggressors INT)
                         """
                         
         ################################
@@ -3210,7 +4827,8 @@ class Sql:
                         endTime DATETIME NOT NULL,
                         tourneyId INT UNSIGNED NOT NULL, FOREIGN KEY (tourneyId) REFERENCES Tourneys(id),
                         playerId INT UNSIGNED NOT NULL, FOREIGN KEY (playerId) REFERENCES Players(id),
-                        n INT NOT NULL,                        
+                        n INT NOT NULL,  
+                                              
                         street0VPIChance INT,
                         street0VPI INT,
                         street0AggrChance INT,
@@ -3233,6 +4851,66 @@ class Sql:
                         street0_FoldTo4BDone INT,
                         street0_SqueezeChance INT,
                         street0_SqueezeDone INT,
+                        street0_FoldToSqueezeChance INT,
+                        street0_FoldToSqueezeDone INT,
+                        
+                        street1_2BChance INT,
+                        street1_2BDone INT,
+                        street1_3BChance INT,
+                        street1_3BDone INT,
+                        street1_4BChance INT,
+                        street1_4BDone INT,
+                        street1_C4BChance INT,
+                        street1_C4BDone INT,
+                        street1_FoldTo2BChance INT,
+                        street1_FoldTo2BDone INT,
+                        street1_FoldTo3BChance INT,
+                        street1_FoldTo3BDone INT,
+                        street1_FoldTo4BChance INT,
+                        street1_FoldTo4BDone INT,
+                        street1_SqueezeChance INT,
+                        street1_SqueezeDone INT,
+                        street1_FoldToSqueezeChance INT,
+                        street1_FoldToSqueezeDone INT,
+                        
+                        street2_2BChance INT,
+                        street2_2BDone INT,
+                        street2_3BChance INT,
+                        street2_3BDone INT,
+                        street2_4BChance INT,
+                        street2_4BDone INT,
+                        street2_C4BChance INT,
+                        street2_C4BDone INT,
+                        street2_FoldTo2BChance INT,
+                        street2_FoldTo2BDone INT,
+                        street2_FoldTo3BChance INT,
+                        street2_FoldTo3BDone INT,
+                        street2_FoldTo4BChance INT,
+                        street2_FoldTo4BDone INT,
+                        street2_SqueezeChance INT,
+                        street2_SqueezeDone INT,
+                        street2_FoldToSqueezeChance INT,
+                        street2_FoldToSqueezeDone INT,
+                        
+                        street3_2BChance INT,
+                        street3_2BDone INT,
+                        street3_3BChance INT,
+                        street3_3BDone INT,
+                        street3_4BChance INT,
+                        street3_4BDone INT,
+                        street3_C4BChance INT,
+                        street3_C4BDone INT,
+                        street3_FoldTo2BChance INT,
+                        street3_FoldTo2BDone INT,
+                        street3_FoldTo3BChance INT,
+                        street3_FoldTo3BDone INT,
+                        street3_FoldTo4BChance INT,
+                        street3_FoldTo4BDone INT,
+                        street3_SqueezeChance INT,
+                        street3_SqueezeDone INT,
+                        street3_FoldToSqueezeChance INT,
+                        street3_FoldToSqueezeDone INT,
+                        
                         raiseToStealChance INT,
                         raiseToStealDone INT,
                         stealChance INT,
@@ -3242,7 +4920,7 @@ class Sql:
                         street2Seen INT,
                         street3Seen INT,
                         street4Seen INT,
-                        sawShowdown INT,                        
+                        sawShowdown INT,
                         street1Aggr INT,
                         street2Aggr INT,
                         street3Aggr INT,
@@ -3256,7 +4934,17 @@ class Sql:
                         foldToOtherRaisedStreet1 INT,
                         foldToOtherRaisedStreet2 INT,
                         foldToOtherRaisedStreet3 INT,
-                        foldToOtherRaisedStreet4 INT,                        
+                        foldToOtherRaisedStreet4 INT,
+                        callToOtherRaisedStreet0 INT,
+                        callToOtherRaisedStreet1 INT,
+                        callToOtherRaisedStreet2 INT,
+                        callToOtherRaisedStreet3 INT,
+                        callToOtherRaisedStreet4 INT,
+                        raiseToOtherRaisedStreet0 INT,
+                        raiseToOtherRaisedStreet1 INT,
+                        raiseToOtherRaisedStreet2 INT,
+                        raiseToOtherRaisedStreet3 INT,
+                        raiseToOtherRaisedStreet4 INT,                        
                         wonWhenSeenStreet1 INT,
                         wonWhenSeenStreet2 INT,
                         wonWhenSeenStreet3 INT,
@@ -3283,7 +4971,23 @@ class Sql:
                         foldToStreet3CBChance INT,
                         foldToStreet3CBDone INT,
                         foldToStreet4CBChance INT,
-                        foldToStreet4CBDone INT,                        
+                        foldToStreet4CBDone INT,
+                        callToStreet1CBChance INT,
+                        callToStreet1CBDone INT,
+                        callToStreet2CBChance INT,
+                        callToStreet2CBDone INT,
+                        callToStreet3CBChance INT,
+                        callToStreet3CBDone INT,
+                        callToStreet4CBChance INT,
+                        callToStreet4CBDone INT,
+                        raiseToStreet1CBChance INT,
+                        raiseToStreet1CBDone INT,
+                        raiseToStreet2CBChance INT,
+                        raiseToStreet2CBDone INT,
+                        raiseToStreet3CBChance INT,
+                        raiseToStreet3CBDone INT,
+                        raiseToStreet4CBChance INT,
+                        raiseToStreet4CBDone INT,                        
                         common BIGINT,
                         committed BIGINT,
                         winnings BIGINT,
@@ -3307,16 +5011,20 @@ class Sql:
                         street4CheckCallRaiseChance INT,
                         street4CheckCallDone INT,
                         street4CheckRaiseDone INT,
+                        street1foldToCheckRaiseChance INT,
+                        street1foldToCheckRaiseDone INT,
+                        street2foldToCheckRaiseChance INT,
+                        street2foldToCheckRaiseDone INT,
+                        street3foldToCheckRaiseChance INT,
+                        street3foldToCheckRaiseDone INT,
+                        street4foldToCheckRaiseChance INT,
+                        street4foldToCheckRaiseDone INT,
                         street0Calls INT,
                         street1Calls INT,
                         street2Calls INT,
                         street3Calls INT,
                         street4Calls INT,
-                        street0Bets INT,
-                        street1Bets INT,
-                        street2Bets INT,
-                        street3Bets INT,
-                        street4Bets INT,
+                        
                         street0Raises INT,
                         street1Raises INT,
                         street2Raises INT,
@@ -3324,7 +5032,19 @@ class Sql:
                         street4Raises INT,
                         street1Discards INT,
                         street2Discards INT,
-                        street3Discards INT)
+                        street3Discards INT,
+                        
+                        street0Callers INT,
+                        street1Callers INT,
+                        street2Callers INT,
+                        street3Callers INT,
+                        street4Callers INT,
+                        
+                        street0Aggressors INT,
+                        street1Aggressors INT,
+                        street2Aggressors INT,
+                        street3Aggressors INT,
+                        street4Aggressors INT)
                         ENGINE=INNODB
                         """
                         
@@ -3336,7 +5056,8 @@ class Sql:
                         endTime timestamp without time zone NOT NULL,
                         tourneyId INT, FOREIGN KEY (tourneyId) REFERENCES Tourneys(id),
                         playerId INT, FOREIGN KEY (playerId) REFERENCES Players(id),
-                        n INT,                        
+                        n INT,  
+                                              
                         street0VPIChance INT,
                         street0VPI INT,
                         street0AggrChance INT,
@@ -3359,6 +5080,66 @@ class Sql:
                         street0_FoldTo4BDone INT,
                         street0_SqueezeChance INT,
                         street0_SqueezeDone INT,
+                        street0_FoldToSqueezeChance INT,
+                        street0_FoldToSqueezeDone INT,
+                        
+                        street1_2BChance INT,
+                        street1_2BDone INT,
+                        street1_3BChance INT,
+                        street1_3BDone INT,
+                        street1_4BChance INT,
+                        street1_4BDone INT,
+                        street1_C4BChance INT,
+                        street1_C4BDone INT,
+                        street1_FoldTo2BChance INT,
+                        street1_FoldTo2BDone INT,
+                        street1_FoldTo3BChance INT,
+                        street1_FoldTo3BDone INT,
+                        street1_FoldTo4BChance INT,
+                        street1_FoldTo4BDone INT,
+                        street1_SqueezeChance INT,
+                        street1_SqueezeDone INT,
+                        street1_FoldToSqueezeChance INT,
+                        street1_FoldToSqueezeDone INT,
+                        
+                        street2_2BChance INT,
+                        street2_2BDone INT,
+                        street2_3BChance INT,
+                        street2_3BDone INT,
+                        street2_4BChance INT,
+                        street2_4BDone INT,
+                        street2_C4BChance INT,
+                        street2_C4BDone INT,
+                        street2_FoldTo2BChance INT,
+                        street2_FoldTo2BDone INT,
+                        street2_FoldTo3BChance INT,
+                        street2_FoldTo3BDone INT,
+                        street2_FoldTo4BChance INT,
+                        street2_FoldTo4BDone INT,
+                        street2_SqueezeChance INT,
+                        street2_SqueezeDone INT,
+                        street2_FoldToSqueezeChance INT,
+                        street2_FoldToSqueezeDone INT,
+                        
+                        street3_2BChance INT,
+                        street3_2BDone INT,
+                        street3_3BChance INT,
+                        street3_3BDone INT,
+                        street3_4BChance INT,
+                        street3_4BDone INT,
+                        street3_C4BChance INT,
+                        street3_C4BDone INT,
+                        street3_FoldTo2BChance INT,
+                        street3_FoldTo2BDone INT,
+                        street3_FoldTo3BChance INT,
+                        street3_FoldTo3BDone INT,
+                        street3_FoldTo4BChance INT,
+                        street3_FoldTo4BDone INT,
+                        street3_SqueezeChance INT,
+                        street3_SqueezeDone INT,
+                        street3_FoldToSqueezeChance INT,
+                        street3_FoldToSqueezeDone INT,
+                        
                         raiseToStealChance INT,
                         raiseToStealDone INT,
                         stealChance INT,
@@ -3382,7 +5163,17 @@ class Sql:
                         foldToOtherRaisedStreet1 INT,
                         foldToOtherRaisedStreet2 INT,
                         foldToOtherRaisedStreet3 INT,
-                        foldToOtherRaisedStreet4 INT,                        
+                        foldToOtherRaisedStreet4 INT,
+                        callToOtherRaisedStreet0 INT,
+                        callToOtherRaisedStreet1 INT,
+                        callToOtherRaisedStreet2 INT,
+                        callToOtherRaisedStreet3 INT,
+                        callToOtherRaisedStreet4 INT,
+                        raiseToOtherRaisedStreet0 INT,
+                        raiseToOtherRaisedStreet1 INT,
+                        raiseToOtherRaisedStreet2 INT,
+                        raiseToOtherRaisedStreet3 INT,
+                        raiseToOtherRaisedStreet4 INT,                        
                         wonWhenSeenStreet1 INT,
                         wonWhenSeenStreet2 INT,
                         wonWhenSeenStreet3 INT,
@@ -3410,6 +5201,22 @@ class Sql:
                         foldToStreet3CBDone INT,
                         foldToStreet4CBChance INT,
                         foldToStreet4CBDone INT,
+                        callToStreet1CBChance INT,
+                        callToStreet1CBDone INT,
+                        callToStreet2CBChance INT,
+                        callToStreet2CBDone INT,
+                        callToStreet3CBChance INT,
+                        callToStreet3CBDone INT,
+                        callToStreet4CBChance INT,
+                        callToStreet4CBDone INT,
+                        raiseToStreet1CBChance INT,
+                        raiseToStreet1CBDone INT,
+                        raiseToStreet2CBChance INT,
+                        raiseToStreet2CBDone INT,
+                        raiseToStreet3CBChance INT,
+                        raiseToStreet3CBDone INT,
+                        raiseToStreet4CBChance INT,
+                        raiseToStreet4CBDone INT,
                         common BIGINT,
                         committed BIGINT,
                         winnings BIGINT,
@@ -3433,16 +5240,20 @@ class Sql:
                         street4CheckCallRaiseChance INT,
                         street4CheckCallDone INT,
                         street4CheckRaiseDone INT,
+                        street1foldToCheckRaiseChance INT,
+                        street1foldToCheckRaiseDone INT,
+                        street2foldToCheckRaiseChance INT,
+                        street2foldToCheckRaiseDone INT,
+                        street3foldToCheckRaiseChance INT,
+                        street3foldToCheckRaiseDone INT,
+                        street4foldToCheckRaiseChance INT,
+                        street4foldToCheckRaiseDone INT,
                         street0Calls INT,
                         street1Calls INT,
                         street2Calls INT,
                         street3Calls INT,
                         street4Calls INT,
-                        street0Bets INT,
-                        street1Bets INT,
-                        street2Bets INT,
-                        street3Bets INT,
-                        street4Bets INT,
+                        
                         street0Raises INT,
                         street1Raises INT,
                         street2Raises INT,
@@ -3450,7 +5261,19 @@ class Sql:
                         street4Raises INT,
                         street1Discards INT,
                         street2Discards INT,
-                        street3Discards INT)
+                        street3Discards INT,
+                        
+                        street0Callers INT,
+                        street1Callers INT,
+                        street2Callers INT,
+                        street3Callers INT,
+                        street4Callers INT,
+                        
+                        street0Aggressors INT,
+                        street1Aggressors INT,
+                        street2Aggressors INT,
+                        street3Aggressors INT,
+                        street4Aggressors INT)
                         """
                         
         elif db_server == 'sqlite':
@@ -3462,6 +5285,7 @@ class Sql:
                         tourneyId INT,
                         playerId INT,
                         n INT,
+                        
                         street0VPIChance INT,
                         street0VPI INT,
                         street0AggrChance INT,
@@ -3484,6 +5308,66 @@ class Sql:
                         street0_FoldTo4BDone INT,
                         street0_SqueezeChance INT,
                         street0_SqueezeDone INT,
+                        street0_FoldToSqueezeChance INT,
+                        street0_FoldToSqueezeDone INT,
+                        
+                        street1_2BChance INT,
+                        street1_2BDone INT,
+                        street1_3BChance INT,
+                        street1_3BDone INT,
+                        street1_4BChance INT,
+                        street1_4BDone INT,
+                        street1_C4BChance INT,
+                        street1_C4BDone INT,
+                        street1_FoldTo2BChance INT,
+                        street1_FoldTo2BDone INT,
+                        street1_FoldTo3BChance INT,
+                        street1_FoldTo3BDone INT,
+                        street1_FoldTo4BChance INT,
+                        street1_FoldTo4BDone INT,
+                        street1_SqueezeChance INT,
+                        street1_SqueezeDone INT,
+                        street1_FoldToSqueezeChance INT,
+                        street1_FoldToSqueezeDone INT,
+                        
+                        street2_2BChance INT,
+                        street2_2BDone INT,
+                        street2_3BChance INT,
+                        street2_3BDone INT,
+                        street2_4BChance INT,
+                        street2_4BDone INT,
+                        street2_C4BChance INT,
+                        street2_C4BDone INT,
+                        street2_FoldTo2BChance INT,
+                        street2_FoldTo2BDone INT,
+                        street2_FoldTo3BChance INT,
+                        street2_FoldTo3BDone INT,
+                        street2_FoldTo4BChance INT,
+                        street2_FoldTo4BDone INT,
+                        street2_SqueezeChance INT,
+                        street2_SqueezeDone INT,
+                        street2_FoldToSqueezeChance INT,
+                        street2_FoldToSqueezeDone INT,
+                        
+                        street3_2BChance INT,
+                        street3_2BDone INT,
+                        street3_3BChance INT,
+                        street3_3BDone INT,
+                        street3_4BChance INT,
+                        street3_4BDone INT,
+                        street3_C4BChance INT,
+                        street3_C4BDone INT,
+                        street3_FoldTo2BChance INT,
+                        street3_FoldTo2BDone INT,
+                        street3_FoldTo3BChance INT,
+                        street3_FoldTo3BDone INT,
+                        street3_FoldTo4BChance INT,
+                        street3_FoldTo4BDone INT,
+                        street3_SqueezeChance INT,
+                        street3_SqueezeDone INT,
+                        street3_FoldToSqueezeChance INT,
+                        street3_FoldToSqueezeDone INT,
+                        
                         raiseToStealChance INT,
                         raiseToStealDone INT,
                         stealChance INT,
@@ -3507,7 +5391,17 @@ class Sql:
                         foldToOtherRaisedStreet1 INT,
                         foldToOtherRaisedStreet2 INT,
                         foldToOtherRaisedStreet3 INT,
-                        foldToOtherRaisedStreet4 INT,                     
+                        foldToOtherRaisedStreet4 INT,
+                        callToOtherRaisedStreet0 INT,
+                        callToOtherRaisedStreet1 INT,
+                        callToOtherRaisedStreet2 INT,
+                        callToOtherRaisedStreet3 INT,
+                        callToOtherRaisedStreet4 INT,
+                        raiseToOtherRaisedStreet0 INT,
+                        raiseToOtherRaisedStreet1 INT,
+                        raiseToOtherRaisedStreet2 INT,
+                        raiseToOtherRaisedStreet3 INT,
+                        raiseToOtherRaisedStreet4 INT,                     
                         wonWhenSeenStreet1 INT,
                         wonWhenSeenStreet2 INT,
                         wonWhenSeenStreet3 INT,
@@ -3535,6 +5429,22 @@ class Sql:
                         foldToStreet3CBDone INT,
                         foldToStreet4CBChance INT,
                         foldToStreet4CBDone INT,
+                        callToStreet1CBChance INT,
+                        callToStreet1CBDone INT,
+                        callToStreet2CBChance INT,
+                        callToStreet2CBDone INT,
+                        callToStreet3CBChance INT,
+                        callToStreet3CBDone INT,
+                        callToStreet4CBChance INT,
+                        callToStreet4CBDone INT,
+                        raiseToStreet1CBChance INT,
+                        raiseToStreet1CBDone INT,
+                        raiseToStreet2CBChance INT,
+                        raiseToStreet2CBDone INT,
+                        raiseToStreet3CBChance INT,
+                        raiseToStreet3CBDone INT,
+                        raiseToStreet4CBChance INT,
+                        raiseToStreet4CBDone INT,
                         common INT,
                         committed INT,
                         winnings INT,
@@ -3558,16 +5468,20 @@ class Sql:
                         street4CheckCallRaiseChance INT,
                         street4CheckCallDone INT,
                         street4CheckRaiseDone INT,
+                        street1foldToCheckRaiseChance INT,
+                        street1foldToCheckRaiseDone INT,
+                        street2foldToCheckRaiseChance INT,
+                        street2foldToCheckRaiseDone INT,
+                        street3foldToCheckRaiseChance INT,
+                        street3foldToCheckRaiseDone INT,
+                        street4foldToCheckRaiseChance INT,
+                        street4foldToCheckRaiseDone INT,
                         street0Calls INT,
                         street1Calls INT,
                         street2Calls INT,
                         street3Calls INT,
                         street4Calls INT,
-                        street0Bets INT,
-                        street1Bets INT,
-                        street2Bets INT,
-                        street3Bets INT,
-                        street4Bets INT,
+                        
                         street0Raises INT,
                         street1Raises INT,
                         street2Raises INT,
@@ -3575,7 +5489,19 @@ class Sql:
                         street4Raises INT,
                         street1Discards INT,
                         street2Discards INT,
-                        street3Discards INT)
+                        street3Discards INT,
+                        
+                        street0Callers INT,
+                        street1Callers INT,
+                        street2Callers INT,
+                        street3Callers INT,
+                        street4Callers INT,
+                        
+                        street0Aggressors INT,
+                        street1Aggressors INT,
+                        street2Aggressors INT,
+                        street3Aggressors INT,
+                        street4Aggressors INT)
                         """
             
         if db_server == 'mysql':
@@ -3656,11 +5582,26 @@ class Sql:
             self.query['addStartCashIndex'] = """CREATE INDEX cash_idx ON HandsPlayers (startCash)"""
             
         if db_server == 'mysql':
+            self.query['addbigblindIndex'] = """ALTER TABLE HandsPlayers ADD INDEX amount_bb_idx (anmountBB)"""
             self.query['addEffStackIndex'] = """ALTER TABLE HandsPlayers ADD INDEX eff_stack_idx (effStack)"""
+            self.query['addEffActiveStackIndex'] = """ALTER TABLE HandsPlayers ADD INDEX eff_active_stack_idx (effActiveStack)"""
+            self.query['addEffMzoneIndex'] = """ALTER TABLE HandsPlayers ADD INDEX eff_mzone_idx (effMzone)"""
+            self.query['addEffActiveMzoneIndex'] = """ALTER TABLE HandsPlayers ADD INDEX eff_active_mzone_idx (effActiveMzone)"""
+            self.query['addTableMzoneIndex'] = """ALTER TABLE HandsPlayers ADD INDEX table_mzone_idx (tableMzone)"""
         elif db_server == 'postgresql':
+            self.query['addbigblindIndex'] = """CREATE INDEX amount_bb_idx ON HandsPlayers (anmountBB)"""
             self.query['addEffStackIndex'] = """CREATE INDEX eff_stack_idx ON HandsPlayers (effStack)"""
+            self.query['addEffActiveStackIndex'] = """CREATE INDEX eff_active_stack_idx ON HandsPlayers (effActiveStack)"""
+            self.query['addEffMzoneIndex'] = """CREATE INDEX eff_mzone_idx ON HandsPlayers (effMzone)"""
+            self.query['addEffActiveMzoneIndex'] = """CREATE INDEX eff_active_mzone_idx ON HandsPlayers (effActiveMzone)"""
+            self.query['addTableMzoneIndex'] = """CREATE INDEX table_mzone_idx ON HandsPlayers (tableMzone)"""
         elif db_server == 'sqlite':
+            self.query['addbigblindIndex'] = """CREATE INDEX amount_bb_idx ON HandsPlayers (anmountBB)"""
             self.query['addEffStackIndex'] = """CREATE INDEX eff_stack_idx ON HandsPlayers (effStack)"""
+            self.query['addEffActiveStackIndex'] = """CREATE INDEX eff_active_stack_idx ON HandsPlayers (effActiveStack)"""
+            self.query['addEffMzoneIndex'] = """CREATE INDEX eff_mzone_idx ON HandsPlayers (effMzone)"""
+            self.query['addEffActiveMzoneIndex'] = """CREATE INDEX eff_active_mzone_idx ON HandsPlayers (effActiveMzone)"""
+            self.query['addTableMzoneIndex'] = """CREATE INDEX table_mzone_idx ON HandsPlayers (tableMzone)"""
             
         if db_server == 'mysql':
             self.query['addTotalProfitIndex'] = """ALTER TABLE HandsPlayers ADD INDEX profit_idx (totalProfit)"""
@@ -3766,6 +5707,7 @@ class Sql:
                     hp.seatNo                           AS seat,
                     p.name                              AS screen_name,
                     sum(hc.n)                           AS n,
+                    
                     sum(hc.street0VPIChance)            AS vpip_opp,
                     sum(hc.street0VPI)                  AS vpip,
                     sum(hc.street0AggrChance)           AS pfr_opp,
@@ -3784,6 +5726,72 @@ class Sql:
                     sum(hc.street0_FoldTo4BDone)        AS F4B_0,
                     sum(hc.street0_SqueezeChance)       AS SQZ_opp_0,
                     sum(hc.street0_SqueezeDone)         AS SQZ_0,
+                    sum(hc.street0_FoldToSqueezeChance)       AS FSQZ_opp_0,
+                    sum(hc.street0_FoldToSqueezeDone)         AS FSQZ_0,
+                                        
+                    sum(hc.street1VPIChance)            AS vpip_opp_1,
+                    sum(hc.street1VPI)                  AS vpip_1,
+                    sum(hc.street1AggrChance)           AS aggr_opp_1,
+                    sum(hc.street1Aggr)                 AS aggr_1,
+                    sum(hc.street1CalledRaiseChance)    AS CAR_opp_1,
+                    sum(hc.street1CalledRaiseDone)      AS CAR_1,
+                    sum(hc.street1_3BChance)            AS TB_opp_1,
+                    sum(hc.street1_3BDone)              AS TB_1,
+                    sum(hc.street1_4BChance)            AS FB_opp_1,
+                    sum(hc.street1_4BDone)              AS FB_1,
+                    sum(hc.street1_C4BChance)           AS CFB_opp_1,
+                    sum(hc.street1_C4BDone)             AS CFB_1,
+                    sum(hc.street1_FoldTo3BChance)      AS F3B_opp_1,
+                    sum(hc.street1_FoldTo3BDone)        AS F3B_1,
+                    sum(hc.street1_FoldTo4BChance)      AS F4B_opp_1,
+                    sum(hc.street1_FoldTo4BDone)        AS F4B_1,
+                    sum(hc.street1_SqueezeChance)       AS SQZ_opp_1,
+                    sum(hc.street1_SqueezeDone)         AS SQZ_1,
+                    sum(hc.street1_FoldToSqueezeChance)       AS FSQZ_opp_1,
+                    sum(hc.street1_FoldToSqueezeDone)         AS FSQZ_1,
+                    
+                    sum(hc.street2VPIChance)            AS vpip_opp_2,
+                    sum(hc.street2VPI)                  AS vpip_2,
+                    sum(hc.street2AggrChance)           AS aggr_opp_2,
+                    sum(hc.street2Aggr)                 AS aggr_2,
+                    sum(hc.street2CalledRaiseChance)    AS CAR_opp_2,
+                    sum(hc.street2CalledRaiseDone)      AS CAR_2,
+                    sum(hc.street2_3BChance)            AS TB_opp_2,
+                    sum(hc.street2_3BDone)              AS TB_2,
+                    sum(hc.street2_4BChance)            AS FB_opp_2,
+                    sum(hc.street2_4BDone)              AS FB_2,
+                    sum(hc.street2_C4BChance)           AS CFB_opp_2,
+                    sum(hc.street2_C4BDone)             AS CFB_2,
+                    sum(hc.street2_FoldTo3BChance)      AS F3B_opp_2,
+                    sum(hc.street2_FoldTo3BDone)        AS F3B_2,
+                    sum(hc.street2_FoldTo4BChance)      AS F4B_opp_2,
+                    sum(hc.street2_FoldTo4BDone)        AS F4B_2,
+                    sum(hc.street2_SqueezeChance)       AS SQZ_opp_2,
+                    sum(hc.street2_SqueezeDone)         AS SQZ_2,
+                    sum(hc.street2_FoldToSqueezeChance)       AS FSQZ_opp_2,
+                    sum(hc.street2_FoldToSqueezeDone)         AS FSQZ_2,
+                    
+                    sum(hc.street3VPIChance)            AS vpip_opp_3,
+                    sum(hc.street3VPI)                  AS vpip_3,
+                    sum(hc.street3AggrChance)           AS aggr_opp_3,
+                    sum(hc.street3Aggr)                 AS aggr_3,
+                    sum(hc.street3CalledRaiseChance)    AS CAR_opp_3,
+                    sum(hc.street3CalledRaiseDone)      AS CAR_3,
+                    sum(hc.street3_3BChance)            AS TB_opp_3,
+                    sum(hc.street3_3BDone)              AS TB_3,
+                    sum(hc.street3_4BChance)            AS FB_opp_3,
+                    sum(hc.street3_4BDone)              AS FB_3,
+                    sum(hc.street3_C4BChance)           AS CFB_opp_3,
+                    sum(hc.street3_C4BDone)             AS CFB_3,
+                    sum(hc.street3_FoldTo3BChance)      AS F3B_opp_3,
+                    sum(hc.street3_FoldTo3BDone)        AS F3B_3,
+                    sum(hc.street3_FoldTo4BChance)      AS F4B_opp_3,
+                    sum(hc.street3_FoldTo4BDone)        AS F4B_3,
+                    sum(hc.street3_SqueezeChance)       AS SQZ_opp_3,
+                    sum(hc.street3_SqueezeDone)         AS SQZ_3,
+                    sum(hc.street3_FoldToSqueezeChance)       AS FSQZ_opp_3,
+                    sum(hc.street3_FoldToSqueezeDone)         AS FSQZ_3,
+                    
                     sum(hc.raiseToStealChance)          AS RTS_opp,
                     sum(hc.raiseToStealDone)            AS RTS,
                     sum(hc.success_Steal)               AS SUC_ST,
@@ -3793,10 +5801,6 @@ class Sql:
                     sum(hc.street3Seen)                 AS saw_3,
                     sum(hc.street4Seen)                 AS saw_4,
                     sum(hc.sawShowdown)                 AS sd,
-                    sum(hc.street1Aggr)                 AS aggr_1,
-                    sum(hc.street2Aggr)                 AS aggr_2,
-                    sum(hc.street3Aggr)                 AS aggr_3,
-                    sum(hc.street4Aggr)                 AS aggr_4,
                     sum(hc.otherRaisedStreet1)          AS was_raised_1,
                     sum(hc.otherRaisedStreet2)          AS was_raised_2,
                     sum(hc.otherRaisedStreet3)          AS was_raised_3,
@@ -3805,6 +5809,14 @@ class Sql:
                     sum(hc.foldToOtherRaisedStreet2)    AS f_freq_2,
                     sum(hc.foldToOtherRaisedStreet3)    AS f_freq_3,
                     sum(hc.foldToOtherRaisedStreet4)    AS f_freq_4,
+                    sum(hc.callToOtherRaisedStreet1)       AS c_freq_1,
+                    sum(hc.callToOtherRaisedStreet2)       AS c_freq_2,
+                    sum(hc.callToOtherRaisedStreet3)       AS c_freq_3,
+                    sum(hc.callToOtherRaisedStreet4)       AS c_freq_4,
+                    sum(hc.raiseToOtherRaisedStreet1)      AS r_freq_1,
+                    sum(hc.raiseToOtherRaisedStreet2)      AS r_freq_2,
+                    sum(hc.raiseToOtherRaisedStreet3)      AS r_freq_3,
+                    sum(hc.raiseToOtherRaisedStreet4)      AS r_freq_4,
                     sum(hc.wonWhenSeenStreet1)          AS w_w_s_1,
                     sum(hc.wonAtSD)                     AS wmsd,
                     sum(hc.stealChance)                 AS steal_opp,
@@ -3829,6 +5841,22 @@ class Sql:
                     sum(hc.foldToStreet3CBDone)         AS f_cb_3,
                     sum(hc.foldToStreet4CBChance)       AS f_cb_opp_4,
                     sum(hc.foldToStreet4CBDone)         AS f_cb_4,
+                    sum(hc.callToStreet1CBChance)       AS c_cb_opp_1,
+                    sum(hc.callToStreet1CBDone)         AS c_cb_1,
+                    sum(hc.callToStreet2CBChance)       AS c_cb_opp_2,
+                    sum(hc.callToStreet2CBDone)         AS c_cb_2,
+                    sum(hc.callToStreet3CBChance)       AS c_cb_opp_3,
+                    sum(hc.callToStreet3CBDone)         AS c_cb_3,
+                    sum(hc.callToStreet4CBChance)       AS c_cb_opp_4,
+                    sum(hc.callToStreet4CBDone)         AS c_cb_4,
+                    sum(hc.raiseToStreet1CBChance)       AS r_cb_opp_1,
+                    sum(hc.raiseToStreet1CBDone)         AS r_cb_1,
+                    sum(hc.raiseToStreet2CBChance)       AS r_cb_opp_2,
+                    sum(hc.raiseToStreet2CBDone)         AS r_cb_2,
+                    sum(hc.raiseToStreet3CBChance)       AS r_cb_opp_3,
+                    sum(hc.raiseToStreet3CBDone)         AS r_cb_3,
+                    sum(hc.raiseToStreet4CBChance)       AS r_cb_opp_4,
+                    sum(hc.raiseToStreet4CBDone)         AS r_cb_4,
                     sum(hc.totalProfit)                 AS net,
                     sum(gt.bigblind * hc.n)             AS bigblind,
                     sum(hc.street1CheckCallRaiseChance) AS ccr_opp_1,
@@ -3841,23 +5869,39 @@ class Sql:
                     sum(hc.street3CheckCallDone)        AS cc_3,
                     sum(hc.street3CheckRaiseDone)       AS cr_3,
                     sum(hc.street4CheckCallRaiseChance) AS ccr_opp_4,
-                    sum(hc.street4CheckCallDone)        AS cc_4
-                    sum(hc.street4CheckRaiseDone)       AS cr_4
+                    sum(hc.street4CheckCallDone)        AS cc_4,
+                    sum(hc.street4CheckRaiseDone)       AS cr_4,
+                    sum(hc.street1foldToCheckRaiseChance)     AS f_cr_opp_1,
+                    sum(hc.street1foldToCheckRaiseDone)       AS f_cr_1,
+                    sum(hc.street2foldToCheckRaiseChance)     AS f_cr_opp_2,
+                    sum(hc.street2foldToCheckRaiseDone)       AS f_cr_2,
+                    sum(hc.street3foldToCheckRaiseChance)     AS f_cr_opp_3,
+                    sum(hc.street3foldToCheckRaiseDone)       AS f_cr_3,
+                    sum(hc.street4foldToCheckRaiseChance)     AS f_cr_opp_4,
+                    sum(hc.street4foldToCheckRaiseDone)       AS f_cr_4,
                     sum(hc.street0Calls)                AS call_0,
                     sum(hc.street1Calls)                AS call_1,
                     sum(hc.street2Calls)                AS call_2,
                     sum(hc.street3Calls)                AS call_3,
                     sum(hc.street4Calls)                AS call_4,
-                    sum(hc.street0Bets)                 AS bet_0,
-                    sum(hc.street1Bets)                 AS bet_1,
-                    sum(hc.street2Bets)                 AS bet_2,
-                    sum(hc.street3Bets)                 AS bet_3,
-                    sum(hc.street4Bets)                 AS bet_4,
+                    
                     sum(hc.street0Raises)               AS raise_0,
                     sum(hc.street1Raises)               AS raise_1,
                     sum(hc.street2Raises)               AS raise_2,
                     sum(hc.street3Raises)               AS raise_3,
-                    sum(hc.street4Raises)               AS raise_4
+                    sum(hc.street4Raises)               AS raise_4,
+                    
+                    sum(hc.street0Callers)              AS callers_0,
+                    sum(hc.street1Callers)              AS callers_1,
+                    sum(hc.street2Callers)              AS callers_2,
+                    sum(hc.street3Callers)              AS callers_3,
+                    sum(hc.street4Callers)              AS callers_4,
+                    
+                    sum(hc.street0Aggressors)           AS aggressors_0,
+                    sum(hc.street1Aggressors)           AS aggressors_1,
+                    sum(hc.street2Aggressors)           AS aggressors_2,
+                    sum(hc.street3Aggressors)           AS aggressors_3,
+                    sum(hc.street4Aggressors)           AS aggressors_4
                 FROM Hands h
                      INNER JOIN HandsPlayers hp ON (hp.handId = h.id)
                      INNER JOIN HudCache hc ON (    hc.PlayerId = hp.PlayerId+0
@@ -3888,6 +5932,7 @@ class Sql:
                            end)                            AS seat,
                        p.name                              AS screen_name,
                        sum(hc.n)                           AS n,
+                       
                        sum(hc.street0VPIChance)            AS vpip_opp,
                        sum(hc.street0VPI)                  AS vpip,
                        sum(hc.street0AggrChance)           AS pfr_opp,
@@ -3906,6 +5951,72 @@ class Sql:
                        sum(hc.street0_FoldTo4BDone)        AS F4B_0,
                        sum(hc.street0_SqueezeChance)       AS SQZ_opp_0,
                        sum(hc.street0_SqueezeDone)         AS SQZ_0,
+                    sum(hc.street0_FoldToSqueezeChance)       AS FSQZ_opp_0,
+                    sum(hc.street0_FoldToSqueezeDone)         AS FSQZ_0,
+                       
+                       sum(hc.street1VPIChance)            AS vpip_opp_1,
+                       sum(hc.street1VPI)                  AS vpip_1,
+                       sum(hc.street1AggrChance)           AS aggr_opp_1,
+                       sum(hc.street1Aggr)                 AS aggr_1,
+                       sum(hc.street1CalledRaiseChance)    AS CAR_opp_1,
+                       sum(hc.street1CalledRaiseDone)      AS CAR_1,
+                       sum(hc.street1_3BChance)            AS TB_opp_1,
+                       sum(hc.street1_3BDone)              AS TB_1,
+                       sum(hc.street1_4BChance)            AS FB_opp_1,
+                       sum(hc.street1_4BDone)              AS FB_1,
+                       sum(hc.street1_C4BChance)           AS CFB_opp_1,
+                       sum(hc.street1_C4BDone)             AS CFB_1,
+                       sum(hc.street1_FoldTo3BChance)      AS F3B_opp_1,
+                       sum(hc.street1_FoldTo3BDone)        AS F3B_1,
+                       sum(hc.street1_FoldTo4BChance)      AS F4B_opp_1,
+                       sum(hc.street1_FoldTo4BDone)        AS F4B_1,
+                       sum(hc.street1_SqueezeChance)       AS SQZ_opp_1,
+                       sum(hc.street1_SqueezeDone)         AS SQZ_1,
+                    sum(hc.street1_FoldToSqueezeChance)       AS FSQZ_opp_1,
+                    sum(hc.street1_FoldToSqueezeDone)         AS FSQZ_1,
+                       
+                       sum(hc.street2VPIChance)            AS vpip_opp_2,
+                       sum(hc.street2VPI)                  AS vpip_2,
+                       sum(hc.street2AggrChance)           AS aggr_opp_2,
+                       sum(hc.street2Aggr)                 AS aggr_2,
+                       sum(hc.street2CalledRaiseChance)    AS CAR_opp_2,
+                       sum(hc.street2CalledRaiseDone)      AS CAR_2,
+                       sum(hc.street2_3BChance)            AS TB_opp_2,
+                       sum(hc.street2_3BDone)              AS TB_2,
+                       sum(hc.street2_4BChance)            AS FB_opp_2,
+                       sum(hc.street2_4BDone)              AS FB_2,
+                       sum(hc.street2_C4BChance)           AS CFB_opp_2,
+                       sum(hc.street2_C4BDone)             AS CFB_2,
+                       sum(hc.street2_FoldTo3BChance)      AS F3B_opp_2,
+                       sum(hc.street2_FoldTo3BDone)        AS F3B_2,
+                       sum(hc.street2_FoldTo4BChance)      AS F4B_opp_2,
+                       sum(hc.street2_FoldTo4BDone)        AS F4B_2,
+                       sum(hc.street2_SqueezeChance)       AS SQZ_opp_2,
+                       sum(hc.street2_SqueezeDone)         AS SQZ_2,
+                    sum(hc.street2_FoldToSqueezeChance)       AS FSQZ_opp_2,
+                    sum(hc.street2_FoldToSqueezeDone)         AS FSQZ_2,
+                        
+                       sum(hc.street3VPIChance)            AS vpip_opp_3,
+                       sum(hc.street3VPI)                  AS vpip_3,
+                       sum(hc.street3AggrChance)           AS aggr_opp_3,
+                       sum(hc.street3Aggr)                 AS aggr_3,
+                       sum(hc.street3CalledRaiseChance)    AS CAR_opp_3,
+                       sum(hc.street3CalledRaiseDone)      AS CAR_3,
+                       sum(hc.street3_3BChance)            AS TB_opp_3,
+                       sum(hc.street3_3BDone)              AS TB_3,
+                       sum(hc.street3_4BChance)            AS FB_opp_3,
+                       sum(hc.street3_4BDone)              AS FB_3,
+                       sum(hc.street3_C4BChance)           AS CFB_opp_3,
+                       sum(hc.street3_C4BDone)             AS CFB_3,
+                       sum(hc.street3_FoldTo3BChance)      AS F3B_opp_3,
+                       sum(hc.street3_FoldTo3BDone)        AS F3B_3,
+                       sum(hc.street3_FoldTo4BChance)      AS F4B_opp_3,
+                       sum(hc.street3_FoldTo4BDone)        AS F4B_3,
+                       sum(hc.street3_SqueezeChance)       AS SQZ_opp_3,
+                       sum(hc.street3_SqueezeDone)         AS SQZ_3,
+                    sum(hc.street3_FoldToSqueezeChance)       AS FSQZ_opp_3,
+                    sum(hc.street3_FoldToSqueezeDone)         AS FSQZ_3,
+                    
                        sum(hc.raiseToStealChance)          AS RTS_opp,
                        sum(hc.raiseToStealDone)            AS RTS,
                        sum(hc.success_Steal)               AS SUC_ST,
@@ -3915,10 +6026,6 @@ class Sql:
                        sum(hc.street3Seen)                 AS saw_3,
                        sum(hc.street4Seen)                 AS saw_4,
                        sum(hc.sawShowdown)                 AS sd,
-                       sum(hc.street1Aggr)                 AS aggr_1,
-                       sum(hc.street2Aggr)                 AS aggr_2,
-                       sum(hc.street3Aggr)                 AS aggr_3,
-                       sum(hc.street4Aggr)                 AS aggr_4,
                        sum(hc.otherRaisedStreet1)          AS was_raised_1,
                        sum(hc.otherRaisedStreet2)          AS was_raised_2,
                        sum(hc.otherRaisedStreet3)          AS was_raised_3,
@@ -3927,6 +6034,14 @@ class Sql:
                        sum(hc.foldToOtherRaisedStreet2)    AS f_freq_2,
                        sum(hc.foldToOtherRaisedStreet3)    AS f_freq_3,
                        sum(hc.foldToOtherRaisedStreet4)    AS f_freq_4,
+                       sum(hc.callToOtherRaisedStreet1)       AS c_freq_1,
+                       sum(hc.callToOtherRaisedStreet2)       AS c_freq_2,
+                       sum(hc.callToOtherRaisedStreet3)       AS c_freq_3,
+                       sum(hc.callToOtherRaisedStreet4)       AS c_freq_4,
+                       sum(hc.raiseToOtherRaisedStreet1)      AS r_freq_1,
+                       sum(hc.raiseToOtherRaisedStreet2)      AS r_freq_2,
+                       sum(hc.raiseToOtherRaisedStreet3)      AS r_freq_3,
+                       sum(hc.raiseToOtherRaisedStreet4)      AS r_freq_4,
                        sum(hc.wonWhenSeenStreet1)          AS w_w_s_1,
                        sum(hc.wonAtSD)                     AS wmsd,
                        sum(hc.stealChance)                 AS steal_opp,
@@ -3951,6 +6066,22 @@ class Sql:
                        sum(hc.foldToStreet3CBDone)         AS f_cb_3,
                        sum(hc.foldToStreet4CBChance)       AS f_cb_opp_4,
                        sum(hc.foldToStreet4CBDone)         AS f_cb_4,
+                        sum(hc.callToStreet1CBChance)       AS c_cb_opp_1,
+                        sum(hc.callToStreet1CBDone)         AS c_cb_1,
+                        sum(hc.callToStreet2CBChance)       AS c_cb_opp_2,
+                        sum(hc.callToStreet2CBDone)         AS c_cb_2,
+                        sum(hc.callToStreet3CBChance)       AS c_cb_opp_3,
+                        sum(hc.callToStreet3CBDone)         AS c_cb_3,
+                        sum(hc.callToStreet4CBChance)       AS c_cb_opp_4,
+                        sum(hc.callToStreet4CBDone)         AS c_cb_4,
+                       sum(hc.raiseToStreet1CBChance)       AS r_cb_opp_1,
+                       sum(hc.raiseToStreet1CBDone)         AS r_cb_1,
+                       sum(hc.raiseToStreet2CBChance)       AS r_cb_opp_2,
+                       sum(hc.raiseToStreet2CBDone)         AS r_cb_2,
+                       sum(hc.raiseToStreet3CBChance)       AS r_cb_opp_3,
+                       sum(hc.raiseToStreet3CBDone)         AS r_cb_3,
+                       sum(hc.raiseToStreet4CBChance)       AS r_cb_opp_4,
+                       sum(hc.raiseToStreet4CBDone)         AS r_cb_4,
                        sum(hc.totalProfit)                 AS net,
                        sum(gt.bigblind * hc.n)             AS bigblind,
                        sum(hc.street1CheckCallRaiseChance) AS ccr_opp_1,
@@ -3965,21 +6096,37 @@ class Sql:
                        sum(hc.street4CheckCallRaiseChance) AS ccr_opp_4,
                        sum(hc.street4CheckCallDone)        AS cc_4,
                        sum(hc.street4CheckRaiseDone)       AS cr_4,
+                    sum(hc.street1foldToCheckRaiseChance)     AS f_cr_opp_1,
+                    sum(hc.street1foldToCheckRaiseDone)       AS f_cr_1,
+                    sum(hc.street2foldToCheckRaiseChance)     AS f_cr_opp_2,
+                    sum(hc.street2foldToCheckRaiseDone)       AS f_cr_2,
+                    sum(hc.street3foldToCheckRaiseChance)     AS f_cr_opp_3,
+                    sum(hc.street3foldToCheckRaiseDone)       AS f_cr_3,
+                    sum(hc.street4foldToCheckRaiseChance)     AS f_cr_opp_4,
+                    sum(hc.street4foldToCheckRaiseDone)       AS f_cr_4,
                        sum(hc.street0Calls)                AS call_0,
                        sum(hc.street1Calls)                AS call_1,
                        sum(hc.street2Calls)                AS call_2,
                        sum(hc.street3Calls)                AS call_3,
                        sum(hc.street4Calls)                AS call_4,
-                       sum(hc.street0Bets)                 AS bet_0,
-                       sum(hc.street1Bets)                 AS bet_1,
-                       sum(hc.street2Bets)                 AS bet_2,
-                       sum(hc.street3Bets)                 AS bet_3,
-                       sum(hc.street4Bets)                 AS bet_4,
+                    
                        sum(hc.street0Raises)               AS raise_0,
                        sum(hc.street1Raises)               AS raise_1,
                        sum(hc.street2Raises)               AS raise_2,
                        sum(hc.street3Raises)               AS raise_3,
-                       sum(hc.street4Raises)               AS raise_4
+                       sum(hc.street4Raises)               AS raise_4,
+                    
+                       sum(hc.street0Callers)               AS callers_0,
+                       sum(hc.street1Callers)               AS callers_1,
+                       sum(hc.street2Callers)               AS callers_2,
+                       sum(hc.street3Callers)               AS callers_3,
+                       sum(hc.street4Callers)               AS callers_4,
+                        
+                       sum(hc.street0Aggressors)            AS aggressors_0,
+                       sum(hc.street1Aggressors)            AS aggressors_1,
+                       sum(hc.street2Aggressors)            AS aggressors_2,
+                       sum(hc.street3Aggressors)            AS aggressors_3,
+                       sum(hc.street4Aggressors)            AS aggressors_4
                 FROM Hands h
                      INNER JOIN HandsPlayers hp ON (hp.handId = h.id)
                      INNER JOIN HudCache hc     ON (hc.playerId = hp.playerId)
@@ -4037,6 +6184,7 @@ class Sql:
                            hp.seatNo                                                AS seat,
                            p.name                                                   AS screen_name,
                            1                                                        AS n,
+                           
                            cast(hp2.street0VPIChance as <signed>integer)            AS vpip_opp,
                            cast(hp2.street0VPI as <signed>integer)                  AS vpip,
                            cast(hp2.street0AggrChance as <signed>integer)           AS pfr_opp,
@@ -4055,6 +6203,72 @@ class Sql:
                            cast(hp2.street0_FoldTo4BDone as <signed>integer)        AS F4B_0,
                            cast(hp2.street0_SqueezeChance as <signed>integer)       AS SQZ_opp_0,
                            cast(hp2.street0_SqueezeDone as <signed>integer)         AS SQZ_0,
+                           cast(hp2.street0_FoldToSqueezeChance as <signed>integer)       AS FSQZ_opp_0,
+                           cast(hp2.street0_FoldToSqueezeDone as <signed>integer)         AS FSQZ_0,
+                           
+                           cast(hp2.street1VPIChance as <signed>integer)            AS vpip_opp_1,
+                           cast(hp2.street1VPI as <signed>integer)                  AS vpip_1,
+                           cast(hp2.street1AggrChance as <signed>integer)           AS aggr_opp_1,
+                           cast(hp2.street1Aggr as <signed>integer)                 AS aggr_1,
+                           cast(hp2.street1CalledRaiseChance as <signed>integer)    AS CAR_opp_1,
+                           cast(hp2.street1CalledRaiseDone as <signed>integer)      AS CAR_1,
+                           cast(hp2.street1_3BChance as <signed>integer)            AS TB_opp_1,
+                           cast(hp2.street1_3BDone as <signed>integer)              AS TB_1,
+                           cast(hp2.street1_4BChance as <signed>integer)            AS FB_opp_1,
+                           cast(hp2.street1_4BDone as <signed>integer)              AS FB_1,
+                           cast(hp2.street1_C4BChance as <signed>integer)           AS CFB_opp_1,
+                           cast(hp2.street1_C4BDone as <signed>integer)             AS CFB_1,
+                           cast(hp2.street1_FoldTo3BChance as <signed>integer)      AS F3B_opp_1,
+                           cast(hp2.street1_FoldTo3BDone as <signed>integer)        AS F3B_1,
+                           cast(hp2.street1_FoldTo4BChance as <signed>integer)      AS F4B_opp_1,
+                           cast(hp2.street1_FoldTo4BDone as <signed>integer)        AS F4B_1,
+                           cast(hp2.street1_SqueezeChance as <signed>integer)       AS SQZ_opp_1,
+                           cast(hp2.street1_SqueezeDone as <signed>integer)         AS SQZ_1,
+                           cast(hp2.street1_FoldToSqueezeChance as <signed>integer)       AS FSQZ_opp_1,
+                           cast(hp2.street1_FoldToSqueezeDone as <signed>integer)         AS FSQZ_1,
+                           
+                           cast(hp2.street2VPIChance as <signed>integer)            AS vpip_opp_2,
+                           cast(hp2.street2VPI as <signed>integer)                  AS vpip_2,
+                           cast(hp2.street2AggrChance as <signed>integer)           AS aggr_opp_2,
+                           cast(hp2.street2Aggr as <signed>integer)                 AS aggr_2,
+                           cast(hp2.street2CalledRaiseChance as <signed>integer)    AS CAR_opp_2,
+                           cast(hp2.street2CalledRaiseDone as <signed>integer)      AS CAR_2,
+                           cast(hp2.street2_3BChance as <signed>integer)            AS TB_opp_2,
+                           cast(hp2.street2_3BDone as <signed>integer)              AS TB_2,
+                           cast(hp2.street2_4BChance as <signed>integer)            AS FB_opp_2,
+                           cast(hp2.street2_4BDone as <signed>integer)              AS FB_2,
+                           cast(hp2.street2_C4BChance as <signed>integer)           AS CFB_opp_2,
+                           cast(hp2.street2_C4BDone as <signed>integer)             AS CFB_2,
+                           cast(hp2.street2_FoldTo3BChance as <signed>integer)      AS F3B_opp_2,
+                           cast(hp2.street2_FoldTo3BDone as <signed>integer)        AS F3B_2,
+                           cast(hp2.street2_FoldTo4BChance as <signed>integer)      AS F4B_opp_2,
+                           cast(hp2.street2_FoldTo4BDone as <signed>integer)        AS F4B_2,
+                           cast(hp2.street2_SqueezeChance as <signed>integer)       AS SQZ_opp_2,
+                           cast(hp2.street2_SqueezeDone as <signed>integer)         AS SQZ_2,
+                           cast(hp2.street2_FoldToSqueezeChance as <signed>integer)       AS FSQZ_opp_2,
+                           cast(hp2.street2_FoldToSqueezeDone as <signed>integer)         AS FSQZ_2,
+                           
+                           cast(hp2.street3VPIChance as <signed>integer)            AS vpip_opp_3,
+                           cast(hp2.street3VPI as <signed>integer)                  AS vpip_3,
+                           cast(hp2.street3AggrChance as <signed>integer)           AS aggr_opp_3,
+                           cast(hp2.street3Aggr as <signed>integer)                 AS aggr_3,
+                           cast(hp2.street3CalledRaiseChance as <signed>integer)    AS CAR_opp_3,
+                           cast(hp2.street3CalledRaiseDone as <signed>integer)      AS CAR_3,
+                           cast(hp2.street3_3BChance as <signed>integer)            AS TB_opp_3,
+                           cast(hp2.street3_3BDone as <signed>integer)              AS TB_3,
+                           cast(hp2.street3_4BChance as <signed>integer)            AS FB_opp_3,
+                           cast(hp2.street3_4BDone as <signed>integer)              AS FB_3,
+                           cast(hp2.street3_C4BChance as <signed>integer)           AS CFB_opp_3,
+                           cast(hp2.street3_C4BDone as <signed>integer)             AS CFB_3,
+                           cast(hp2.street3_FoldTo3BChance as <signed>integer)      AS F3B_opp_3,
+                           cast(hp2.street3_FoldTo3BDone as <signed>integer)        AS F3B_3,
+                           cast(hp2.street3_FoldTo4BChance as <signed>integer)      AS F4B_opp_3,
+                           cast(hp2.street3_FoldTo4BDone as <signed>integer)        AS F4B_3,
+                           cast(hp2.street3_SqueezeChance as <signed>integer)       AS SQZ_opp_3,
+                           cast(hp2.street3_SqueezeDone as <signed>integer)         AS SQZ_3,
+                           cast(hp2.street3_FoldToSqueezeChance as <signed>integer)       AS FSQZ_opp_3,
+                           cast(hp2.street3_FoldToSqueezeDone as <signed>integer)         AS FSQZ_3,
+                           
                            cast(hp2.raiseToStealChance as <signed>integer)          AS RTS_opp,
                            cast(hp2.raiseToStealDone as <signed>integer)            AS RTS,
                            cast(hp2.success_Steal as <signed>integer)               AS SUC_ST,
@@ -4064,10 +6278,6 @@ class Sql:
                            cast(hp2.street3Seen as <signed>integer)                 AS saw_3,
                            cast(hp2.street4Seen as <signed>integer)                 AS saw_4,
                            cast(hp2.sawShowdown as <signed>integer)                 AS sd,
-                           cast(hp2.street1Aggr as <signed>integer)                 AS aggr_1,
-                           cast(hp2.street2Aggr as <signed>integer)                 AS aggr_2,
-                           cast(hp2.street3Aggr as <signed>integer)                 AS aggr_3,
-                           cast(hp2.street4Aggr as <signed>integer)                 AS aggr_4,
                            cast(hp2.otherRaisedStreet1 as <signed>integer)          AS was_raised_1,
                            cast(hp2.otherRaisedStreet2 as <signed>integer)          AS was_raised_2,
                            cast(hp2.otherRaisedStreet3 as <signed>integer)          AS was_raised_3,
@@ -4076,6 +6286,14 @@ class Sql:
                            cast(hp2.foldToOtherRaisedStreet2 as <signed>integer)    AS f_freq_2,
                            cast(hp2.foldToOtherRaisedStreet3 as <signed>integer)    AS f_freq_3,
                            cast(hp2.foldToOtherRaisedStreet4 as <signed>integer)    AS f_freq_4,
+                           cast(hp2.callToOtherRaisedStreet1 as <signed>integer)       AS c_freq_1,
+                           cast(hp2.callToOtherRaisedStreet2 as <signed>integer)       AS c_freq_2,
+                           cast(hp2.callToOtherRaisedStreet3 as <signed>integer)       AS c_freq_3,
+                           cast(hp2.callToOtherRaisedStreet4 as <signed>integer)       AS c_freq_4,
+                           cast(hp2.raiseToOtherRaisedStreet1 as <signed>integer)      AS r_freq_1,
+                           cast(hp2.raiseToOtherRaisedStreet2 as <signed>integer)      AS r_freq_2,
+                           cast(hp2.raiseToOtherRaisedStreet3 as <signed>integer)      AS r_freq_3,
+                           cast(hp2.raiseToOtherRaisedStreet4 as <signed>integer)      AS r_freq_4,
                            cast(hp2.wonWhenSeenStreet1 as <signed>integer)          AS w_w_s_1,
                            cast(hp2.wonAtSD as <signed>integer)                     AS wmsd,
                            cast(hp2.stealChance as <signed>integer)                 AS steal_opp,
@@ -4100,6 +6318,22 @@ class Sql:
                            cast(hp2.foldToStreet3CBDone as <signed>integer)         AS f_cb_3,
                            cast(hp2.foldToStreet4CBChance as <signed>integer)       AS f_cb_opp_4,
                            cast(hp2.foldToStreet4CBDone as <signed>integer)         AS f_cb_4,
+                           cast(hp2.callToStreet1CBChance as <signed>integer)       AS c_cb_opp_1,
+                           cast(hp2.callToStreet1CBDone as <signed>integer)         AS c_cb_1,
+                           cast(hp2.callToStreet2CBChance as <signed>integer)       AS c_cb_opp_2,
+                           cast(hp2.callToStreet2CBDone as <signed>integer)         AS c_cb_2,
+                           cast(hp2.callToStreet3CBChance as <signed>integer)       AS c_cb_opp_3,
+                           cast(hp2.callToStreet3CBDone as <signed>integer)         AS c_cb_3,
+                           cast(hp2.callToStreet4CBChance as <signed>integer)       AS c_cb_opp_4,
+                           cast(hp2.callToStreet4CBDone as <signed>integer)         AS c_cb_4,
+                           cast(hp2.raiseToStreet1CBChance as <signed>integer)       AS r_cb_opp_1,
+                           cast(hp2.raiseToStreet1CBDone as <signed>integer)         AS r_cb_1,
+                           cast(hp2.raiseToStreet2CBChance as <signed>integer)       AS r_cb_opp_2,
+                           cast(hp2.raiseToStreet2CBDone as <signed>integer)         AS r_cb_2,
+                           cast(hp2.raiseToStreet3CBChance as <signed>integer)       AS r_cb_opp_3,
+                           cast(hp2.raiseToStreet3CBDone as <signed>integer)         AS r_cb_3,
+                           cast(hp2.raiseToStreet4CBChance as <signed>integer)       AS r_cb_opp_4,
+                           cast(hp2.raiseToStreet4CBDone as <signed>integer)         AS r_cb_4,
                            cast(hp2.totalProfit as <signed>bigint)                  AS net,
                            cast(gt.bigblind as <signed>bigint)                      AS bigblind,
                            cast(hp2.street1CheckCallRaiseChance as <signed>integer) AS ccr_opp_1,
@@ -4114,21 +6348,37 @@ class Sql:
                            cast(hp2.street4CheckCallRaiseChance as <signed>integer) AS ccr_opp_4,
                            cast(hp2.street4CheckCallDone as <signed>integer)        AS cc_4,
                            cast(hp2.street4CheckRaiseDone as <signed>integer)       AS cr_4,
+                           cast(hp2.street1foldToCheckRaiseChance as <signed>integer)     AS f_cr_opp_1,
+                           cast(hp2.street1foldToCheckRaiseDone as <signed>integer)       AS f_cr_1,
+                           cast(hp2.street2foldToCheckRaiseChance as <signed>integer)     AS f_cr_opp_2,
+                           cast(hp2.street2foldToCheckRaiseDone as <signed>integer)       AS f_cr_2,
+                           cast(hp2.street3foldToCheckRaiseChance as <signed>integer)     AS f_cr_opp_3,
+                           cast(hp2.street3foldToCheckRaiseDone as <signed>integer)       AS f_cr_3,
+                           cast(hp2.street4foldToCheckRaiseChance as <signed>integer)     AS f_cr_opp_4,
+                           cast(hp2.street4foldToCheckRaiseDone as <signed>integer)       AS f_cr_4,
                            cast(hp2.street0Calls as <signed>integer)                AS call_0,
                            cast(hp2.street1Calls as <signed>integer)                AS call_1,
                            cast(hp2.street2Calls as <signed>integer)                AS call_2,
                            cast(hp2.street3Calls as <signed>integer)                AS call_3,
                            cast(hp2.street4Calls as <signed>integer)                AS call_4,
-                           cast(hp2.street0Bets as <signed>integer)                 AS bet_0,
-                           cast(hp2.street1Bets as <signed>integer)                 AS bet_1,
-                           cast(hp2.street2Bets as <signed>integer)                 AS bet_2,
-                           cast(hp2.street3Bets as <signed>integer)                 AS bet_3,
-                           cast(hp2.street4Bets as <signed>integer)                 AS bet_4,
+                           
                            cast(hp2.street0Raises as <signed>integer)               AS raise_0,
                            cast(hp2.street1Raises as <signed>integer)               AS raise_1,
                            cast(hp2.street2Raises as <signed>integer)               AS raise_2,
                            cast(hp2.street3Raises as <signed>integer)               AS raise_3,
-                           cast(hp2.street4Raises as <signed>integer)               AS raise_4
+                           cast(hp2.street4Raises as <signed>integer)               AS raise_4,
+                           
+                           cast(hp2.street0Callers as <signed>integer)              AS callers_0,
+                           cast(hp2.street1Callers as <signed>integer)              AS callers_1,
+                           cast(hp2.street2Callers as <signed>integer)              AS callers_2,
+                           cast(hp2.street3Callers as <signed>integer)              AS callers_3,
+                           cast(hp2.street4Callers as <signed>integer)              AS callers_4,
+                           
+                           cast(hp2.street0Aggressors as <signed>integer)           AS aggressors_0,
+                           cast(hp2.street1Aggressors as <signed>integer)           AS aggressors_1,
+                           cast(hp2.street2Aggressors as <signed>integer)           AS aggressors_2,
+                           cast(hp2.street3Aggressors as <signed>integer)           AS aggressors_3,
+                           cast(hp2.street4Aggressors as <signed>integer)           AS aggressors_4
                     FROM
                          Hands h
                          INNER JOIN Hands h2         ON (h2.id >= %s AND   h2.tableName = h.tableName)
@@ -4162,6 +6412,7 @@ class Sql:
                            p.name                                                   AS screen_name,
                            h.seats                                                  AS seats,
                            1                                                        AS n,
+                           
                            cast(hp2.street0VPIChance as <signed>integer)            AS vpip_opp,
                            cast(hp2.street0VPI as <signed>integer)                  AS vpip,
                            cast(hp2.street0AggrChance as <signed>integer)           AS pfr_opp,
@@ -4180,6 +6431,72 @@ class Sql:
                            cast(hp2.street0_FoldTo4BDone as <signed>integer)        AS F4B_0,
                            cast(hp2.street0_SqueezeChance as <signed>integer)       AS SQZ_opp_0,
                            cast(hp2.street0_SqueezeDone as <signed>integer)         AS SQZ_0,
+                           cast(hp2.street0_FoldToSqueezeChance as <signed>integer)       AS FSQZ_opp_0,
+                           cast(hp2.street0_FoldToSqueezeDone as <signed>integer)         AS FSQZ_0,
+                           
+                           cast(hp2.street1VPIChance as <signed>integer)            AS vpip_opp_1,
+                           cast(hp2.street1VPI as <signed>integer)                  AS vpip_1,
+                           cast(hp2.street1AggrChance as <signed>integer)           AS aggr_opp_1,
+                           cast(hp2.street1Aggr as <signed>integer)                 AS aggr_1,
+                           cast(hp2.street1CalledRaiseChance as <signed>integer)    AS CAR_opp_1,
+                           cast(hp2.street1CalledRaiseDone as <signed>integer)      AS CAR_1,
+                           cast(hp2.street1_3BChance as <signed>integer)            AS TB_opp_1,
+                           cast(hp2.street1_3BDone as <signed>integer)              AS TB_1,
+                           cast(hp2.street1_4BChance as <signed>integer)            AS FB_opp_1,
+                           cast(hp2.street1_4BDone as <signed>integer)              AS FB_1,
+                           cast(hp2.street1_C4BChance as <signed>integer)           AS CFB_opp_1,
+                           cast(hp2.street1_C4BDone as <signed>integer)             AS CFB_1,
+                           cast(hp2.street1_FoldTo3BChance as <signed>integer)      AS F3B_opp_1,
+                           cast(hp2.street1_FoldTo3BDone as <signed>integer)        AS F3B_1,
+                           cast(hp2.street1_FoldTo4BChance as <signed>integer)      AS F4B_opp_1,
+                           cast(hp2.street1_FoldTo4BDone as <signed>integer)        AS F4B_1,
+                           cast(hp2.street1_SqueezeChance as <signed>integer)       AS SQZ_opp_1,
+                           cast(hp2.street1_SqueezeDone as <signed>integer)         AS SQZ_1,
+                           cast(hp2.street1_FoldToSqueezeChance as <signed>integer)       AS FSQZ_opp_1,
+                           cast(hp2.street1_FoldToSqueezeDone as <signed>integer)         AS FSQZ_1,
+                           
+                           cast(hp2.street2VPIChance as <signed>integer)            AS vpip_opp_2,
+                           cast(hp2.street2VPI as <signed>integer)                  AS vpip_2,
+                           cast(hp2.street2AggrChance as <signed>integer)           AS aggr_opp_2,
+                           cast(hp2.street2Aggr as <signed>integer)                 AS aggr_2,
+                           cast(hp2.street2CalledRaiseChance as <signed>integer)    AS CAR_opp_2,
+                           cast(hp2.street2CalledRaiseDone as <signed>integer)      AS CAR_2,
+                           cast(hp2.street2_3BChance as <signed>integer)            AS TB_opp_2,
+                           cast(hp2.street2_3BDone as <signed>integer)              AS TB_2,
+                           cast(hp2.street2_4BChance as <signed>integer)            AS FB_opp_2,
+                           cast(hp2.street2_4BDone as <signed>integer)              AS FB_2,
+                           cast(hp2.street2_C4BChance as <signed>integer)           AS CFB_opp_2,
+                           cast(hp2.street2_C4BDone as <signed>integer)             AS CFB_2,
+                           cast(hp2.street2_FoldTo3BChance as <signed>integer)      AS F3B_opp_2,
+                           cast(hp2.street2_FoldTo3BDone as <signed>integer)        AS F3B_2,
+                           cast(hp2.street2_FoldTo4BChance as <signed>integer)      AS F4B_opp_2,
+                           cast(hp2.street2_FoldTo4BDone as <signed>integer)        AS F4B_2,
+                           cast(hp2.street2_SqueezeChance as <signed>integer)       AS SQZ_opp_2,
+                           cast(hp2.street2_SqueezeDone as <signed>integer)         AS SQZ_2,
+                           cast(hp2.street2_FoldToSqueezeChance as <signed>integer)       AS FSQZ_opp_2,
+                           cast(hp2.street2_FoldToSqueezeDone as <signed>integer)         AS FSQZ_2,
+                           
+                           cast(hp2.street3VPIChance as <signed>integer)            AS vpip_opp_3,
+                           cast(hp2.street3VPI as <signed>integer)                  AS vpip_3,
+                           cast(hp2.street3AggrChance as <signed>integer)           AS aggr_opp_3,
+                           cast(hp2.street3Aggr as <signed>integer)                 AS aggr_3,
+                           cast(hp2.street3CalledRaiseChance as <signed>integer)    AS CAR_opp_3,
+                           cast(hp2.street3CalledRaiseDone as <signed>integer)      AS CAR_3,
+                           cast(hp2.street3_3BChance as <signed>integer)            AS TB_opp_3,
+                           cast(hp2.street3_3BDone as <signed>integer)              AS TB_3,
+                           cast(hp2.street3_4BChance as <signed>integer)            AS FB_opp_3,
+                           cast(hp2.street3_4BDone as <signed>integer)              AS FB_3,
+                           cast(hp2.street3_C4BChance as <signed>integer)           AS CFB_opp_3,
+                           cast(hp2.street3_C4BDone as <signed>integer)             AS CFB_3,
+                           cast(hp2.street3_FoldTo3BChance as <signed>integer)      AS F3B_opp_3,
+                           cast(hp2.street3_FoldTo3BDone as <signed>integer)        AS F3B_3,
+                           cast(hp2.street3_FoldTo4BChance as <signed>integer)      AS F4B_opp_3,
+                           cast(hp2.street3_FoldTo4BDone as <signed>integer)        AS F4B_3,
+                           cast(hp2.street3_SqueezeChance as <signed>integer)       AS SQZ_opp_3,
+                           cast(hp2.street3_SqueezeDone as <signed>integer)         AS SQZ_3,
+                           cast(hp2.street3_FoldToSqueezeChance as <signed>integer)       AS FSQZ_opp_3,
+                           cast(hp2.street3_FoldToSqueezeDone as <signed>integer)         AS FSQZ_3,
+                           
                            cast(hp2.raiseToStealChance as <signed>integer)          AS RTS_opp,
                            cast(hp2.raiseToStealDone as <signed>integer)            AS RTS,
                            cast(hp2.success_Steal as <signed>integer)               AS SUC_ST,
@@ -4189,10 +6506,6 @@ class Sql:
                            cast(hp2.street3Seen as <signed>integer)                 AS saw_3,
                            cast(hp2.street4Seen as <signed>integer)                 AS saw_4,
                            cast(hp2.sawShowdown as <signed>integer)                 AS sd,
-                           cast(hp2.street1Aggr as <signed>integer)                 AS aggr_1,
-                           cast(hp2.street2Aggr as <signed>integer)                 AS aggr_2,
-                           cast(hp2.street3Aggr as <signed>integer)                 AS aggr_3,
-                           cast(hp2.street4Aggr as <signed>integer)                 AS aggr_4,
                            cast(hp2.otherRaisedStreet1 as <signed>integer)          AS was_raised_1,
                            cast(hp2.otherRaisedStreet2 as <signed>integer)          AS was_raised_2,
                            cast(hp2.otherRaisedStreet3 as <signed>integer)          AS was_raised_3,
@@ -4201,6 +6514,14 @@ class Sql:
                            cast(hp2.foldToOtherRaisedStreet2 as <signed>integer)    AS f_freq_2,
                            cast(hp2.foldToOtherRaisedStreet3 as <signed>integer)    AS f_freq_3,
                            cast(hp2.foldToOtherRaisedStreet4 as <signed>integer)    AS f_freq_4,
+                           cast(hp2.callToOtherRaisedStreet1 as <signed>integer)       AS c_freq_1,
+                           cast(hp2.callToOtherRaisedStreet2 as <signed>integer)       AS c_freq_2,
+                           cast(hp2.callToOtherRaisedStreet3 as <signed>integer)       AS c_freq_3,
+                           cast(hp2.callToOtherRaisedStreet4 as <signed>integer)       AS c_freq_4,
+                           cast(hp2.raiseToOtherRaisedStreet1 as <signed>integer)      AS r_freq_1,
+                           cast(hp2.raiseToOtherRaisedStreet2 as <signed>integer)      AS r_freq_2,
+                           cast(hp2.raiseToOtherRaisedStreet3 as <signed>integer)      AS r_freq_3,
+                           cast(hp2.raiseToOtherRaisedStreet4 as <signed>integer)      AS r_freq_4,
                            cast(hp2.wonWhenSeenStreet1 as <signed>integer)          AS w_w_s_1,
                            cast(hp2.wonAtSD as <signed>integer)                     AS wmsd,
                            cast(hp2.stealChance as <signed>integer)                 AS steal_opp,
@@ -4225,6 +6546,22 @@ class Sql:
                            cast(hp2.foldToStreet3CBDone as <signed>integer)         AS f_cb_3,
                            cast(hp2.foldToStreet4CBChance as <signed>integer)       AS f_cb_opp_4,
                            cast(hp2.foldToStreet4CBDone as <signed>integer)         AS f_cb_4,
+                           cast(hp2.callToStreet1CBChance as <signed>integer)       AS c_cb_opp_1,
+                           cast(hp2.callToStreet1CBDone as <signed>integer)         AS c_cb_1,
+                           cast(hp2.callToStreet2CBChance as <signed>integer)       AS c_cb_opp_2,
+                           cast(hp2.callToStreet2CBDone as <signed>integer)         AS c_cb_2,
+                           cast(hp2.callToStreet3CBChance as <signed>integer)       AS c_cb_opp_3,
+                           cast(hp2.callToStreet3CBDone as <signed>integer)         AS c_cb_3,
+                           cast(hp2.callToStreet4CBChance as <signed>integer)       AS c_cb_opp_4,
+                           cast(hp2.callToStreet4CBDone as <signed>integer)         AS c_cb_4,
+                           cast(hp2.raiseToStreet1CBChance as <signed>integer)      AS r_cb_opp_1,
+                           cast(hp2.raiseToStreet1CBDone as <signed>integer)        AS r_cb_1,
+                           cast(hp2.raiseToStreet2CBChance as <signed>integer)      AS r_cb_opp_2,
+                           cast(hp2.raiseToStreet2CBDone as <signed>integer)        AS r_cb_2,
+                           cast(hp2.raiseToStreet3CBChance as <signed>integer)      AS r_cb_opp_3,
+                           cast(hp2.raiseToStreet3CBDone as <signed>integer)        AS r_cb_3,
+                           cast(hp2.raiseToStreet4CBChance as <signed>integer)      AS r_cb_opp_4,
+                           cast(hp2.raiseToStreet4CBDone as <signed>integer)        AS r_cb_4,
                            cast(hp2.totalProfit as <signed>bigint)                  AS net,
                            cast(gt.bigblind as <signed>bigint)                      AS bigblind,
                            cast(hp2.street1CheckCallRaiseChance as <signed>integer) AS ccr_opp_1,
@@ -4239,21 +6576,37 @@ class Sql:
                            cast(hp2.street4CheckCallRaiseChance as <signed>integer) AS ccr_opp_4,
                            cast(hp2.street4CheckCallDone as <signed>integer)        AS cc_4,
                            cast(hp2.street4CheckRaiseDone as <signed>integer)       AS cr_4,
+                           cast(hp2.street1foldToCheckRaiseChance as <signed>integer)     AS f_cr_opp_1,
+                           cast(hp2.street1foldToCheckRaiseDone as <signed>integer)       AS f_cr_1,
+                           cast(hp2.street2foldToCheckRaiseChance as <signed>integer)     AS f_cr_opp_2,
+                           cast(hp2.street2foldToCheckRaiseDone as <signed>integer)       AS f_cr_2,
+                           cast(hp2.street3foldToCheckRaiseChance as <signed>integer)     AS f_cr_opp_3,
+                           cast(hp2.street3foldToCheckRaiseDone as <signed>integer)       AS f_cr_3,
+                           cast(hp2.street4foldToCheckRaiseChance as <signed>integer)     AS f_cr_opp_4,
+                           cast(hp2.street4foldToCheckRaiseDone as <signed>integer)       AS f_cr_4,
                            cast(hp2.street0Calls as <signed>integer)                AS call_0,
                            cast(hp2.street1Calls as <signed>integer)                AS call_1,
                            cast(hp2.street2Calls as <signed>integer)                AS call_2,
                            cast(hp2.street3Calls as <signed>integer)                AS call_3,
                            cast(hp2.street4Calls as <signed>integer)                AS call_4,
-                           cast(hp2.street0Bets as <signed>integer)                 AS bet_0,
-                           cast(hp2.street1Bets as <signed>integer)                 AS bet_1,
-                           cast(hp2.street2Bets as <signed>integer)                 AS bet_2,
-                           cast(hp2.street3Bets as <signed>integer)                 AS bet_3,
-                           cast(hp2.street4Bets as <signed>integer)                 AS bet_4,
+                           
                            cast(hp2.street0Raises as <signed>integer)               AS raise_0,
                            cast(hp2.street1Raises as <signed>integer)               AS raise_1,
                            cast(hp2.street2Raises as <signed>integer)               AS raise_2,
                            cast(hp2.street3Raises as <signed>integer)               AS raise_3,
-                           cast(hp2.street4Raises as <signed>integer)               AS raise_4
+                           cast(hp2.street4Raises as <signed>integer)               AS raise_4,
+                           
+                           cast(hp2.street0Callers as <signed>integer)              AS callers_0,
+                           cast(hp2.street1Callers as <signed>integer)              AS callers_1,
+                           cast(hp2.street2Callers as <signed>integer)              AS callers_2,
+                           cast(hp2.street3Callers as <signed>integer)              AS callers_3,
+                           cast(hp2.street4Callers as <signed>integer)              AS callers_4,
+                           
+                           cast(hp2.street0Aggressors as <signed>integer)           AS aggressors_0,
+                           cast(hp2.street1Aggressors as <signed>integer)           AS aggressors_1,
+                           cast(hp2.street2Aggressors as <signed>integer)           AS aggressors_2,
+                           cast(hp2.street3Aggressors as <signed>integer)           AS aggressors_3,
+                           cast(hp2.street4Aggressors as <signed>integer)           AS aggressors_4
                          FROM Hands h                                                  /* this hand */
                          INNER JOIN Hands h2         ON (    h2.id >= %s           /* other hands */
                                                          AND h2.tableName = h.tableName)
@@ -4288,6 +6641,7 @@ class Sql:
                            p.name                                                   AS screen_name,
                            h.seats                                                  AS seats,
                            1                                                        AS n,
+                           
                            cast(hp2.street0VPIChance as <signed>integer)            AS vpip_opp,
                            cast(hp2.street0VPI as <signed>integer)                  AS vpip,
                            cast(hp2.street0AggrChance as <signed>integer)           AS pfr_opp,
@@ -4306,6 +6660,72 @@ class Sql:
                            cast(hp2.street0_FoldTo4BDone as <signed>integer)        AS F4B_0,
                            cast(hp2.street0_SqueezeChance as <signed>integer)       AS SQZ_opp_0,
                            cast(hp2.street0_SqueezeDone as <signed>integer)         AS SQZ_0,
+                           cast(hp2.street0_FoldToSqueezeChance as <signed>integer)       AS FSQZ_opp_0,
+                           cast(hp2.street0_FoldToSqueezeDone as <signed>integer)         AS FSQZ_0,
+                           
+                           cast(hp2.street1VPIChance as <signed>integer)            AS vpip_opp_1,
+                           cast(hp2.street1VPI as <signed>integer)                  AS vpip_1,
+                           cast(hp2.street1AggrChance as <signed>integer)           AS aggr_opp_1,
+                           cast(hp2.street1Aggr as <signed>integer)                 AS aggr_1,
+                           cast(hp2.street1CalledRaiseChance as <signed>integer)    AS CAR_opp_1,
+                           cast(hp2.street1CalledRaiseDone as <signed>integer)      AS CAR_1,
+                           cast(hp2.street1_3BChance as <signed>integer)            AS TB_opp_1,
+                           cast(hp2.street1_3BDone as <signed>integer)              AS TB_1,
+                           cast(hp2.street1_4BChance as <signed>integer)            AS FB_opp_1,
+                           cast(hp2.street1_4BDone as <signed>integer)              AS FB_1,
+                           cast(hp2.street1_C4BChance as <signed>integer)           AS CFB_opp_1,
+                           cast(hp2.street1_C4BDone as <signed>integer)             AS CFB_1,
+                           cast(hp2.street1_FoldTo3BChance as <signed>integer)      AS F3B_opp_1,
+                           cast(hp2.street1_FoldTo3BDone as <signed>integer)        AS F3B_1,
+                           cast(hp2.street1_FoldTo4BChance as <signed>integer)      AS F4B_opp_1,
+                           cast(hp2.street1_FoldTo4BDone as <signed>integer)        AS F4B_1,
+                           cast(hp2.street1_SqueezeChance as <signed>integer)       AS SQZ_opp_1,
+                           cast(hp2.street1_SqueezeDone as <signed>integer)         AS SQZ_1,
+                           cast(hp2.street1_FoldToSqueezeChance as <signed>integer)       AS FSQZ_opp_1,
+                           cast(hp2.street1_FoldToSqueezeDone as <signed>integer)         AS FSQZ_1,
+                           
+                           cast(hp2.street2VPIChance as <signed>integer)            AS vpip_opp_2,
+                           cast(hp2.street2VPI as <signed>integer)                  AS vpip_2,
+                           cast(hp2.street2AggrChance as <signed>integer)           AS aggr_opp_2,
+                           cast(hp2.street2Aggr as <signed>integer)                 AS aggr_2,
+                           cast(hp2.street2CalledRaiseChance as <signed>integer)    AS CAR_opp_2,
+                           cast(hp2.street2CalledRaiseDone as <signed>integer)      AS CAR_2,
+                           cast(hp2.street2_3BChance as <signed>integer)            AS TB_opp_2,
+                           cast(hp2.street2_3BDone as <signed>integer)              AS TB_2,
+                           cast(hp2.street2_4BChance as <signed>integer)            AS FB_opp_2,
+                           cast(hp2.street2_4BDone as <signed>integer)              AS FB_2,
+                           cast(hp2.street2_C4BChance as <signed>integer)           AS CFB_opp_2,
+                           cast(hp2.street2_C4BDone as <signed>integer)             AS CFB_2,
+                           cast(hp2.street2_FoldTo3BChance as <signed>integer)      AS F3B_opp_2,
+                           cast(hp2.street2_FoldTo3BDone as <signed>integer)        AS F3B_2,
+                           cast(hp2.street2_FoldTo4BChance as <signed>integer)      AS F4B_opp_2,
+                           cast(hp2.street2_FoldTo4BDone as <signed>integer)        AS F4B_2,
+                           cast(hp2.street2_SqueezeChance as <signed>integer)       AS SQZ_opp_2,
+                           cast(hp2.street2_SqueezeDone as <signed>integer)         AS SQZ_2,
+                           cast(hp2.street2_FoldToSqueezeChance as <signed>integer)       AS FSQZ_opp_2,
+                           cast(hp2.street2_FoldToSqueezeDone as <signed>integer)         AS FSQZ_2,
+                           
+                           cast(hp2.street3VPIChance as <signed>integer)            AS vpip_opp_3,
+                           cast(hp2.street3VPI as <signed>integer)                  AS vpip_3,
+                           cast(hp2.street3AggrChance as <signed>integer)           AS aggr_opp_3,
+                           cast(hp2.street3Aggr as <signed>integer)                 AS aggr_3,
+                           cast(hp2.street3CalledRaiseChance as <signed>integer)    AS CAR_opp_3,
+                           cast(hp2.street3CalledRaiseDone as <signed>integer)      AS CAR_3,
+                           cast(hp2.street3_3BChance as <signed>integer)            AS TB_opp_3,
+                           cast(hp2.street3_3BDone as <signed>integer)              AS TB_3,
+                           cast(hp2.street3_4BChance as <signed>integer)            AS FB_opp_3,
+                           cast(hp2.street3_4BDone as <signed>integer)              AS FB_3,
+                           cast(hp2.street3_C4BChance as <signed>integer)           AS CFB_opp_3,
+                           cast(hp2.street3_C4BDone as <signed>integer)             AS CFB_3,
+                           cast(hp2.street3_FoldTo3BChance as <signed>integer)      AS F3B_opp_3,
+                           cast(hp2.street3_FoldTo3BDone as <signed>integer)        AS F3B_3,
+                           cast(hp2.street3_FoldTo4BChance as <signed>integer)      AS F4B_opp_3,
+                           cast(hp2.street3_FoldTo4BDone as <signed>integer)        AS F4B_3,
+                           cast(hp2.street3_SqueezeChance as <signed>integer)       AS SQZ_opp_3,
+                           cast(hp2.street3_SqueezeDone as <signed>integer)         AS SQZ_3,
+                           cast(hp2.street3_FoldToSqueezeChance as <signed>integer)       AS FSQZ_opp_3,
+                           cast(hp2.street3_FoldToSqueezeDone as <signed>integer)         AS FSQZ_3,
+                           
                            cast(hp2.raiseToStealChance as <signed>integer)          AS RTS_opp,
                            cast(hp2.raiseToStealDone as <signed>integer)            AS RTS,
                            cast(hp2.success_Steal as <signed>integer)               AS SUC_ST,
@@ -4327,6 +6747,14 @@ class Sql:
                            cast(hp2.foldToOtherRaisedStreet2 as <signed>integer)    AS f_freq_2,
                            cast(hp2.foldToOtherRaisedStreet3 as <signed>integer)    AS f_freq_3,
                            cast(hp2.foldToOtherRaisedStreet4 as <signed>integer)    AS f_freq_4,
+                           cast(hp2.callToOtherRaisedStreet1 as <signed>integer)       AS c_freq_1,
+                           cast(hp2.callToOtherRaisedStreet2 as <signed>integer)       AS c_freq_2,
+                           cast(hp2.callToOtherRaisedStreet3 as <signed>integer)       AS c_freq_3,
+                           cast(hp2.callToOtherRaisedStreet4 as <signed>integer)       AS c_freq_4,
+                           cast(hp2.raiseToOtherRaisedStreet1 as <signed>integer)      AS r_freq_1,
+                           cast(hp2.raiseToOtherRaisedStreet2 as <signed>integer)      AS r_freq_2,
+                           cast(hp2.raiseToOtherRaisedStreet3 as <signed>integer)      AS r_freq_3,
+                           cast(hp2.raiseToOtherRaisedStreet4 as <signed>integer)      AS r_freq_4,
                            cast(hp2.wonWhenSeenStreet1 as <signed>integer)          AS w_w_s_1,
                            cast(hp2.wonAtSD as <signed>integer)                     AS wmsd,
                            cast(hp2.stealChance as <signed>integer)                 AS steal_opp,
@@ -4351,6 +6779,22 @@ class Sql:
                            cast(hp2.foldToStreet3CBDone as <signed>integer)         AS f_cb_3,
                            cast(hp2.foldToStreet4CBChance as <signed>integer)       AS f_cb_opp_4,
                            cast(hp2.foldToStreet4CBDone as <signed>integer)         AS f_cb_4,
+                           cast(hp2.callToStreet1CBChance as <signed>integer)       AS c_cb_opp_1,
+                           cast(hp2.callToStreet1CBDone as <signed>integer)         AS c_cb_1,
+                           cast(hp2.callToStreet2CBChance as <signed>integer)       AS c_cb_opp_2,
+                           cast(hp2.callToStreet2CBDone as <signed>integer)         AS c_cb_2,
+                           cast(hp2.callToStreet3CBChance as <signed>integer)       AS c_cb_opp_3,
+                           cast(hp2.callToStreet3CBDone as <signed>integer)         AS c_cb_3,
+                           cast(hp2.callToStreet4CBChance as <signed>integer)       AS c_cb_opp_4,
+                           cast(hp2.callToStreet4CBDone as <signed>integer)         AS c_cb_4,
+                           cast(hp2.raiseToStreet1CBChance as <signed>integer)      AS r_cb_opp_1,
+                           cast(hp2.raiseToStreet1CBDone as <signed>integer)        AS r_cb_1,
+                           cast(hp2.raiseToStreet2CBChance as <signed>integer)      AS r_cb_opp_2,
+                           cast(hp2.raiseToStreet2CBDone as <signed>integer)        AS r_cb_2,
+                           cast(hp2.raiseToStreet3CBChance as <signed>integer)      AS r_cb_opp_3,
+                           cast(hp2.raiseToStreet3CBDone as <signed>integer)        AS r_cb_3,
+                           cast(hp2.raiseToStreet4CBChance as <signed>integer)      AS r_cb_opp_4,
+                           cast(hp2.raiseToStreet4CBDone as <signed>integer)        AS r_cb_4,
                            cast(hp2.totalProfit as <signed>integer)                 AS net,
                            cast(gt.bigblind as <signed>integer)                     AS bigblind,
                            cast(hp2.street1CheckCallRaiseChance as <signed>integer) AS ccr_opp_1,
@@ -4365,21 +6809,37 @@ class Sql:
                            cast(hp2.street4CheckCallRaiseChance as <signed>integer) AS ccr_opp_4,
                            cast(hp2.street4CheckCallDone as <signed>integer)        AS cc_4,
                            cast(hp2.street4CheckRaiseDone as <signed>integer)       AS cr_4,
+                           cast(hp2.street1foldToCheckRaiseChance as <signed>integer)     AS f_cr_opp_1,
+                           cast(hp2.street1foldToCheckRaiseDone as <signed>integer)       AS f_cr_1,
+                           cast(hp2.street2foldToCheckRaiseChance as <signed>integer)     AS f_cr_opp_2,
+                           cast(hp2.street2foldToCheckRaiseDone as <signed>integer)       AS f_cr_2,
+                           cast(hp2.street3foldToCheckRaiseChance as <signed>integer)     AS f_cr_opp_3,
+                           cast(hp2.street3foldToCheckRaiseDone as <signed>integer)       AS f_cr_3,
+                           cast(hp2.street4foldToCheckRaiseChance as <signed>integer)     AS f_cr_opp_4,
+                           cast(hp2.street4foldToCheckRaiseDone as <signed>integer)       AS f_cr_4,
                            cast(hp2.street0Calls as <signed>integer)                AS call_0,
                            cast(hp2.street1Calls as <signed>integer)                AS call_1,
                            cast(hp2.street2Calls as <signed>integer)                AS call_2,
                            cast(hp2.street3Calls as <signed>integer)                AS call_3,
                            cast(hp2.street4Calls as <signed>integer)                AS call_4,
-                           cast(hp2.street0Bets as <signed>integer)                 AS bet_0,
-                           cast(hp2.street1Bets as <signed>integer)                 AS bet_1,
-                           cast(hp2.street2Bets as <signed>integer)                 AS bet_2,
-                           cast(hp2.street3Bets as <signed>integer)                 AS bet_3,
-                           cast(hp2.street4Bets as <signed>integer)                 AS bet_4,
+                           
                            cast(hp2.street0Raises as <signed>integer)               AS raise_0,
                            cast(hp2.street1Raises as <signed>integer)               AS raise_1,
                            cast(hp2.street2Raises as <signed>integer)               AS raise_2,
                            cast(hp2.street3Raises as <signed>integer)               AS raise_3,
-                           cast(hp2.street4Raises as <signed>integer)               AS raise_4
+                           cast(hp2.street4Raises as <signed>integer)               AS raise_4,
+                           
+                           cast(hp2.street0Callers as <signed>integer)              AS callers_0,
+                           cast(hp2.street1Callers as <signed>integer)              AS callers_1,
+                           cast(hp2.street2Callers as <signed>integer)              AS callers_2,
+                           cast(hp2.street3Callers as <signed>integer)              AS callers_3,
+                           cast(hp2.street4Callers as <signed>integer)              AS callers_4,
+                           
+                           cast(hp2.street0Aggressors as <signed>integer)           AS aggressors_0,
+                           cast(hp2.street1Aggressors as <signed>integer)           AS aggressors_1,
+                           cast(hp2.street2Aggressors as <signed>integer)           AS aggressors_2,
+                           cast(hp2.street3Aggressors as <signed>integer)           AS aggressors_3,
+                           cast(hp2.street4Aggressors as <signed>integer)           AS aggressors_4
                          FROM Hands h                                                  /* this hand */
                          INNER JOIN Hands h2         ON (    h2.id >= %s           /* other hands */
                                                          AND h2.tableName = h.tableName)
@@ -4602,6 +7062,7 @@ class Sql:
                             ,<position>                                                             AS plposition
                             ,gt.fast                                                                AS fast
                             ,count(1)                                                               AS n
+                            
                             ,case when sum(cast(hp.street0VPIChance as <signed>integer)) = 0 then -999
                                   else 100.0*sum(cast(hp.street0VPI as <signed>integer))/sum(cast(hp.street0VPIChance as <signed>integer))
                              end                                                                    AS vpip
@@ -4623,6 +7084,72 @@ class Sql:
                             ,case when sum(cast(hp.street0_FoldTo4Bchance as <signed>integer)) = 0 then -999
                                   else 100.0*sum(cast(hp.street0_FoldTo4Bdone as <signed>integer))/sum(cast(hp.street0_FoldTo4Bchance as <signed>integer))
                              end                                                                    AS pff4
+                             
+                            ,case when sum(cast(hp.street1VPIChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1VPI as <signed>integer))/sum(cast(hp.street1VPIChance as <signed>integer))
+                             end                                                                    AS vpip_1
+                            ,case when sum(cast(hp.street1AggrChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1Aggr as <signed>integer))/sum(cast(hp.street1AggrChance as <signed>integer))
+                             end                                                                    AS pfr_1
+                            ,case when sum(cast(hp.street1CalledRaiseChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1CalledRaiseDone as <signed>integer))/sum(cast(hp.street1CalledRaiseChance as <signed>integer))
+                             end                                                                    AS car0_1
+                            ,case when sum(cast(hp.street1_3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1_3Bdone as <signed>integer))/sum(cast(hp.street1_3Bchance as <signed>integer))
+                             end                                                                    AS pf3_1
+                            ,case when sum(cast(hp.street1_4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1_4Bdone as <signed>integer))/sum(cast(hp.street1_4Bchance as <signed>integer))
+                             end                                                                    AS pf4_1
+                            ,case when sum(cast(hp.street1_FoldTo3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1_FoldTo3Bdone as <signed>integer))/sum(cast(hp.street1_FoldTo3Bchance as <signed>integer))
+                             end                                                                    AS pff3_1
+                            ,case when sum(cast(hp.street1_FoldTo4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1_FoldTo4Bdone as <signed>integer))/sum(cast(hp.street1_FoldTo4Bchance as <signed>integer))
+                             end                                                                    AS pff4_1
+
+                            ,case when sum(cast(hp.street2VPIChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2VPI as <signed>integer))/sum(cast(hp.street2VPIChance as <signed>integer))
+                             end                                                                    AS vpip_2
+                            ,case when sum(cast(hp.street2AggrChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2Aggr as <signed>integer))/sum(cast(hp.street2AggrChance as <signed>integer))
+                             end                                                                    AS pfr_2
+                            ,case when sum(cast(hp.street2CalledRaiseChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2CalledRaiseDone as <signed>integer))/sum(cast(hp.street2CalledRaiseChance as <signed>integer))
+                             end                                                                    AS car0_2
+                            ,case when sum(cast(hp.street2_3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2_3Bdone as <signed>integer))/sum(cast(hp.street2_3Bchance as <signed>integer))
+                             end                                                                    AS pf3_2
+                            ,case when sum(cast(hp.street2_4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2_4Bdone as <signed>integer))/sum(cast(hp.street2_4Bchance as <signed>integer))
+                             end                                                                    AS pf4_2
+                            ,case when sum(cast(hp.street2_FoldTo3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2_FoldTo3Bdone as <signed>integer))/sum(cast(hp.street2_FoldTo3Bchance as <signed>integer))
+                             end                                                                    AS pff3_2
+                            ,case when sum(cast(hp.street2_FoldTo4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2_FoldTo4Bdone as <signed>integer))/sum(cast(hp.street2_FoldTo4Bchance as <signed>integer))
+                             end                                                                    AS pff4_2
+
+                            ,case when sum(cast(hp.street3VPIChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3VPI as <signed>integer))/sum(cast(hp.street3VPIChance as <signed>integer))
+                             end                                                                    AS vpip_3
+                            ,case when sum(cast(hp.street3AggrChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3Aggr as <signed>integer))/sum(cast(hp.street3AggrChance as <signed>integer))
+                             end                                                                    AS pfr_3
+                            ,case when sum(cast(hp.street3CalledRaiseChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3CalledRaiseDone as <signed>integer))/sum(cast(hp.street3CalledRaiseChance as <signed>integer))
+                             end                                                                    AS car0_3
+                            ,case when sum(cast(hp.street3_3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3_3Bdone as <signed>integer))/sum(cast(hp.street3_3Bchance as <signed>integer))
+                             end                                                                    AS pf3_3
+                            ,case when sum(cast(hp.street3_4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3_4Bdone as <signed>integer))/sum(cast(hp.street3_4Bchance as <signed>integer))
+                             end                                                                    AS pf4_3
+                            ,case when sum(cast(hp.street3_FoldTo3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3_FoldTo3Bdone as <signed>integer))/sum(cast(hp.street3_FoldTo3Bchance as <signed>integer))
+                             end                                                                    AS pff3_3
+                            ,case when sum(cast(hp.street3_FoldTo4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3_FoldTo4Bdone as <signed>integer))/sum(cast(hp.street3_FoldTo4Bchance as <signed>integer))
+                             end                                                                    AS pff4_3
 
                             ,case when sum(cast(hp.raiseFirstInChance as <signed>integer)) = 0 then -999
                                   else 100.0 * sum(cast(hp.raisedFirstIn as <signed>integer)) / 
@@ -4736,6 +7263,7 @@ class Sql:
                             ,<position>                                                             AS plposition
                             ,gt.fast                                                                AS fast
                             ,count(1)                                                               AS n
+                            
                             ,case when sum(cast(hp.street0VPIChance as <signed>integer)) = 0 then -999
                                   else 100.0*sum(cast(hp.street0VPI as <signed>integer))/sum(cast(hp.street0VPIChance as <signed>integer))
                              end                                                                    AS vpip
@@ -4757,6 +7285,73 @@ class Sql:
                             ,case when sum(cast(hp.street0_FoldTo4Bchance as <signed>integer)) = 0 then -999
                                   else 100.0*sum(cast(hp.street0_FoldTo4Bdone as <signed>integer))/sum(cast(hp.street0_FoldTo4Bchance as <signed>integer))
                              end                                                                    AS pff4
+                             
+                            ,case when sum(cast(hp.street1VPIChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1VPI as <signed>integer))/sum(cast(hp.street1VPIChance as <signed>integer))
+                             end                                                                    AS vpip_1
+                            ,case when sum(cast(hp.street1AggrChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1Aggr as <signed>integer))/sum(cast(hp.street1AggrChance as <signed>integer))
+                             end                                                                    AS pfr_1
+                            ,case when sum(cast(hp.street1CalledRaiseChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1CalledRaiseDone as <signed>integer))/sum(cast(hp.street1CalledRaiseChance as <signed>integer))
+                             end                                                                    AS car0_1
+                            ,case when sum(cast(hp.street1_3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1_3Bdone as <signed>integer))/sum(cast(hp.street1_3Bchance as <signed>integer))
+                             end                                                                    AS pf3_1
+                            ,case when sum(cast(hp.street1_4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1_4Bdone as <signed>integer))/sum(cast(hp.street1_4Bchance as <signed>integer))
+                             end                                                                    AS pf4_1
+                            ,case when sum(cast(hp.street1_FoldTo3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1_FoldTo3Bdone as <signed>integer))/sum(cast(hp.street1_FoldTo3Bchance as <signed>integer))
+                             end                                                                    AS pff3_1
+                            ,case when sum(cast(hp.street1_FoldTo4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1_FoldTo4Bdone as <signed>integer))/sum(cast(hp.street1_FoldTo4Bchance as <signed>integer))
+                             end                                                                    AS pff4_1
+
+                            ,case when sum(cast(hp.street2VPIChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2VPI as <signed>integer))/sum(cast(hp.street2VPIChance as <signed>integer))
+                             end                                                                    AS vpip_2
+                            ,case when sum(cast(hp.street2AggrChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2Aggr as <signed>integer))/sum(cast(hp.street2AggrChance as <signed>integer))
+                             end                                                                    AS pfr_2
+                            ,case when sum(cast(hp.street2CalledRaiseChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2CalledRaiseDone as <signed>integer))/sum(cast(hp.street2CalledRaiseChance as <signed>integer))
+                             end                                                                    AS car0_2
+                            ,case when sum(cast(hp.street2_3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2_3Bdone as <signed>integer))/sum(cast(hp.street2_3Bchance as <signed>integer))
+                             end                                                                    AS pf3_2
+                            ,case when sum(cast(hp.street2_4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2_4Bdone as <signed>integer))/sum(cast(hp.street2_4Bchance as <signed>integer))
+                             end                                                                    AS pf4_2
+                            ,case when sum(cast(hp.street2_FoldTo3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2_FoldTo3Bdone as <signed>integer))/sum(cast(hp.street2_FoldTo3Bchance as <signed>integer))
+                             end                                                                    AS pff3_2
+                            ,case when sum(cast(hp.street2_FoldTo4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2_FoldTo4Bdone as <signed>integer))/sum(cast(hp.street2_FoldTo4Bchance as <signed>integer))
+                             end                                                                    AS pff4_2
+
+                            ,case when sum(cast(hp.street3VPIChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3VPI as <signed>integer))/sum(cast(hp.street3VPIChance as <signed>integer))
+                             end                                                                    AS vpip_3
+                            ,case when sum(cast(hp.street3AggrChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3Aggr as <signed>integer))/sum(cast(hp.street3AggrChance as <signed>integer))
+                             end                                                                    AS pfr_3
+                            ,case when sum(cast(hp.street3CalledRaiseChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3CalledRaiseDone as <signed>integer))/sum(cast(hp.street3CalledRaiseChance as <signed>integer))
+                             end                                                                    AS car0_3
+                            ,case when sum(cast(hp.street3_3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3_3Bdone as <signed>integer))/sum(cast(hp.street3_3Bchance as <signed>integer))
+                             end                                                                    AS pf3_3
+                            ,case when sum(cast(hp.street3_4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3_4Bdone as <signed>integer))/sum(cast(hp.street3_4Bchance as <signed>integer))
+                             end                                                                    AS pf4_3
+                            ,case when sum(cast(hp.street3_FoldTo3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3_FoldTo3Bdone as <signed>integer))/sum(cast(hp.street3_FoldTo3Bchance as <signed>integer))
+                             end                                                                    AS pff3_3
+                            ,case when sum(cast(hp.street3_FoldTo4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3_FoldTo4Bdone as <signed>integer))/sum(cast(hp.street3_FoldTo4Bchance as <signed>integer))
+                             end                                                                    AS pff4_3
+
                             ,case when sum(cast(hp.raiseFirstInChance as <signed>integer)) = 0 then -999
                                   else 100.0 * sum(cast(hp.raisedFirstIn as <signed>integer)) / 
                                        sum(cast(hp.raiseFirstInChance as <signed>integer))
@@ -4884,6 +7479,7 @@ class Sql:
                             ,<position>                                                             AS plposition
                             ,gt.fast                                                                AS fast
                             ,count(1)                                                               AS n
+                            
                             ,case when sum(cast(hp.street0VPIChance as <signed>integer)) = 0 then -999
                                   else 100.0*sum(cast(hp.street0VPI as <signed>integer))/sum(cast(hp.street0VPIChance as <signed>integer))
                              end                                                                    AS vpip
@@ -4905,6 +7501,73 @@ class Sql:
                             ,case when sum(cast(hp.street0_FoldTo4Bchance as <signed>integer)) = 0 then -999
                                   else 100.0*sum(cast(hp.street0_FoldTo4Bdone as <signed>integer))/sum(cast(hp.street0_FoldTo4Bchance as <signed>integer))
                              end                                                                    AS pff4
+                             
+                            ,case when sum(cast(hp.street1VPIChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1VPI as <signed>integer))/sum(cast(hp.street1VPIChance as <signed>integer))
+                             end                                                                    AS vpip_1
+                            ,case when sum(cast(hp.street1AggrChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1Aggr as <signed>integer))/sum(cast(hp.street1AggrChance as <signed>integer))
+                             end                                                                    AS pfr_1
+                            ,case when sum(cast(hp.street1CalledRaiseChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1CalledRaiseDone as <signed>integer))/sum(cast(hp.street1CalledRaiseChance as <signed>integer))
+                             end                                                                    AS car0_1
+                            ,case when sum(cast(hp.street1_3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1_3Bdone as <signed>integer))/sum(cast(hp.street1_3Bchance as <signed>integer))
+                             end                                                                    AS pf3_1
+                            ,case when sum(cast(hp.street1_4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1_4Bdone as <signed>integer))/sum(cast(hp.street1_4Bchance as <signed>integer))
+                             end                                                                    AS pf4_1
+                            ,case when sum(cast(hp.street1_FoldTo3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1_FoldTo3Bdone as <signed>integer))/sum(cast(hp.street1_FoldTo3Bchance as <signed>integer))
+                             end                                                                    AS pff3_1
+                            ,case when sum(cast(hp.street1_FoldTo4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street1_FoldTo4Bdone as <signed>integer))/sum(cast(hp.street1_FoldTo4Bchance as <signed>integer))
+                             end                                                                    AS pff4_1
+
+                            ,case when sum(cast(hp.street2VPIChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2VPI as <signed>integer))/sum(cast(hp.street2VPIChance as <signed>integer))
+                             end                                                                    AS vpip_2
+                            ,case when sum(cast(hp.street2AggrChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2Aggr as <signed>integer))/sum(cast(hp.street2AggrChance as <signed>integer))
+                             end                                                                    AS pfr_2
+                            ,case when sum(cast(hp.street2CalledRaiseChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2CalledRaiseDone as <signed>integer))/sum(cast(hp.street2CalledRaiseChance as <signed>integer))
+                             end                                                                    AS car0_2
+                            ,case when sum(cast(hp.street2_3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2_3Bdone as <signed>integer))/sum(cast(hp.street2_3Bchance as <signed>integer))
+                             end                                                                    AS pf3_2
+                            ,case when sum(cast(hp.street2_4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2_4Bdone as <signed>integer))/sum(cast(hp.street2_4Bchance as <signed>integer))
+                             end                                                                    AS pf4_2
+                            ,case when sum(cast(hp.street2_FoldTo3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2_FoldTo3Bdone as <signed>integer))/sum(cast(hp.street2_FoldTo3Bchance as <signed>integer))
+                             end                                                                    AS pff3_2
+                            ,case when sum(cast(hp.street2_FoldTo4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street2_FoldTo4Bdone as <signed>integer))/sum(cast(hp.street2_FoldTo4Bchance as <signed>integer))
+                             end                                                                    AS pff4_2
+
+                            ,case when sum(cast(hp.street3VPIChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3VPI as <signed>integer))/sum(cast(hp.street3VPIChance as <signed>integer))
+                             end                                                                    AS vpip_3
+                            ,case when sum(cast(hp.street3AggrChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3Aggr as <signed>integer))/sum(cast(hp.street3AggrChance as <signed>integer))
+                             end                                                                    AS pfr_3
+                            ,case when sum(cast(hp.street3CalledRaiseChance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3CalledRaiseDone as <signed>integer))/sum(cast(hp.street3CalledRaiseChance as <signed>integer))
+                             end                                                                    AS car0_3
+                            ,case when sum(cast(hp.street3_3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3_3Bdone as <signed>integer))/sum(cast(hp.street3_3Bchance as <signed>integer))
+                             end                                                                    AS pf3_3
+                            ,case when sum(cast(hp.street3_4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3_4Bdone as <signed>integer))/sum(cast(hp.street3_4Bchance as <signed>integer))
+                             end                                                                    AS pf4_3
+                            ,case when sum(cast(hp.street3_FoldTo3Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3_FoldTo3Bdone as <signed>integer))/sum(cast(hp.street3_FoldTo3Bchance as <signed>integer))
+                             end                                                                    AS pff3_3
+                            ,case when sum(cast(hp.street3_FoldTo4Bchance as <signed>integer)) = 0 then -999
+                                  else 100.0*sum(cast(hp.street3_FoldTo4Bdone as <signed>integer))/sum(cast(hp.street3_FoldTo4Bchance as <signed>integer))
+                             end                                                                    AS pff4_3
+
                             ,case when sum(cast(hp.raiseFirstInChance as <signed>integer)) = 0 then -999
                                   else 100.0 * sum(cast(hp.raisedFirstIn as <signed>integer)) / 
                                        sum(cast(hp.raiseFirstInChance as <signed>integer))
@@ -5178,6 +7841,7 @@ class Sql:
                            ,<selectgt.bigBlind>                                             AS bigBlindDesc
                            ,<hcgametypeId>                                                  AS gtId
                            ,sum(n)                                                          AS n
+                           
                            ,case when sum(street0VPIChance) = 0 then '0'
                                  else format(100.0*sum(street0VPI)/sum(street0VPIChance),1)
                             end                                                             AS vpip
@@ -5199,6 +7863,73 @@ class Sql:
                            ,case when sum(street0_FoldTo4Bchance) = 0 then '0'
                                  else format(100.0*sum(street0_FoldTo4Bdone)/sum(street0_FoldTo4Bchance),1)
                             end                                                             AS pff4
+                            
+                           ,case when sum(street1VPIChance) = 0 then '0'
+                                 else format(100.0*sum(street1VPI)/sum(street1VPIChance),1)
+                            end                                                             AS vpip_1
+                           ,case when sum(street1AggrChance) = 0 then '0'
+                                 else format(100.0*sum(street1Aggr)/sum(street1AggrChance),1)
+                            end                                                             AS pfr_1
+                           ,case when sum(street1CalledRaiseChance) = 0 then '0'
+                                 else format(100.0*sum(street1CalledRaiseDone)/sum(street1CalledRaiseChance),1)
+                            end                                                             AS car0_1
+                           ,case when sum(street1_3Bchance) = 0 then '0'
+                                 else format(100.0*sum(street1_3Bdone)/sum(street1_3Bchance),1)
+                            end                                                             AS pf3_1
+                           ,case when sum(street1_4Bchance) = 0 then '0'
+                                 else format(100.0*sum(street1_4Bdone)/sum(street1_4Bchance),1)
+                            end                                                             AS pf4_1
+                           ,case when sum(street1_FoldTo3Bchance) = 0 then '0'
+                                 else format(100.0*sum(street1_FoldTo3Bdone)/sum(street1_FoldTo3Bchance),1)
+                            end                                                             AS pff3_1
+                           ,case when sum(street1_FoldTo4Bchance) = 0 then '0'
+                                 else format(100.0*sum(street1_FoldTo4Bdone)/sum(street1_FoldTo4Bchance),1)
+                            end                                                             AS pff4_1
+                            
+                           ,case when sum(street2VPIChance) = 0 then '0'
+                                 else format(100.0*sum(street2VPI)/sum(street2VPIChance),1)
+                            end                                                             AS vpip_2
+                           ,case when sum(street2AggrChance) = 0 then '0'
+                                 else format(100.0*sum(street2Aggr)/sum(street2AggrChance),1)
+                            end                                                             AS pfr_2
+                           ,case when sum(street2CalledRaiseChance) = 0 then '0'
+                                 else format(100.0*sum(street2CalledRaiseDone)/sum(street2CalledRaiseChance),1)
+                            end                                                             AS car0_2
+                           ,case when sum(street2_3Bchance) = 0 then '0'
+                                 else format(100.0*sum(street2_3Bdone)/sum(street2_3Bchance),1)
+                            end                                                             AS pf3_2
+                           ,case when sum(street2_4Bchance) = 0 then '0'
+                                 else format(100.0*sum(street2_4Bdone)/sum(street2_4Bchance),1)
+                            end                                                             AS pf4_2
+                           ,case when sum(street2_FoldTo3Bchance) = 0 then '0'
+                                 else format(100.0*sum(street2_FoldTo3Bdone)/sum(street2_FoldTo3Bchance),1)
+                            end                                                             AS pff3_2
+                           ,case when sum(street2_FoldTo4Bchance) = 0 then '0'
+                                 else format(100.0*sum(street2_FoldTo4Bdone)/sum(street2_FoldTo4Bchance),1)
+                            end                                                             AS pff4_2
+                            
+                           ,case when sum(street3VPIChance) = 0 then '0'
+                                 else format(100.0*sum(street3VPI)/sum(street3VPIChance),1)
+                            end                                                             AS vpip_3
+                           ,case when sum(street3AggrChance) = 0 then '0'
+                                 else format(100.0*sum(street3Aggr)/sum(street3AggrChance),1)
+                            end                                                             AS pfr_3
+                           ,case when sum(street3CalledRaiseChance) = 0 then '0'
+                                 else format(100.0*sum(street3CalledRaiseDone)/sum(street3CalledRaiseChance),1)
+                            end                                                             AS car0_3
+                           ,case when sum(street3_3Bchance) = 0 then '0'
+                                 else format(100.0*sum(street3_3Bdone)/sum(street3_3Bchance),1)
+                            end                                                             AS pf3_3
+                           ,case when sum(street3_4Bchance) = 0 then '0'
+                                 else format(100.0*sum(street3_4Bdone)/sum(street3_4Bchance),1)
+                            end                                                             AS pf4_3
+                           ,case when sum(street3_FoldTo3Bchance) = 0 then '0'
+                                 else format(100.0*sum(street3_FoldTo3Bdone)/sum(street3_FoldTo3Bchance),1)
+                            end                                                             AS pff3_3
+                           ,case when sum(street3_FoldTo4Bchance) = 0 then '0'
+                                 else format(100.0*sum(street3_FoldTo4Bdone)/sum(street3_FoldTo4Bchance),1)
+                            end                                                             AS pff4_3
+                            
                            ,case when sum(raiseFirstInChance) = 0 then '-'
                                  else format(100.0*sum(raisedFirstIn)/sum(raiseFirstInChance),1)
                             end                                                             AS steals
@@ -5287,6 +8018,7 @@ class Sql:
                            ,<selectgt.bigBlind>                                             AS bigBlindDesc
                            ,<hcgametypeId>                                                  AS gtId
                            ,sum(n)                                                          AS n
+                           
                            ,case when sum(street0VPIChance) = 0 then '0'
                                  else round(100.0*sum(street0VPI)/sum(street0VPIChance),1)
                             end                                                             AS vpip
@@ -5308,6 +8040,73 @@ class Sql:
                            ,case when sum(street0_FoldTo4Bchance) = 0 then '0'
                                  else round(100.0*sum(street0_FoldTo4Bdone)/sum(street0_FoldTo4Bchance),1)
                             end                                                             AS pff4
+                            
+                           ,case when sum(street1VPIChance) = 0 then '0'
+                                 else round(100.0*sum(street1VPI)/sum(street1VPIChance),1)
+                            end                                                             AS vpip_1
+                           ,case when sum(street1AggrChance) = 0 then '0'
+                                 else round(100.0*sum(street1Aggr)/sum(street1AggrChance),1)
+                            end                                                             AS pfr_1
+                           ,case when sum(street1CalledRaiseChance) = 0 then '0'
+                                 else round(100.0*sum(street1CalledRaiseDone)/sum(street1CalledRaiseChance),1)
+                            end                                                             AS car0_1
+                           ,case when sum(street1_3Bchance) = 0 then '0'
+                                 else round(100.0*sum(street1_3Bdone)/sum(street1_3Bchance),1)
+                            end                                                             AS pf3_1
+                           ,case when sum(street1_4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street1_4Bdone)/sum(street1_4Bchance),1)
+                            end                                                             AS pf4_1
+                           ,case when sum(street1_FoldTo3Bchance) = 0 then '0'
+                                 else round(100.0*sum(street1_FoldTo3Bdone)/sum(street1_FoldTo3Bchance),1)
+                            end                                                             AS pff3_1
+                           ,case when sum(street1_FoldTo4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street1_FoldTo4Bdone)/sum(street1_FoldTo4Bchance),1)
+                            end                                                             AS pff4_1
+                            
+                           ,case when sum(street2VPIChance) = 0 then '0'
+                                 else round(100.0*sum(street2VPI)/sum(street2VPIChance),1)
+                            end                                                             AS vpip_2
+                           ,case when sum(street2AggrChance) = 0 then '0'
+                                 else round(100.0*sum(street2Aggr)/sum(street2AggrChance),1)
+                            end                                                             AS pfr_2
+                           ,case when sum(street2CalledRaiseChance) = 0 then '0'
+                                 else round(100.0*sum(street2CalledRaiseDone)/sum(street2CalledRaiseChance),1)
+                            end                                                             AS car0_2
+                           ,case when sum(street2_3Bchance) = 0 then '0'
+                                 else round(100.0*sum(street2_3Bdone)/sum(street2_3Bchance),1)
+                            end                                                             AS pf3_2
+                           ,case when sum(street2_4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street2_4Bdone)/sum(street2_4Bchance),1)
+                            end                                                             AS pf4_2
+                           ,case when sum(street2_FoldTo3Bchance) = 0 then '0'
+                                 else round(100.0*sum(street2_FoldTo3Bdone)/sum(street2_FoldTo3Bchance),1)
+                            end                                                             AS pff3_2
+                           ,case when sum(street2_FoldTo4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street2_FoldTo4Bdone)/sum(street2_FoldTo4Bchance),1)
+                            end                                                             AS pff4_2
+                            
+                           ,case when sum(street3VPIChance) = 0 then '0'
+                                 else round(100.0*sum(street3VPI)/sum(street3VPIChance),1)
+                            end                                                             AS vpip_3
+                           ,case when sum(street3AggrChance) = 0 then '0'
+                                 else round(100.0*sum(street3Aggr)/sum(street3AggrChance),1)
+                            end                                                             AS pfr_3
+                           ,case when sum(street3CalledRaiseChance) = 0 then '0'
+                                 else round(100.0*sum(street3CalledRaiseDone)/sum(street3CalledRaiseChance),1)
+                            end                                                             AS car0_3
+                           ,case when sum(street3_3Bchance) = 0 then '0'
+                                 else round(100.0*sum(street3_3Bdone)/sum(street3_3Bchance),1)
+                            end                                                             AS pf3_3
+                           ,case when sum(street3_4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street3_4Bdone)/sum(street3_4Bchance),1)
+                            end                                                             AS pf4_3
+                           ,case when sum(street3_FoldTo3Bchance) = 0 then '0'
+                                 else round(100.0*sum(street3_FoldTo3Bdone)/sum(street3_FoldTo3Bchance),1)
+                            end                                                             AS pff3_3
+                           ,case when sum(street3_FoldTo4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street3_FoldTo4Bdone)/sum(street3_FoldTo4Bchance),1)
+                            end                                                             AS pff4_3
+                            
                            ,case when sum(raiseFirstInChance) = 0 then '-'
                                  else round(100.0*sum(raisedFirstIn)/sum(raiseFirstInChance),1)
                             end                                                             AS steals
@@ -5410,6 +8209,7 @@ class Sql:
                            ,<selectgt.bigBlind>                                             AS bigBlindDesc
                            ,<hcgametypeId>                                                  AS gtId
                            ,sum(n)                                                          AS n
+                           
                            ,case when sum(street0VPIChance) = 0 then '0'
                                  else to_char(100.0*sum(street0VPI)/sum(street0VPIChance),'990D0')
                             end                                                             AS vpip
@@ -5431,6 +8231,73 @@ class Sql:
                            ,case when sum(street0_FoldTo4Bchance) = 0 then '0'
                                  else round(100.0*sum(street0_FoldTo4Bdone)/sum(street0_FoldTo4Bchance),1)
                             end                                                             AS pff4
+                            
+                           ,case when sum(street1VPIChance) = 0 then '0'
+                                 else to_char(100.0*sum(street1VPI)/sum(street1VPIChance),'990D0')
+                            end                                                             AS vpip_1
+                           ,case when sum(street1AggrChance) = 0 then '0'
+                                 else to_char(100.0*sum(street1Aggr)/sum(street1AggrChance),'90D0')
+                            end                                                             AS pfr_1
+                           ,case when sum(street1CalledRaiseChance) = 0 then '0'
+                                 else to_char(100.0*sum(street1CalledRaiseDone)/sum(street1CalledRaiseChance),'90D0')
+                            end                                                             AS car0_1
+                           ,case when sum(street1_3Bchance) = 0 then '0'
+                                 else to_char(100.0*sum(street1_3Bdone)/sum(street1_3Bchance),'90D0')
+                            end                                                             AS pf3_1
+                           ,case when sum(street1_4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street1_4Bdone)/sum(street1_4Bchance),1)
+                            end                                                             AS pf4_1
+                           ,case when sum(street1_FoldTo3Bchance) = 0 then '0'
+                                 else round(100.0*sum(street1_FoldTo3Bdone)/sum(street1_FoldTo3Bchance),1)
+                            end                                                             AS pff3_1
+                           ,case when sum(street1_FoldTo4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street1_FoldTo4Bdone)/sum(street1_FoldTo4Bchance),1)
+                            end                                                             AS pff4_1
+                            
+                           ,case when sum(street2VPIChance) = 0 then '0'
+                                 else to_char(100.0*sum(street2VPI)/sum(street2VPIChance),'990D0')
+                            end                                                             AS vpip_2
+                           ,case when sum(street2AggrChance) = 0 then '0'
+                                 else to_char(100.0*sum(street2Aggr)/sum(street2AggrChance),'90D0')
+                            end                                                             AS pfr_2
+                           ,case when sum(street2CalledRaiseChance) = 0 then '0'
+                                 else to_char(100.0*sum(street2CalledRaiseDone)/sum(street2CalledRaiseChance),'90D0')
+                            end                                                             AS car0_2
+                           ,case when sum(street2_3Bchance) = 0 then '0'
+                                 else to_char(100.0*sum(street2_3Bdone)/sum(street2_3Bchance),'90D0')
+                            end                                                             AS pf3_2
+                           ,case when sum(street2_4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street2_4Bdone)/sum(street2_4Bchance),1)
+                            end                                                             AS pf4_2
+                           ,case when sum(street2_FoldTo3Bchance) = 0 then '0'
+                                 else round(100.0*sum(street2_FoldTo3Bdone)/sum(street2_FoldTo3Bchance),1)
+                            end                                                             AS pff3_2
+                           ,case when sum(street2_FoldTo4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street2_FoldTo4Bdone)/sum(street2_FoldTo4Bchance),1)
+                            end                                                             AS pff4_2
+                            
+                           ,case when sum(street3VPIChance) = 0 then '0'
+                                 else to_char(100.0*sum(street3VPI)/sum(street3VPIChance),'990D0')
+                            end                                                             AS vpip_3
+                           ,case when sum(street3AggrChance) = 0 then '0'
+                                 else to_char(100.0*sum(street3Aggr)/sum(street3AggrChance),'90D0')
+                            end                                                             AS pfr_3
+                           ,case when sum(street3CalledRaiseChance) = 0 then '0'
+                                 else to_char(100.0*sum(street3CalledRaiseDone)/sum(street3CalledRaiseChance),'90D0')
+                            end                                                             AS car0_3
+                           ,case when sum(street3_3Bchance) = 0 then '0'
+                                 else to_char(100.0*sum(street3_3Bdone)/sum(street3_3Bchance),'90D0')
+                            end                                                             AS pf3_3
+                           ,case when sum(street3_4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street3_4Bdone)/sum(street3_4Bchance),1)
+                            end                                                             AS pf4_3
+                           ,case when sum(street3_FoldTo3Bchance) = 0 then '0'
+                                 else round(100.0*sum(street3_FoldTo3Bdone)/sum(street3_FoldTo3Bchance),1)
+                            end                                                             AS pff3_3
+                           ,case when sum(street3_FoldTo4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street3_FoldTo4Bdone)/sum(street3_FoldTo4Bchance),1)
+                            end                                                             AS pff4_3
+                            
                            ,case when sum(raiseFirstInChance) = 0 then '-'
                                  else to_char(100.0*sum(raisedFirstIn)/sum(raiseFirstInChance),'90D0')
                             end                                                             AS steals
@@ -5559,6 +8426,7 @@ class Sql:
                                  else 9
                             end                                                             as PlPosition
                            ,sum(n)                                                          AS n
+                           
                            ,case when sum(street0VPIChance) = 0 then '0'
                                  else format(100.0*sum(street0VPI)/sum(street0VPIChance),1)
                             end                                                             AS vpip
@@ -5580,6 +8448,73 @@ class Sql:
                            ,case when sum(street0_FoldTo4Bchance) = 0 then '0'
                                  else format(100.0*sum(street0_FoldTo4Bdone)/sum(street0_FoldTo4Bchance),1)
                             end                                                             AS pff4
+                            
+                           ,case when sum(street1VPIChance) = 0 then '0'
+                                 else format(100.0*sum(street1VPI)/sum(street1VPIChance),1)
+                            end                                                             AS vpip_1
+                           ,case when sum(street1AggrChance) = 0 then '0'
+                                 else format(100.0*sum(street1Aggr)/sum(street1AggrChance),1)
+                            end                                                             AS pfr_1
+                           ,case when sum(street1CalledRaiseChance) = 0 then '0'
+                                 else format(100.0*sum(street1CalledRaiseDone)/sum(street1CalledRaiseChance),1)
+                            end                                                             AS car0_1
+                           ,case when sum(street1_3Bchance) = 0 then '0'
+                                 else format(100.0*sum(street1_3Bdone)/sum(street1_3Bchance),1)
+                            end                                                             AS pf3_1
+                           ,case when sum(street1_4Bchance) = 0 then '0'
+                                 else format(100.0*sum(street1_4Bdone)/sum(street1_4Bchance),1)
+                            end                                                             AS pf4_1
+                           ,case when sum(street1_FoldTo3Bchance) = 0 then '0'
+                                 else format(100.0*sum(street1_FoldTo3Bdone)/sum(street1_FoldTo3Bchance),1)
+                            end                                                             AS pff3_1
+                           ,case when sum(street1_FoldTo4Bchance) = 0 then '0'
+                                 else format(100.0*sum(street1_FoldTo4Bdone)/sum(street1_FoldTo4Bchance),1)
+                            end                                                             AS pff4_1
+                            
+                           ,case when sum(street2VPIChance) = 0 then '0'
+                                 else format(100.0*sum(street2VPI)/sum(street2VPIChance),1)
+                            end                                                             AS vpip_2
+                           ,case when sum(street2AggrChance) = 0 then '0'
+                                 else format(100.0*sum(street2Aggr)/sum(street2AggrChance),1)
+                            end                                                             AS pfr_2
+                           ,case when sum(street2CalledRaiseChance) = 0 then '0'
+                                 else format(100.0*sum(street2CalledRaiseDone)/sum(street2CalledRaiseChance),1)
+                            end                                                             AS car0_2
+                           ,case when sum(street2_3Bchance) = 0 then '0'
+                                 else format(100.0*sum(street2_3Bdone)/sum(street2_3Bchance),1)
+                            end                                                             AS pf3_2
+                           ,case when sum(street2_4Bchance) = 0 then '0'
+                                 else format(100.0*sum(street2_4Bdone)/sum(street2_4Bchance),1)
+                            end                                                             AS pf4_2
+                           ,case when sum(street2_FoldTo3Bchance) = 0 then '0'
+                                 else format(100.0*sum(street2_FoldTo3Bdone)/sum(street2_FoldTo3Bchance),1)
+                            end                                                             AS pff3_2
+                           ,case when sum(street2_FoldTo4Bchance) = 0 then '0'
+                                 else format(100.0*sum(street2_FoldTo4Bdone)/sum(street2_FoldTo4Bchance),1)
+                            end                                                             AS pff4_2
+                            
+                           ,case when sum(street3VPIChance) = 0 then '0'
+                                 else format(100.0*sum(street3VPI)/sum(street3VPIChance),1)
+                            end                                                             AS vpip_3
+                           ,case when sum(street3AggrChance) = 0 then '0'
+                                 else format(100.0*sum(street3Aggr)/sum(street3AggrChance),1)
+                            end                                                             AS pfr_3
+                           ,case when sum(street3CalledRaiseChance) = 0 then '0'
+                                 else format(100.0*sum(street3CalledRaiseDone)/sum(street3CalledRaiseChance),1)
+                            end                                                             AS car0_3
+                           ,case when sum(street3_3Bchance) = 0 then '0'
+                                 else format(100.0*sum(street3_3Bdone)/sum(street3_3Bchance),1)
+                            end                                                             AS pf3_3
+                           ,case when sum(street3_4Bchance) = 0 then '0'
+                                 else format(100.0*sum(street3_4Bdone)/sum(street3_4Bchance),1)
+                            end                                                             AS pf4_3
+                           ,case when sum(street3_FoldTo3Bchance) = 0 then '0'
+                                 else format(100.0*sum(street3_FoldTo3Bdone)/sum(street3_FoldTo3Bchance),1)
+                            end                                                             AS pff3_3
+                           ,case when sum(street3_FoldTo4Bchance) = 0 then '0'
+                                 else format(100.0*sum(street3_FoldTo4Bdone)/sum(street3_FoldTo4Bchance),1)
+                            end                                                             AS pff4_3
+                            
                            ,case when sum(raiseFirstInChance) = 0 then '-'
                                  else format(100.0*sum(raisedFirstIn)/sum(raiseFirstInChance),1)
                             end                                                             AS steals
@@ -5701,6 +8636,7 @@ class Sql:
                                  else 9
                             end                                                             AS PlPosition
                            ,sum(n)                                                          AS n
+                           
                            ,case when sum(street0VPIChance) = 0 then '0'
                                  else round(100.0*sum(street0VPI)/sum(street0VPIChance),1)
                             end                                                             AS vpip
@@ -5722,6 +8658,73 @@ class Sql:
                            ,case when sum(street0_FoldTo4Bchance) = 0 then '0'
                                  else round(100.0*sum(street0_FoldTo4Bdone)/sum(street0_FoldTo4Bchance),1)
                             end                                                             AS pff4
+                            
+                           ,case when sum(street1VPIChance) = 0 then '0'
+                                 else round(100.0*sum(street1VPI)/sum(street1VPIChance),1)
+                            end                                                             AS vpip_1
+                           ,case when sum(street1AggrChance) = 0 then '0'
+                                 else round(100.0*sum(street1Aggr)/sum(street1AggrChance),1)
+                            end                                                             AS pfr_1
+                           ,case when sum(street1CalledRaiseChance) = 0 then '0'
+                                 else round(100.0*sum(street1CalledRaiseDone)/sum(street1CalledRaiseChance),1)
+                            end                                                             AS car0_1
+                           ,case when sum(street1_3Bchance) = 0 then '0'
+                                 else round(100.0*sum(street1_3Bdone)/sum(street1_3Bchance),1)
+                            end                                                             AS pf3_1
+                           ,case when sum(street1_4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street1_4Bdone)/sum(street1_4Bchance),1)
+                            end                                                             AS pf4_1
+                           ,case when sum(street1_FoldTo3Bchance) = 0 then '0'
+                                 else round(100.0*sum(street1_FoldTo3Bdone)/sum(street1_FoldTo3Bchance),1)
+                            end                                                             AS pff3_1
+                           ,case when sum(street1_FoldTo4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street1_FoldTo4Bdone)/sum(street1_FoldTo4Bchance),1)
+                            end                                                             AS pff4_1
+                            
+                           ,case when sum(street2VPIChance) = 0 then '0'
+                                 else round(100.0*sum(street2VPI)/sum(street2VPIChance),1)
+                            end                                                             AS vpip_2
+                           ,case when sum(street2AggrChance) = 0 then '0'
+                                 else round(100.0*sum(street2Aggr)/sum(street2AggrChance),1)
+                            end                                                             AS pfr_2
+                           ,case when sum(street2CalledRaiseChance) = 0 then '0'
+                                 else round(100.0*sum(street2CalledRaiseDone)/sum(street2CalledRaiseChance),1)
+                            end                                                             AS car0_2
+                           ,case when sum(street2_3Bchance) = 0 then '0'
+                                 else round(100.0*sum(street2_3Bdone)/sum(street2_3Bchance),1)
+                            end                                                             AS pf3_2
+                           ,case when sum(street2_4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street2_4Bdone)/sum(street2_4Bchance),1)
+                            end                                                             AS pf4_2
+                           ,case when sum(street2_FoldTo3Bchance) = 0 then '0'
+                                 else round(100.0*sum(street2_FoldTo3Bdone)/sum(street2_FoldTo3Bchance),1)
+                            end                                                             AS pff3_2
+                           ,case when sum(street2_FoldTo4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street2_FoldTo4Bdone)/sum(street2_FoldTo4Bchance),1)
+                            end                                                             AS pff4_2
+                            
+                           ,case when sum(street3VPIChance) = 0 then '0'
+                                 else round(100.0*sum(street3VPI)/sum(street3VPIChance),1)
+                            end                                                             AS vpip_3
+                           ,case when sum(street3AggrChance) = 0 then '0'
+                                 else round(100.0*sum(street3Aggr)/sum(street3AggrChance),1)
+                            end                                                             AS pfr_3
+                           ,case when sum(street3CalledRaiseChance) = 0 then '0'
+                                 else round(100.0*sum(street3CalledRaiseDone)/sum(street3CalledRaiseChance),1)
+                            end                                                             AS car0_3
+                           ,case when sum(street3_3Bchance) = 0 then '0'
+                                 else round(100.0*sum(street3_3Bdone)/sum(street3_3Bchance),1)
+                            end                                                             AS pf3_3
+                           ,case when sum(street3_4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street3_4Bdone)/sum(street3_4Bchance),1)
+                            end                                                             AS pf4_3
+                           ,case when sum(street3_FoldTo3Bchance) = 0 then '0'
+                                 else round(100.0*sum(street3_FoldTo3Bdone)/sum(street3_FoldTo3Bchance),1)
+                            end                                                             AS pff3_3
+                           ,case when sum(street3_FoldTo4Bchance) = 0 then '0'
+                                 else round(100.0*sum(street3_FoldTo4Bdone)/sum(street3_FoldTo4Bchance),1)
+                            end                                                             AS pff4_3
+                            
                            ,case when sum(raiseFirstInChance) = 0 then '-'
                                  else round(100.0*sum(raisedFirstIn)/sum(raiseFirstInChance),1)
                             end                                                             AS steals
@@ -5854,6 +8857,7 @@ class Sql:
                                  else 9
                             end                                                             AS PlPosition
                            ,sum(n)                                                          AS n
+                           
                            ,case when sum(street0VPIChance) = 0 then '0'
                                  else to_char(100.0*sum(street0VPI)/sum(street0VPIChance),'990D0')
                             end                                                             AS vpip
@@ -5875,6 +8879,73 @@ class Sql:
                            ,case when sum(street0_FoldTo4Bchance) = 0 then '0'
                                  else to_char(100.0*sum(street0_FoldTo4Bdone)/sum(street0_FoldTo4Bchance),'90D0')
                             end                                                             AS pff4
+                            
+                           ,case when sum(street1VPIChance) = 0 then '0'
+                                 else to_char(100.0*sum(street1VPI)/sum(street1VPIChance),'990D0')
+                            end                                                             AS vpip_1
+                           ,case when sum(street1AggrChance) = 0 then '0'
+                                 else to_char(100.0*sum(street1Aggr)/sum(street1AggrChance),'90D0')
+                            end                                                             AS pfr_1
+                           ,case when sum(street1CalledRaiseChance) = 0 then '0'
+                                 else to_char(100.0*sum(street1CalledRaiseDone)/sum(street1CalledRaiseChance),'90D0')
+                            end                                                             AS car0_1
+                           ,case when sum(street1_3Bchance) = 0 then '0'
+                                 else to_char(100.0*sum(street1_3Bdone)/sum(street1_3Bchance),'90D0')
+                            end                                                             AS pf3_1
+                           ,case when sum(street1_4Bchance) = 0 then '0'
+                                 else to_char(100.0*sum(street1_4Bdone)/sum(street1_4Bchance),'90D0')
+                            end                                                             AS pf4_1
+                           ,case when sum(street1_FoldTo3Bchance) = 0 then '0'
+                                 else to_char(100.0*sum(street1_FoldTo3Bdone)/sum(street1_FoldTo3Bchance),'90D0')
+                            end                                                             AS pff3_1
+                           ,case when sum(street1_FoldTo4Bchance) = 0 then '0'
+                                 else to_char(100.0*sum(street1_FoldTo4Bdone)/sum(street1_FoldTo4Bchance),'90D0')
+                            end                                                             AS pff4_1
+                            
+                           ,case when sum(street2VPIChance) = 0 then '0'
+                                 else to_char(100.0*sum(street2VPI)/sum(street2VPIChance),'990D0')
+                            end                                                             AS vpip_2
+                           ,case when sum(street2AggrChance) = 0 then '0'
+                                 else to_char(100.0*sum(street2Aggr)/sum(street2AggrChance),'90D0')
+                            end                                                             AS pfr_2
+                           ,case when sum(street2CalledRaiseChance) = 0 then '0'
+                                 else to_char(100.0*sum(street2CalledRaiseDone)/sum(street2CalledRaiseChance),'90D0')
+                            end                                                             AS car0_2
+                           ,case when sum(street2_3Bchance) = 0 then '0'
+                                 else to_char(100.0*sum(street2_3Bdone)/sum(street2_3Bchance),'90D0')
+                            end                                                             AS pf3_2
+                           ,case when sum(street2_4Bchance) = 0 then '0'
+                                 else to_char(100.0*sum(street2_4Bdone)/sum(street2_4Bchance),'90D0')
+                            end                                                             AS pf4_2
+                           ,case when sum(street2_FoldTo3Bchance) = 0 then '0'
+                                 else to_char(100.0*sum(street2_FoldTo3Bdone)/sum(street2_FoldTo3Bchance),'90D0')
+                            end                                                             AS pff3_2
+                           ,case when sum(street2_FoldTo4Bchance) = 0 then '0'
+                                 else to_char(100.0*sum(street2_FoldTo4Bdone)/sum(street2_FoldTo4Bchance),'90D0')
+                            end                                                             AS pff4_2
+                            
+                           ,case when sum(street3VPIChance) = 0 then '0'
+                                 else to_char(100.0*sum(street3VPI)/sum(street3VPIChance),'990D0')
+                            end                                                             AS vpip_3
+                           ,case when sum(street3AggrChance) = 0 then '0'
+                                 else to_char(100.0*sum(street3Aggr)/sum(street3AggrChance),'90D0')
+                            end                                                             AS pfr_3
+                           ,case when sum(street3CalledRaiseChance) = 0 then '0'
+                                 else to_char(100.0*sum(street3CalledRaiseDone)/sum(street3CalledRaiseChance),'90D0')
+                            end                                                             AS car0_3
+                           ,case when sum(street3_3Bchance) = 0 then '0'
+                                 else to_char(100.0*sum(street3_3Bdone)/sum(street3_3Bchance),'90D0')
+                            end                                                             AS pf3_3
+                           ,case when sum(street3_4Bchance) = 0 then '0'
+                                 else to_char(100.0*sum(street3_4Bdone)/sum(street3_4Bchance),'90D0')
+                            end                                                             AS pf4_3
+                           ,case when sum(street3_FoldTo3Bchance) = 0 then '0'
+                                 else to_char(100.0*sum(street3_FoldTo3Bdone)/sum(street3_FoldTo3Bchance),'90D0')
+                            end                                                             AS pff3_3
+                           ,case when sum(street3_FoldTo4Bchance) = 0 then '0'
+                                 else to_char(100.0*sum(street3_FoldTo4Bdone)/sum(street3_FoldTo4Bchance),'90D0')
+                            end                                                             AS pff4_3
+                            
                            ,case when sum(raiseFirstInChance) = 0 then '-'
                                  else to_char(100.0*sum(raisedFirstIn)/sum(raiseFirstInChance),'90D0')
                             end                                                             AS steals
@@ -6248,6 +9319,7 @@ class Sql:
         if db_server == 'mysql':
             self.query['rebuildCache'] = """insert into <insert>
                 ,n
+                
                 ,street0VPIChance
                 ,street0VPI
                 ,street0AggrChance
@@ -6270,6 +9342,66 @@ class Sql:
                 ,street0_FoldTo4BDone
                 ,street0_SqueezeChance
                 ,street0_SqueezeDone
+                ,street0_FoldToSqueezeChance
+                ,street0_FoldToSqueezeDone
+                
+                ,street1_2BChance
+                ,street1_2BDone
+                ,street1_3BChance
+                ,street1_3BDone
+                ,street1_4BChance
+                ,street1_4BDone
+                ,street1_C4BChance
+                ,street1_C4BDone
+                ,street1_FoldTo2BChance
+                ,street1_FoldTo2BDone
+                ,street1_FoldTo3BChance
+                ,street1_FoldTo3BDone
+                ,street1_FoldTo4BChance
+                ,street1_FoldTo4BDone
+                ,street1_SqueezeChance
+                ,street1_SqueezeDone
+                ,street1_FoldToSqueezeChance
+                ,street1_FoldToSqueezeDone
+                
+                ,street2_2BChance
+                ,street2_2BDone
+                ,street2_3BChance
+                ,street2_3BDone
+                ,street2_4BChance
+                ,street2_4BDone
+                ,street2_C4BChance
+                ,street2_C4BDone
+                ,street2_FoldTo2BChance
+                ,street2_FoldTo2BDone
+                ,street2_FoldTo3BChance
+                ,street2_FoldTo3BDone
+                ,street2_FoldTo4BChance
+                ,street2_FoldTo4BDone
+                ,street2_SqueezeChance
+                ,street2_SqueezeDone
+                ,street2_FoldToSqueezeChance
+                ,street2_FoldToSqueezeDone
+                
+                ,street3_2BChance
+                ,street3_2BDone
+                ,street3_3BChance
+                ,street3_3BDone
+                ,street3_4BChance
+                ,street3_4BDone
+                ,street3_C4BChance
+                ,street3_C4BDone
+                ,street3_FoldTo2BChance
+                ,street3_FoldTo2BDone
+                ,street3_FoldTo3BChance
+                ,street3_FoldTo3BDone
+                ,street3_FoldTo4BChance
+                ,street3_FoldTo4BDone
+                ,street3_SqueezeChance
+                ,street3_SqueezeDone
+                ,street3_FoldToSqueezeChance
+                ,street3_FoldToSqueezeDone
+                
                 ,raiseToStealChance
                 ,raiseToStealDone
                 ,stealChance
@@ -6294,6 +9426,16 @@ class Sql:
                 ,foldToOtherRaisedStreet2
                 ,foldToOtherRaisedStreet3
                 ,foldToOtherRaisedStreet4
+                ,callToOtherRaisedStreet0
+                ,callToOtherRaisedStreet1
+                ,callToOtherRaisedStreet2
+                ,callToOtherRaisedStreet3
+                ,callToOtherRaisedStreet4
+                ,raiseToOtherRaisedStreet0
+                ,raiseToOtherRaisedStreet1
+                ,raiseToOtherRaisedStreet2
+                ,raiseToOtherRaisedStreet3
+                ,raiseToOtherRaisedStreet4
                 ,wonWhenSeenStreet1
                 ,wonWhenSeenStreet2
                 ,wonWhenSeenStreet3
@@ -6321,6 +9463,22 @@ class Sql:
                 ,foldToStreet3CBDone
                 ,foldToStreet4CBChance
                 ,foldToStreet4CBDone
+                ,callToStreet1CBChance
+                ,callToStreet1CBDone
+                ,callToStreet2CBChance
+                ,callToStreet2CBDone
+                ,callToStreet3CBChance
+                ,callToStreet3CBDone
+                ,callToStreet4CBChance
+                ,callToStreet4CBDone
+                ,raiseToStreet1CBChance
+                ,raiseToStreet1CBDone
+                ,raiseToStreet2CBChance
+                ,raiseToStreet2CBDone
+                ,raiseToStreet3CBChance
+                ,raiseToStreet3CBDone
+                ,raiseToStreet4CBChance
+                ,raiseToStreet4CBDone
                 ,common
                 ,committed
                 ,winnings
@@ -6344,16 +9502,20 @@ class Sql:
                 ,street4CheckCallRaiseChance
                 ,street4CheckCallDone
                 ,street4CheckRaiseDone
+                ,street1foldToCheckRaiseChance
+                ,street1foldToCheckRaiseDone
+                ,street2foldToCheckRaiseChance
+                ,street2foldToCheckRaiseDone
+                ,street3foldToCheckRaiseChance
+                ,street3foldToCheckRaiseDone
+                ,street4foldToCheckRaiseChance
+                ,street4foldToCheckRaiseDone
                 ,street0Calls
                 ,street1Calls
                 ,street2Calls
                 ,street3Calls
                 ,street4Calls
-                ,street0Bets
-                ,street1Bets
-                ,street2Bets
-                ,street3Bets
-                ,street4Bets
+                
                 ,street0Raises
                 ,street1Raises
                 ,street2Raises
@@ -6362,9 +9524,22 @@ class Sql:
                 ,street1Discards
                 ,street2Discards
                 ,street3Discards
+                
+                ,street0Callers
+                ,street1Callers
+                ,street2Callers
+                ,street3Callers
+                ,street4Callers
+                
+                ,street0Aggressors
+                ,street1Aggressors
+                ,street2Aggressors
+                ,street3Aggressors
+                ,street4Aggressors
                 )
                 SELECT <select>
                       ,count(1)
+                      
                       ,sum(street0VPIChance)
                       ,sum(street0VPI)
                       ,sum(street0AggrChance)
@@ -6387,6 +9562,66 @@ class Sql:
                       ,sum(street0_FoldTo4BDone)
                       ,sum(street0_SqueezeChance)
                       ,sum(street0_SqueezeDone)
+                      ,sum(street0_FoldToSqueezeChance)
+                      ,sum(street0_FoldToSqueezeDone)
+                      
+                      ,sum(street1_2BChance)
+                      ,sum(street1_2BDone)
+                      ,sum(street1_3BChance)
+                      ,sum(street1_3BDone)
+                      ,sum(street1_4BChance)
+                      ,sum(street1_4BDone)
+                      ,sum(street1_C4BChance)
+                      ,sum(street1_C4BDone)
+                      ,sum(street1_FoldTo2BChance)
+                      ,sum(street1_FoldTo2BDone)
+                      ,sum(street1_FoldTo3BChance)
+                      ,sum(street1_FoldTo3BDone)
+                      ,sum(street1_FoldTo4BChance)
+                      ,sum(street1_FoldTo4BDone)
+                      ,sum(street1_SqueezeChance)
+                      ,sum(street1_SqueezeDone)
+                      ,sum(street1_FoldToSqueezeChance)
+                      ,sum(street1_FoldToSqueezeDone)
+                      
+                      ,sum(street2_2BChance)
+                      ,sum(street2_2BDone)
+                      ,sum(street2_3BChance)
+                      ,sum(street2_3BDone)
+                      ,sum(street2_4BChance)
+                      ,sum(street2_4BDone)
+                      ,sum(street2_C4BChance)
+                      ,sum(street2_C4BDone)
+                      ,sum(street2_FoldTo2BChance)
+                      ,sum(street2_FoldTo2BDone)
+                      ,sum(street2_FoldTo3BChance)
+                      ,sum(street2_FoldTo3BDone)
+                      ,sum(street2_FoldTo4BChance)
+                      ,sum(street2_FoldTo4BDone)
+                      ,sum(street2_SqueezeChance)
+                      ,sum(street2_SqueezeDone)
+                      ,sum(street2_FoldToSqueezeChance)
+                      ,sum(street2_FoldToSqueezeDone)
+                      
+                      ,sum(street3_2BChance)
+                      ,sum(street3_2BDone)
+                      ,sum(street3_3BChance)
+                      ,sum(street3_3BDone)
+                      ,sum(street3_4BChance)
+                      ,sum(street3_4BDone)
+                      ,sum(street3_C4BChance)
+                      ,sum(street3_C4BDone)
+                      ,sum(street3_FoldTo2BChance)
+                      ,sum(street3_FoldTo2BDone)
+                      ,sum(street3_FoldTo3BChance)
+                      ,sum(street3_FoldTo3BDone)
+                      ,sum(street3_FoldTo4BChance)
+                      ,sum(street3_FoldTo4BDone)
+                      ,sum(street3_SqueezeChance)
+                      ,sum(street3_SqueezeDone)
+                      ,sum(street3_FoldToSqueezeChance)
+                      ,sum(street3_FoldToSqueezeDone)
+                      
                       ,sum(raiseToStealChance)
                       ,sum(raiseToStealDone)
                       ,sum(stealChance)
@@ -6411,6 +9646,16 @@ class Sql:
                       ,sum(foldToOtherRaisedStreet2)
                       ,sum(foldToOtherRaisedStreet3)
                       ,sum(foldToOtherRaisedStreet4)
+                      ,sum(callToOtherRaisedStreet0)
+                      ,sum(callToOtherRaisedStreet1)
+                      ,sum(callToOtherRaisedStreet2)
+                      ,sum(callToOtherRaisedStreet3)
+                      ,sum(callToOtherRaisedStreet4)
+                      ,sum(raiseToOtherRaisedStreet0)
+                      ,sum(raiseToOtherRaisedStreet1)
+                      ,sum(raiseToOtherRaisedStreet2)
+                      ,sum(raiseToOtherRaisedStreet3)
+                      ,sum(raiseToOtherRaisedStreet4)
                       ,sum(wonWhenSeenStreet1)
                       ,sum(wonWhenSeenStreet2)
                       ,sum(wonWhenSeenStreet3)
@@ -6438,6 +9683,22 @@ class Sql:
                       ,sum(foldToStreet3CBDone)
                       ,sum(foldToStreet4CBChance)
                       ,sum(foldToStreet4CBDone)
+                      ,sum(callToStreet1CBChance)
+                      ,sum(callToStreet1CBDone)
+                      ,sum(callToStreet2CBChance)
+                      ,sum(callToStreet2CBDone)
+                      ,sum(callToStreet3CBChance)
+                      ,sum(callToStreet3CBDone)
+                      ,sum(callToStreet4CBChance)
+                      ,sum(callToStreet4CBDone)
+                      ,sum(raiseToStreet1CBChance)
+                      ,sum(raiseToStreet1CBDone)
+                      ,sum(raiseToStreet2CBChance)
+                      ,sum(raiseToStreet2CBDone)
+                      ,sum(raiseToStreet3CBChance)
+                      ,sum(raiseToStreet3CBDone)
+                      ,sum(raiseToStreet4CBChance)
+                      ,sum(raiseToStreet4CBDone)
                       ,sum(common)
                       ,sum(committed)
                       ,sum(winnings)
@@ -6461,16 +9722,20 @@ class Sql:
                       ,sum(street4CheckCallRaiseChance)
                       ,sum(street4CheckCallDone)
                       ,sum(street4CheckRaiseDone)
-                      ,sum(street0Calls)
-                      ,sum(street1Calls)
-                      ,sum(street2Calls)
-                      ,sum(street3Calls)
-                      ,sum(street4Calls)
-                      ,sum(street0Bets)
-                      ,sum(street1Bets)
-                      ,sum(street2Bets)
-                      ,sum(street3Bets)
-                      ,sum(street4Bets)
+                      ,sum(street1foldToCheckRaiseChance)
+                      ,sum(street1foldToCheckRaiseDone)
+                      ,sum(street2foldToCheckRaiseChance)
+                      ,sum(street2foldToCheckRaiseDone)
+                      ,sum(street3foldToCheckRaiseChance)
+                      ,sum(street3foldToCheckRaiseDone)
+                      ,sum(street4foldToCheckRaiseChance)
+                      ,sum(street4foldToCheckRaiseDone)
+                      ,sum(hp.street0Calls)
+                      ,sum(hp.street1Calls)
+                      ,sum(hp.street2Calls)
+                      ,sum(hp.street3Calls)
+                      ,sum(hp.street4Calls)
+                      
                       ,sum(hp.street0Raises)
                       ,sum(hp.street1Raises)
                       ,sum(hp.street2Raises)
@@ -6479,6 +9744,18 @@ class Sql:
                       ,sum(street1Discards)
                       ,sum(street2Discards)
                       ,sum(street3Discards)
+                      
+                      ,sum(hp.street0Callers)
+                      ,sum(hp.street1Callers)
+                      ,sum(hp.street2Callers)
+                      ,sum(hp.street3Callers)
+                      ,sum(hp.street4Callers)
+                      
+                      ,sum(hp.street0Aggressors)
+                      ,sum(hp.street1Aggressors)
+                      ,sum(hp.street2Aggressors)
+                      ,sum(hp.street3Aggressors)
+                      ,sum(hp.street4Aggressors)
                 FROM Hands h
                 INNER JOIN HandsPlayers hp ON (h.id = hp.handId<hero_join>)
                 INNER JOIN Gametypes g ON (h.gametypeId = g.id)
@@ -6490,6 +9767,7 @@ class Sql:
         elif db_server == 'postgresql':
             self.query['rebuildCache'] = """insert into <insert>
                 ,n
+                
                 ,street0VPIChance
                 ,street0VPI
                 ,street0AggrChance
@@ -6512,6 +9790,66 @@ class Sql:
                 ,street0_FoldTo4BDone
                 ,street0_SqueezeChance
                 ,street0_SqueezeDone
+                ,street0_FoldToSqueezeChance
+                ,street0_FoldToSqueezeDone
+                
+                ,street1_2BChance
+                ,street1_2BDone
+                ,street1_3BChance
+                ,street1_3BDone
+                ,street1_4BChance
+                ,street1_4BDone
+                ,street1_C4BChance
+                ,street1_C4BDone
+                ,street1_FoldTo2BChance
+                ,street1_FoldTo2BDone
+                ,street1_FoldTo3BChance
+                ,street1_FoldTo3BDone
+                ,street1_FoldTo4BChance
+                ,street1_FoldTo4BDone
+                ,street1_SqueezeChance
+                ,street1_SqueezeDone
+                ,street1_FoldToSqueezeChance
+                ,street1_FoldToSqueezeDone
+                
+                ,street2_2BChance
+                ,street2_2BDone
+                ,street2_3BChance
+                ,street2_3BDone
+                ,street2_4BChance
+                ,street2_4BDone
+                ,street2_C4BChance
+                ,street2_C4BDone
+                ,street2_FoldTo2BChance
+                ,street2_FoldTo2BDone
+                ,street2_FoldTo3BChance
+                ,street2_FoldTo3BDone
+                ,street2_FoldTo4BChance
+                ,street2_FoldTo4BDone
+                ,street2_SqueezeChance
+                ,street2_SqueezeDone
+                ,street2_FoldToSqueezeChance
+                ,street2_FoldToSqueezeDone
+                
+                ,street3_2BChance
+                ,street3_2BDone
+                ,street3_3BChance
+                ,street3_3BDone
+                ,street3_4BChance
+                ,street3_4BDone
+                ,street3_C4BChance
+                ,street3_C4BDone
+                ,street3_FoldTo2BChance
+                ,street3_FoldTo2BDone
+                ,street3_FoldTo3BChance
+                ,street3_FoldTo3BDone
+                ,street3_FoldTo4BChance
+                ,street3_FoldTo4BDone
+                ,street3_SqueezeChance
+                ,street3_SqueezeDone
+                ,street3_FoldToSqueezeChance
+                ,street3_FoldToSqueezeDone
+                
                 ,raiseToStealChance
                 ,raiseToStealDone
                 ,stealChance
@@ -6535,7 +9873,17 @@ class Sql:
                 ,foldToOtherRaisedStreet1
                 ,foldToOtherRaisedStreet2
                 ,foldToOtherRaisedStreet3
-                ,foldToOtherRaisedStreet4                
+                ,foldToOtherRaisedStreet4    
+                ,callToOtherRaisedStreet0
+                ,callToOtherRaisedStreet1
+                ,callToOtherRaisedStreet2
+                ,callToOtherRaisedStreet3
+                ,callToOtherRaisedStreet4
+                ,raiseToOtherRaisedStreet0
+                ,raiseToOtherRaisedStreet1
+                ,raiseToOtherRaisedStreet2
+                ,raiseToOtherRaisedStreet3
+                ,raiseToOtherRaisedStreet4            
                 ,wonWhenSeenStreet1
                 ,wonWhenSeenStreet2
                 ,wonWhenSeenStreet3
@@ -6563,6 +9911,22 @@ class Sql:
                 ,foldToStreet3CBDone
                 ,foldToStreet4CBChance
                 ,foldToStreet4CBDone
+                ,callToStreet1CBChance
+                ,callToStreet1CBDone
+                ,callToStreet2CBChance
+                ,callToStreet2CBDone
+                ,callToStreet3CBChance
+                ,callToStreet3CBDone
+                ,callToStreet4CBChance
+                ,callToStreet4CBDone
+                ,raiseToStreet1CBChance
+                ,raiseToStreet1CBDone
+                ,raiseToStreet2CBChance
+                ,raiseToStreet2CBDone
+                ,raiseToStreet3CBChance
+                ,raiseToStreet3CBDone
+                ,raiseToStreet4CBChance
+                ,raiseToStreet4CBDone
                 ,common
                 ,committed
                 ,winnings
@@ -6586,16 +9950,20 @@ class Sql:
                 ,street4CheckCallRaiseChance
                 ,street4CheckCallDone
                 ,street4CheckRaiseDone
+                ,street1foldToCheckRaiseChance
+                ,street1foldToCheckRaiseDone
+                ,street2foldToCheckRaiseChance
+                ,street2foldToCheckRaiseDone
+                ,street3foldToCheckRaiseChance
+                ,street3foldToCheckRaiseDone
+                ,street4foldToCheckRaiseChance
+                ,street4foldToCheckRaiseDone
                 ,street0Calls
                 ,street1Calls
                 ,street2Calls
                 ,street3Calls
                 ,street4Calls
-                ,street0Bets
-                ,street1Bets
-                ,street2Bets
-                ,street3Bets
-                ,street4Bets
+                
                 ,street0Raises
                 ,street1Raises
                 ,street2Raises
@@ -6604,9 +9972,22 @@ class Sql:
                 ,street1Discards
                 ,street2Discards
                 ,street3Discards
+                
+                ,street0Callers
+                ,street1Callers
+                ,street2Callers
+                ,street3Callers
+                ,street4Callers
+                
+                ,street0Aggressors
+                ,street1Aggressors
+                ,street2Aggressors
+                ,street3Aggressors
+                ,street4Aggressors
                 )
                 SELECT <select>
                       ,count(1)
+                      
                       ,sum(CAST(street0VPIChance as integer))
                       ,sum(CAST(street0VPI as integer))
                       ,sum(CAST(street0AggrChance as integer))
@@ -6629,248 +10010,66 @@ class Sql:
                       ,sum(CAST(street0_FoldTo4BDone as integer))
                       ,sum(CAST(street0_SqueezeChance as integer))
                       ,sum(CAST(street0_SqueezeDone as integer))
-                      ,sum(CAST(raiseToStealChance as integer))
-                      ,sum(CAST(raiseToStealDone as integer))
-                      ,sum(CAST(stealChance as integer))
-                      ,sum(CAST(stealDone as integer))
-                      ,sum(CAST(success_Steal as integer))
-                      ,sum(CAST(street1Seen as integer))
-                      ,sum(CAST(street2Seen as integer))
-                      ,sum(CAST(street3Seen as integer))
-                      ,sum(CAST(street4Seen as integer))
-                      ,sum(CAST(sawShowdown as integer))
-                      ,sum(CAST(street1Aggr as integer))
-                      ,sum(CAST(street2Aggr as integer))
-                      ,sum(CAST(street3Aggr as integer))
-                      ,sum(CAST(street4Aggr as integer))
-                      ,sum(CAST(otherRaisedStreet0 as integer))
-                      ,sum(CAST(otherRaisedStreet1 as integer))
-                      ,sum(CAST(otherRaisedStreet2 as integer))
-                      ,sum(CAST(otherRaisedStreet3 as integer))
-                      ,sum(CAST(otherRaisedStreet4 as integer))
-                      ,sum(CAST(foldToOtherRaisedStreet0 as integer))
-                      ,sum(CAST(foldToOtherRaisedStreet1 as integer))
-                      ,sum(CAST(foldToOtherRaisedStreet2 as integer))
-                      ,sum(CAST(foldToOtherRaisedStreet3 as integer))
-                      ,sum(CAST(foldToOtherRaisedStreet4 as integer))                      
-                      ,sum(CAST(wonWhenSeenStreet1 as integer))
-                      ,sum(CAST(wonWhenSeenStreet2 as integer))
-                      ,sum(CAST(wonWhenSeenStreet3 as integer))
-                      ,sum(CAST(wonWhenSeenStreet4 as integer))
-                      ,sum(CAST(wonAtSD as integer))
-                      ,sum(CAST(raiseFirstInChance as integer))
-                      ,sum(CAST(raisedFirstIn as integer))
-                      ,sum(CAST(foldBbToStealChance as integer))
-                      ,sum(CAST(foldedBbToSteal as integer))
-                      ,sum(CAST(foldSbToStealChance as integer))
-                      ,sum(CAST(foldedSbToSteal as integer))
-                      ,sum(CAST(street1CBChance as integer))
-                      ,sum(CAST(street1CBDone as integer))
-                      ,sum(CAST(street2CBChance as integer))
-                      ,sum(CAST(street2CBDone as integer))
-                      ,sum(CAST(street3CBChance as integer))
-                      ,sum(CAST(street3CBDone as integer))
-                      ,sum(CAST(street4CBChance as integer))
-                      ,sum(CAST(street4CBDone as integer))
-                      ,sum(CAST(foldToStreet1CBChance as integer))
-                      ,sum(CAST(foldToStreet1CBDone as integer))
-                      ,sum(CAST(foldToStreet2CBChance as integer))
-                      ,sum(CAST(foldToStreet2CBDone as integer))
-                      ,sum(CAST(foldToStreet3CBChance as integer))
-                      ,sum(CAST(foldToStreet3CBDone as integer))
-                      ,sum(CAST(foldToStreet4CBChance as integer))
-                      ,sum(CAST(foldToStreet4CBDone as integer))
-                      ,sum(common)
-                      ,sum(committed)
-                      ,sum(winnings)
-                      ,sum(rake)
-                      ,sum(rakeDealt)
-                      ,sum(rakeContributed)
-                      ,sum(rakeWeighted)
-                      ,sum(totalProfit)
-                      ,sum(allInEV)
-                      ,sum(case when sawShowdown then totalProfit else 0 end)
-                      ,sum(case when sawShowdown then 0 else totalProfit end)
-                      ,sum(CAST(street1CheckCallRaiseChance as integer))
-                      ,sum(CAST(street1CheckCallDone as integer))
-                      ,sum(CAST(street1CheckRaiseDone as integer))
-                      ,sum(CAST(street2CheckCallRaiseChance as integer))
-                      ,sum(CAST(street2CheckCallDone as integer))
-                      ,sum(CAST(street2CheckRaiseDone as integer))
-                      ,sum(CAST(street3CheckCallRaiseChance as integer))
-                      ,sum(CAST(street3CheckCallDone as integer))
-                      ,sum(CAST(street3CheckRaiseDone as integer))
-                      ,sum(CAST(street4CheckCallRaiseChance as integer))
-                      ,sum(CAST(street4CheckCallDone as integer))
-                      ,sum(CAST(street4CheckRaiseDone as integer))
-                      ,sum(CAST(street0Calls as integer))
-                      ,sum(CAST(street1Calls as integer))
-                      ,sum(CAST(street2Calls as integer))
-                      ,sum(CAST(street3Calls as integer))
-                      ,sum(CAST(street4Calls as integer))
-                      ,sum(CAST(street0Bets as integer))
-                      ,sum(CAST(street1Bets as integer))
-                      ,sum(CAST(street2Bets as integer))
-                      ,sum(CAST(street3Bets as integer))
-                      ,sum(CAST(street4Bets as integer))
-                      ,sum(CAST(hp.street0Raises as integer))
-                      ,sum(CAST(hp.street1Raises as integer))
-                      ,sum(CAST(hp.street2Raises as integer))
-                      ,sum(CAST(hp.street3Raises as integer))
-                      ,sum(CAST(hp.street4Raises as integer))
-                      ,sum(CAST(street1Discards as integer))
-                      ,sum(CAST(street2Discards as integer))
-                      ,sum(CAST(street3Discards as integer))
-                FROM Hands h
-                INNER JOIN HandsPlayers hp ON (h.id = hp.handId<hero_join>)
-                INNER JOIN Gametypes g ON (h.gametypeId = g.id)
-                <sessions_join_clause>
-                <tourney_join_clause>
-                <where_clause>
-                GROUP BY <group>
-"""
-        elif db_server == 'sqlite':
-            self.query['rebuildCache'] = """insert into <insert>
-                ,n
-                ,street0VPIChance
-                ,street0VPI
-                ,street0AggrChance
-                ,street0Aggr
-                ,street0CalledRaiseChance
-                ,street0CalledRaiseDone
-                ,street0_2BChance
-                ,street0_2BDone
-                ,street0_3BChance
-                ,street0_3BDone
-                ,street0_4BChance
-                ,street0_4BDone
-                ,street0_C4BChance
-                ,street0_C4BDone
-                ,street0_FoldTo2BChance
-                ,street0_FoldTo2BDone
-                ,street0_FoldTo3BChance
-                ,street0_FoldTo3BDone
-                ,street0_FoldTo4BChance
-                ,street0_FoldTo4BDone
-                ,street0_SqueezeChance
-                ,street0_SqueezeDone
-                ,raiseToStealChance
-                ,raiseToStealDone
-                ,stealChance
-                ,stealDone
-                ,success_Steal
-                ,street1Seen
-                ,street2Seen
-                ,street3Seen
-                ,street4Seen
-                ,sawShowdown
-                ,street1Aggr
-                ,street2Aggr
-                ,street3Aggr
-                ,street4Aggr
-                ,otherRaisedStreet0
-                ,otherRaisedStreet1
-                ,otherRaisedStreet2
-                ,otherRaisedStreet3
-                ,otherRaisedStreet4
-                ,foldToOtherRaisedStreet0
-                ,foldToOtherRaisedStreet1
-                ,foldToOtherRaisedStreet2
-                ,foldToOtherRaisedStreet3
-                ,foldToOtherRaisedStreet4
-                ,wonWhenSeenStreet1
-                ,wonWhenSeenStreet2
-                ,wonWhenSeenStreet3
-                ,wonWhenSeenStreet4
-                ,wonAtSD
-                ,raiseFirstInChance
-                ,raisedFirstIn
-                ,foldBbToStealChance
-                ,foldedBbToSteal
-                ,foldSbToStealChance
-                ,foldedSbToSteal
-                ,street1CBChance
-                ,street1CBDone
-                ,street2CBChance
-                ,street2CBDone
-                ,street3CBChance
-                ,street3CBDone
-                ,street4CBChance
-                ,street4CBDone
-                ,foldToStreet1CBChance
-                ,foldToStreet1CBDone
-                ,foldToStreet2CBChance
-                ,foldToStreet2CBDone
-                ,foldToStreet3CBChance
-                ,foldToStreet3CBDone
-                ,foldToStreet4CBChance
-                ,foldToStreet4CBDone
-                ,common
-                ,committed
-                ,winnings
-                ,rake
-                ,rakeDealt
-                ,rakeContributed
-                ,rakeWeighted
-                ,totalProfit
-                ,allInEV
-                ,showdownWinnings
-                ,nonShowdownWinnings
-                ,street1CheckCallRaiseChance
-                ,street1CheckCallDone
-                ,street1CheckRaiseDone
-                ,street2CheckCallRaiseChance
-                ,street2CheckCallDone
-                ,street2CheckRaiseDone
-                ,street3CheckCallRaiseChance
-                ,street3CheckCallDone
-                ,street3CheckRaiseDone
-                ,street4CheckCallRaiseChance
-                ,street4CheckCallDone
-                ,street4CheckRaiseDone
-                ,street0Calls
-                ,street1Calls
-                ,street2Calls
-                ,street3Calls
-                ,street4Calls
-                ,street0Bets
-                ,street1Bets
-                ,street2Bets
-                ,street3Bets
-                ,street4Bets
-                ,street0Raises
-                ,street1Raises
-                ,street2Raises
-                ,street3Raises
-                ,street4Raises
-                ,street1Discards
-                ,street2Discards
-                ,street3Discards
-                )
-                SELECT <select>
-                      ,count(1)
-                      ,sum(CAST(street0VPIChance as integer))
-                      ,sum(CAST(street0VPI as integer))
-                      ,sum(CAST(street0AggrChance as integer))
-                      ,sum(CAST(street0Aggr as integer))
-                      ,sum(CAST(street0CalledRaiseChance as integer))
-                      ,sum(CAST(street0CalledRaiseDone as integer))
-                      ,sum(CAST(street0_2BChance as integer))
-                      ,sum(CAST(street0_2BDone as integer))
-                      ,sum(CAST(street0_3BChance as integer))
-                      ,sum(CAST(street0_3BDone as integer))
-                      ,sum(CAST(street0_4BChance as integer))
-                      ,sum(CAST(street0_4BDone as integer))
-                      ,sum(CAST(street0_C4BChance as integer))
-                      ,sum(CAST(street0_C4BDone as integer))
-                      ,sum(CAST(street0_FoldTo2BChance as integer))
-                      ,sum(CAST(street0_FoldTo2BDone as integer))
-                      ,sum(CAST(street0_FoldTo3BChance as integer))
-                      ,sum(CAST(street0_FoldTo3BDone as integer))
-                      ,sum(CAST(street0_FoldTo4BChance as integer))
-                      ,sum(CAST(street0_FoldTo4BDone as integer))
-                      ,sum(CAST(street0_SqueezeChance as integer))
-                      ,sum(CAST(street0_SqueezeDone as integer))
+                      ,sum(CAST(street0_FoldToSqueezeChance as integer))
+                      ,sum(CAST(street0_FoldToSqueezeDone as integer))
+                      
+                      ,sum(CAST(street1_2BChance as integer))
+                      ,sum(CAST(street1_2BDone as integer))
+                      ,sum(CAST(street1_3BChance as integer))
+                      ,sum(CAST(street1_3BDone as integer))
+                      ,sum(CAST(street1_4BChance as integer))
+                      ,sum(CAST(street1_4BDone as integer))
+                      ,sum(CAST(street1_C4BChance as integer))
+                      ,sum(CAST(street1_C4BDone as integer))
+                      ,sum(CAST(street1_FoldTo2BChance as integer))
+                      ,sum(CAST(street1_FoldTo2BDone as integer))
+                      ,sum(CAST(street1_FoldTo3BChance as integer))
+                      ,sum(CAST(street1_FoldTo3BDone as integer))
+                      ,sum(CAST(street1_FoldTo4BChance as integer))
+                      ,sum(CAST(street1_FoldTo4BDone as integer))
+                      ,sum(CAST(street1_SqueezeChance as integer))
+                      ,sum(CAST(street1_SqueezeDone as integer))
+                      ,sum(CAST(street1_FoldToSqueezeChance as integer))
+                      ,sum(CAST(street1_FoldToSqueezeDone as integer))
+                      
+                      ,sum(CAST(street2_2BChance as integer))
+                      ,sum(CAST(street2_2BDone as integer))
+                      ,sum(CAST(street2_3BChance as integer))
+                      ,sum(CAST(street2_3BDone as integer))
+                      ,sum(CAST(street2_4BChance as integer))
+                      ,sum(CAST(street2_4BDone as integer))
+                      ,sum(CAST(street2_C4BChance as integer))
+                      ,sum(CAST(street2_C4BDone as integer))
+                      ,sum(CAST(street2_FoldTo2BChance as integer))
+                      ,sum(CAST(street2_FoldTo2BDone as integer))
+                      ,sum(CAST(street2_FoldTo3BChance as integer))
+                      ,sum(CAST(street2_FoldTo3BDone as integer))
+                      ,sum(CAST(street2_FoldTo4BChance as integer))
+                      ,sum(CAST(street2_FoldTo4BDone as integer))
+                      ,sum(CAST(street2_SqueezeChance as integer))
+                      ,sum(CAST(street2_SqueezeDone as integer))
+                      ,sum(CAST(street2_FoldToSqueezeChance as integer))
+                      ,sum(CAST(street2_FoldToSqueezeDone as integer))
+                      
+                      ,sum(CAST(street3_2BChance as integer))
+                      ,sum(CAST(street3_2BDone as integer))
+                      ,sum(CAST(street3_3BChance as integer))
+                      ,sum(CAST(street3_3BDone as integer))
+                      ,sum(CAST(street3_4BChance as integer))
+                      ,sum(CAST(street3_4BDone as integer))
+                      ,sum(CAST(street3_C4BChance as integer))
+                      ,sum(CAST(street3_C4BDone as integer))
+                      ,sum(CAST(street3_FoldTo2BChance as integer))
+                      ,sum(CAST(street3_FoldTo2BDone as integer))
+                      ,sum(CAST(street3_FoldTo3BChance as integer))
+                      ,sum(CAST(street3_FoldTo3BDone as integer))
+                      ,sum(CAST(street3_FoldTo4BChance as integer))
+                      ,sum(CAST(street3_FoldTo4BDone as integer))
+                      ,sum(CAST(street3_SqueezeChance as integer))
+                      ,sum(CAST(street3_SqueezeDone as integer))
+                      ,sum(CAST(street3_FoldToSqueezeChance as integer))
+                      ,sum(CAST(street3_FoldToSqueezeDone as integer))
+                      
                       ,sum(CAST(raiseToStealChance as integer))
                       ,sum(CAST(raiseToStealDone as integer))
                       ,sum(CAST(stealChance as integer))
@@ -6895,6 +10094,16 @@ class Sql:
                       ,sum(CAST(foldToOtherRaisedStreet2 as integer))
                       ,sum(CAST(foldToOtherRaisedStreet3 as integer))
                       ,sum(CAST(foldToOtherRaisedStreet4 as integer))
+                      ,sum(CAST(callToOtherRaisedStreet0 as integer))
+                      ,sum(CAST(callToOtherRaisedStreet1 as integer))
+                      ,sum(CAST(callToOtherRaisedStreet2 as integer))
+                      ,sum(CAST(callToOtherRaisedStreet3 as integer))
+                      ,sum(CAST(callToOtherRaisedStreet4 as integer))
+                      ,sum(CAST(raiseToOtherRaisedStreet0 as integer))
+                      ,sum(CAST(raiseToOtherRaisedStreet1 as integer))
+                      ,sum(CAST(raiseToOtherRaisedStreet2 as integer))
+                      ,sum(CAST(raiseToOtherRaisedStreet3 as integer))
+                      ,sum(CAST(raiseToOtherRaisedStreet4 as integer))                      
                       ,sum(CAST(wonWhenSeenStreet1 as integer))
                       ,sum(CAST(wonWhenSeenStreet2 as integer))
                       ,sum(CAST(wonWhenSeenStreet3 as integer))
@@ -6922,6 +10131,470 @@ class Sql:
                       ,sum(CAST(foldToStreet3CBDone as integer))
                       ,sum(CAST(foldToStreet4CBChance as integer))
                       ,sum(CAST(foldToStreet4CBDone as integer))
+                      ,sum(CAST(callToStreet1CBChance as integer))
+                      ,sum(CAST(callToStreet1CBDone as integer))
+                      ,sum(CAST(callToStreet2CBChance as integer))
+                      ,sum(CAST(callToStreet2CBDone as integer))
+                      ,sum(CAST(callToStreet3CBChance as integer))
+                      ,sum(CAST(callToStreet3CBDone as integer))
+                      ,sum(CAST(callToStreet4CBChance as integer))
+                      ,sum(CAST(callToStreet4CBDone as integer))
+                      ,sum(CAST(raiseToStreet1CBChance as integer))
+                      ,sum(CAST(raiseToStreet1CBDone as integer))
+                      ,sum(CAST(raiseToStreet2CBChance as integer))
+                      ,sum(CAST(raiseToStreet2CBDone as integer))
+                      ,sum(CAST(raiseToStreet3CBChance as integer))
+                      ,sum(CAST(raiseToStreet3CBDone as integer))
+                      ,sum(CAST(raiseToStreet4CBChance as integer))
+                      ,sum(CAST(raiseToStreet4CBDone as integer))
+                      ,sum(common)
+                      ,sum(committed)
+                      ,sum(winnings)
+                      ,sum(rake)
+                      ,sum(rakeDealt)
+                      ,sum(rakeContributed)
+                      ,sum(rakeWeighted)
+                      ,sum(totalProfit)
+                      ,sum(allInEV)
+                      ,sum(case when sawShowdown then totalProfit else 0 end)
+                      ,sum(case when sawShowdown then 0 else totalProfit end)
+                      ,sum(CAST(street1CheckCallRaiseChance as integer))
+                      ,sum(CAST(street1CheckCallDone as integer))
+                      ,sum(CAST(street1CheckRaiseDone as integer))
+                      ,sum(CAST(street2CheckCallRaiseChance as integer))
+                      ,sum(CAST(street2CheckCallDone as integer))
+                      ,sum(CAST(street2CheckRaiseDone as integer))
+                      ,sum(CAST(street3CheckCallRaiseChance as integer))
+                      ,sum(CAST(street3CheckCallDone as integer))
+                      ,sum(CAST(street3CheckRaiseDone as integer))
+                      ,sum(CAST(street4CheckCallRaiseChance as integer))
+                      ,sum(CAST(street4CheckCallDone as integer))
+                      ,sum(CAST(street4CheckRaiseDone as integer))
+                      ,sum(CAST(street1foldToCheckRaiseChance as integer))
+                      ,sum(CAST(street1foldToCheckRaiseDone as integer))
+                      ,sum(CAST(street2foldToCheckRaiseChance as integer))
+                      ,sum(CAST(street2foldToCheckRaiseDone as integer))
+                      ,sum(CAST(street3foldToCheckRaiseChance as integer))
+                      ,sum(CAST(street3foldToCheckRaiseDone as integer))
+                      ,sum(CAST(street4foldToCheckRaiseChance as integer))
+                      ,sum(CAST(street4foldToCheckRaiseDone as integer))
+                      ,sum(CAST(hp.street0Calls as integer))
+                      ,sum(CAST(hp.street1Calls as integer))
+                      ,sum(CAST(hp.street2Calls as integer))
+                      ,sum(CAST(hp.street3Calls as integer))
+                      ,sum(CAST(hp.street4Calls as integer))
+                      
+                      ,sum(CAST(hp.street0Raises as integer))
+                      ,sum(CAST(hp.street1Raises as integer))
+                      ,sum(CAST(hp.street2Raises as integer))
+                      ,sum(CAST(hp.street3Raises as integer))
+                      ,sum(CAST(hp.street4Raises as integer))
+                      ,sum(CAST(street1Discards as integer))
+                      ,sum(CAST(street2Discards as integer))
+                      ,sum(CAST(street3Discards as integer))
+                      
+                      ,sum(CAST(hp.street0Callers as integer))
+                      ,sum(CAST(hp.street1Callers as integer))
+                      ,sum(CAST(hp.street2Callers as integer))
+                      ,sum(CAST(hp.street3Callers as integer))
+                      ,sum(CAST(hp.street4Callers as integer))
+                      
+                      ,sum(CAST(hp.street0Aggressors as integer))
+                      ,sum(CAST(hp.street1Aggressors as integer))
+                      ,sum(CAST(hp.street2Aggressors as integer))
+                      ,sum(CAST(hp.street3Aggressors as integer))
+                      ,sum(CAST(hp.street4Aggressors as integer))
+                FROM Hands h
+                INNER JOIN HandsPlayers hp ON (h.id = hp.handId<hero_join>)
+                INNER JOIN Gametypes g ON (h.gametypeId = g.id)
+                <sessions_join_clause>
+                <tourney_join_clause>
+                <where_clause>
+                GROUP BY <group>
+"""
+        elif db_server == 'sqlite':
+            self.query['rebuildCache'] = """insert into <insert>
+                ,n
+                
+                ,street0VPIChance
+                ,street0VPI
+                ,street0AggrChance
+                ,street0Aggr
+                ,street0CalledRaiseChance
+                ,street0CalledRaiseDone
+                ,street0_2BChance
+                ,street0_2BDone
+                ,street0_3BChance
+                ,street0_3BDone
+                ,street0_4BChance
+                ,street0_4BDone
+                ,street0_C4BChance
+                ,street0_C4BDone
+                ,street0_FoldTo2BChance
+                ,street0_FoldTo2BDone
+                ,street0_FoldTo3BChance
+                ,street0_FoldTo3BDone
+                ,street0_FoldTo4BChance
+                ,street0_FoldTo4BDone
+                ,street0_SqueezeChance
+                ,street0_SqueezeDone
+                ,street0_FoldToSqueezeChance
+                ,street0_FoldToSqueezeDone
+                
+                ,street1_2BChance
+                ,street1_2BDone
+                ,street1_3BChance
+                ,street1_3BDone
+                ,street1_4BChance
+                ,street1_4BDone
+                ,street1_C4BChance
+                ,street1_C4BDone
+                ,street1_FoldTo2BChance
+                ,street1_FoldTo2BDone
+                ,street1_FoldTo3BChance
+                ,street1_FoldTo3BDone
+                ,street1_FoldTo4BChance
+                ,street1_FoldTo4BDone
+                ,street1_SqueezeChance
+                ,street1_SqueezeDone
+                ,street1_FoldToSqueezeChance
+                ,street1_FoldToSqueezeDone
+                
+                ,street2_2BChance
+                ,street2_2BDone
+                ,street2_3BChance
+                ,street2_3BDone
+                ,street2_4BChance
+                ,street2_4BDone
+                ,street2_C4BChance
+                ,street2_C4BDone
+                ,street2_FoldTo2BChance
+                ,street2_FoldTo2BDone
+                ,street2_FoldTo3BChance
+                ,street2_FoldTo3BDone
+                ,street2_FoldTo4BChance
+                ,street2_FoldTo4BDone
+                ,street2_SqueezeChance
+                ,street2_SqueezeDone
+                ,street2_FoldToSqueezeChance
+                ,street2_FoldToSqueezeDone
+                
+                ,street3_2BChance
+                ,street3_2BDone
+                ,street3_3BChance
+                ,street3_3BDone
+                ,street3_4BChance
+                ,street3_4BDone
+                ,street3_C4BChance
+                ,street3_C4BDone
+                ,street3_FoldTo2BChance
+                ,street3_FoldTo2BDone
+                ,street3_FoldTo3BChance
+                ,street3_FoldTo3BDone
+                ,street3_FoldTo4BChance
+                ,street3_FoldTo4BDone
+                ,street3_SqueezeChance
+                ,street3_SqueezeDone
+                ,street3_FoldToSqueezeChance
+                ,street3_FoldToSqueezeDone
+                
+                ,raiseToStealChance
+                ,raiseToStealDone
+                ,stealChance
+                ,stealDone
+                ,success_Steal
+                ,street1Seen
+                ,street2Seen
+                ,street3Seen
+                ,street4Seen
+                ,sawShowdown
+                ,street1Aggr
+                ,street2Aggr
+                ,street3Aggr
+                ,street4Aggr
+                ,otherRaisedStreet0
+                ,otherRaisedStreet1
+                ,otherRaisedStreet2
+                ,otherRaisedStreet3
+                ,otherRaisedStreet4
+                ,foldToOtherRaisedStreet0
+                ,foldToOtherRaisedStreet1
+                ,foldToOtherRaisedStreet2
+                ,foldToOtherRaisedStreet3
+                ,foldToOtherRaisedStreet4
+                ,callToOtherRaisedStreet0
+                ,callToOtherRaisedStreet1
+                ,callToOtherRaisedStreet2
+                ,callToOtherRaisedStreet3
+                ,callToOtherRaisedStreet4
+                ,raiseToOtherRaisedStreet0
+                ,raiseToOtherRaisedStreet1
+                ,raiseToOtherRaisedStreet2
+                ,raiseToOtherRaisedStreet3
+                ,raiseToOtherRaisedStreet4
+                ,wonWhenSeenStreet1
+                ,wonWhenSeenStreet2
+                ,wonWhenSeenStreet3
+                ,wonWhenSeenStreet4
+                ,wonAtSD
+                ,raiseFirstInChance
+                ,raisedFirstIn
+                ,foldBbToStealChance
+                ,foldedBbToSteal
+                ,foldSbToStealChance
+                ,foldedSbToSteal
+                ,street1CBChance
+                ,street1CBDone
+                ,street2CBChance
+                ,street2CBDone
+                ,street3CBChance
+                ,street3CBDone
+                ,street4CBChance
+                ,street4CBDone
+                ,foldToStreet1CBChance
+                ,foldToStreet1CBDone
+                ,foldToStreet2CBChance
+                ,foldToStreet2CBDone
+                ,foldToStreet3CBChance
+                ,foldToStreet3CBDone
+                ,foldToStreet4CBChance
+                ,foldToStreet4CBDone
+                ,callToStreet1CBChance
+                ,callToStreet1CBDone
+                ,callToStreet2CBChance
+                ,callToStreet2CBDone
+                ,callToStreet3CBChance
+                ,callToStreet3CBDone
+                ,callToStreet4CBChance
+                ,callToStreet4CBDone
+                ,raiseToStreet1CBChance
+                ,raiseToStreet1CBDone
+                ,raiseToStreet2CBChance
+                ,raiseToStreet2CBDone
+                ,raiseToStreet3CBChance
+                ,raiseToStreet3CBDone
+                ,raiseToStreet4CBChance
+                ,raiseToStreet4CBDone
+                ,common
+                ,committed
+                ,winnings
+                ,rake
+                ,rakeDealt
+                ,rakeContributed
+                ,rakeWeighted
+                ,totalProfit
+                ,allInEV
+                ,showdownWinnings
+                ,nonShowdownWinnings
+                ,street1CheckCallRaiseChance
+                ,street1CheckCallDone
+                ,street1CheckRaiseDone
+                ,street2CheckCallRaiseChance
+                ,street2CheckCallDone
+                ,street2CheckRaiseDone
+                ,street3CheckCallRaiseChance
+                ,street3CheckCallDone
+                ,street3CheckRaiseDone
+                ,street4CheckCallRaiseChance
+                ,street4CheckCallDone
+                ,street4CheckRaiseDone
+                ,street1foldToCheckRaiseChance
+                ,street1foldToCheckRaiseDone
+                ,street2foldToCheckRaiseChance
+                ,street2foldToCheckRaiseDone
+                ,street3foldToCheckRaiseChance
+                ,street3foldToCheckRaiseDone
+                ,street4foldToCheckRaiseChance
+                ,street4foldToCheckRaiseDone
+                ,street0Calls
+                ,street1Calls
+                ,street2Calls
+                ,street3Calls
+                ,street4Calls
+                
+                ,street0Raises
+                ,street1Raises
+                ,street2Raises
+                ,street3Raises
+                ,street4Raises
+                ,street1Discards
+                ,street2Discards
+                ,street3Discards
+                
+                ,street0Callers
+                ,street1Callers
+                ,street2Callers
+                ,street3Callers
+                ,street4Callers
+                
+                ,street0Aggressors
+                ,street1Aggressors
+                ,street2Aggressors
+                ,street3Aggressors
+                ,street4Aggressors
+                )
+                SELECT <select>
+                      ,count(1)
+                      
+                      ,sum(CAST(street0VPIChance as integer))
+                      ,sum(CAST(street0VPI as integer))
+                      ,sum(CAST(street0AggrChance as integer))
+                      ,sum(CAST(street0Aggr as integer))
+                      ,sum(CAST(street0CalledRaiseChance as integer))
+                      ,sum(CAST(street0CalledRaiseDone as integer))
+                      ,sum(CAST(street0_2BChance as integer))
+                      ,sum(CAST(street0_2BDone as integer))
+                      ,sum(CAST(street0_3BChance as integer))
+                      ,sum(CAST(street0_3BDone as integer))
+                      ,sum(CAST(street0_4BChance as integer))
+                      ,sum(CAST(street0_4BDone as integer))
+                      ,sum(CAST(street0_C4BChance as integer))
+                      ,sum(CAST(street0_C4BDone as integer))
+                      ,sum(CAST(street0_FoldTo2BChance as integer))
+                      ,sum(CAST(street0_FoldTo2BDone as integer))
+                      ,sum(CAST(street0_FoldTo3BChance as integer))
+                      ,sum(CAST(street0_FoldTo3BDone as integer))
+                      ,sum(CAST(street0_FoldTo4BChance as integer))
+                      ,sum(CAST(street0_FoldTo4BDone as integer))
+                      ,sum(CAST(street0_SqueezeChance as integer))
+                      ,sum(CAST(street0_SqueezeDone as integer))
+                      ,sum(CAST(street0_FoldToSqueezeChance as integer))
+                      ,sum(CAST(street0_FoldToSqueezeDone as integer))
+                      
+                      ,sum(CAST(street1_2BChance as integer))
+                      ,sum(CAST(street1_2BDone as integer))
+                      ,sum(CAST(street1_3BChance as integer))
+                      ,sum(CAST(street1_3BDone as integer))
+                      ,sum(CAST(street1_4BChance as integer))
+                      ,sum(CAST(street1_4BDone as integer))
+                      ,sum(CAST(street1_C4BChance as integer))
+                      ,sum(CAST(street1_C4BDone as integer))
+                      ,sum(CAST(street1_FoldTo2BChance as integer))
+                      ,sum(CAST(street1_FoldTo2BDone as integer))
+                      ,sum(CAST(street1_FoldTo3BChance as integer))
+                      ,sum(CAST(street1_FoldTo3BDone as integer))
+                      ,sum(CAST(street1_FoldTo4BChance as integer))
+                      ,sum(CAST(street1_FoldTo4BDone as integer))
+                      ,sum(CAST(street1_SqueezeChance as integer))
+                      ,sum(CAST(street1_SqueezeDone as integer))
+                      ,sum(CAST(street1_FoldToSqueezeChance as integer))
+                      ,sum(CAST(street1_FoldToSqueezeDone as integer))
+                      
+                      ,sum(CAST(street2_2BChance as integer))
+                      ,sum(CAST(street2_2BDone as integer))
+                      ,sum(CAST(street2_3BChance as integer))
+                      ,sum(CAST(street2_3BDone as integer))
+                      ,sum(CAST(street2_4BChance as integer))
+                      ,sum(CAST(street2_4BDone as integer))
+                      ,sum(CAST(street2_C4BChance as integer))
+                      ,sum(CAST(street2_C4BDone as integer))
+                      ,sum(CAST(street2_FoldTo2BChance as integer))
+                      ,sum(CAST(street2_FoldTo2BDone as integer))
+                      ,sum(CAST(street2_FoldTo3BChance as integer))
+                      ,sum(CAST(street2_FoldTo3BDone as integer))
+                      ,sum(CAST(street2_FoldTo4BChance as integer))
+                      ,sum(CAST(street2_FoldTo4BDone as integer))
+                      ,sum(CAST(street2_SqueezeChance as integer))
+                      ,sum(CAST(street2_SqueezeDone as integer))
+                      ,sum(CAST(street2_FoldToSqueezeChance as integer))
+                      ,sum(CAST(street2_FoldToSqueezeDone as integer))
+                      
+                      ,sum(CAST(street3_2BChance as integer))
+                      ,sum(CAST(street3_2BDone as integer))
+                      ,sum(CAST(street3_3BChance as integer))
+                      ,sum(CAST(street3_3BDone as integer))
+                      ,sum(CAST(street3_4BChance as integer))
+                      ,sum(CAST(street3_4BDone as integer))
+                      ,sum(CAST(street3_C4BChance as integer))
+                      ,sum(CAST(street3_C4BDone as integer))
+                      ,sum(CAST(street3_FoldTo2BChance as integer))
+                      ,sum(CAST(street3_FoldTo2BDone as integer))
+                      ,sum(CAST(street3_FoldTo3BChance as integer))
+                      ,sum(CAST(street3_FoldTo3BDone as integer))
+                      ,sum(CAST(street3_FoldTo4BChance as integer))
+                      ,sum(CAST(street3_FoldTo4BDone as integer))
+                      ,sum(CAST(street3_SqueezeChance as integer))
+                      ,sum(CAST(street3_SqueezeDone as integer))
+                      ,sum(CAST(street3_FoldToSqueezeChance as integer))
+                      ,sum(CAST(street3_FoldToSqueezeDone as integer))
+                      
+                      ,sum(CAST(raiseToStealChance as integer))
+                      ,sum(CAST(raiseToStealDone as integer))
+                      ,sum(CAST(stealChance as integer))
+                      ,sum(CAST(stealDone as integer))
+                      ,sum(CAST(success_Steal as integer))
+                      ,sum(CAST(street1Seen as integer))
+                      ,sum(CAST(street2Seen as integer))
+                      ,sum(CAST(street3Seen as integer))
+                      ,sum(CAST(street4Seen as integer))
+                      ,sum(CAST(sawShowdown as integer))
+                      ,sum(CAST(street1Aggr as integer))
+                      ,sum(CAST(street2Aggr as integer))
+                      ,sum(CAST(street3Aggr as integer))
+                      ,sum(CAST(street4Aggr as integer))
+                      ,sum(CAST(otherRaisedStreet0 as integer))
+                      ,sum(CAST(otherRaisedStreet1 as integer))
+                      ,sum(CAST(otherRaisedStreet2 as integer))
+                      ,sum(CAST(otherRaisedStreet3 as integer))
+                      ,sum(CAST(otherRaisedStreet4 as integer))
+                      ,sum(CAST(foldToOtherRaisedStreet0 as integer))
+                      ,sum(CAST(foldToOtherRaisedStreet1 as integer))
+                      ,sum(CAST(foldToOtherRaisedStreet2 as integer))
+                      ,sum(CAST(foldToOtherRaisedStreet3 as integer))
+                      ,sum(CAST(foldToOtherRaisedStreet4 as integer))
+                      ,sum(CAST(callToOtherRaisedStreet0 as integer))
+                      ,sum(CAST(callToOtherRaisedStreet1 as integer))
+                      ,sum(CAST(callToOtherRaisedStreet2 as integer))
+                      ,sum(CAST(callToOtherRaisedStreet3 as integer))
+                      ,sum(CAST(callToOtherRaisedStreet4 as integer))
+                      ,sum(CAST(raiseToOtherRaisedStreet0 as integer))
+                      ,sum(CAST(raiseToOtherRaisedStreet1 as integer))
+                      ,sum(CAST(raiseToOtherRaisedStreet2 as integer))
+                      ,sum(CAST(raiseToOtherRaisedStreet3 as integer))
+                      ,sum(CAST(raiseToOtherRaisedStreet4 as integer))
+                      ,sum(CAST(wonWhenSeenStreet1 as integer))
+                      ,sum(CAST(wonWhenSeenStreet2 as integer))
+                      ,sum(CAST(wonWhenSeenStreet3 as integer))
+                      ,sum(CAST(wonWhenSeenStreet4 as integer))
+                      ,sum(CAST(wonAtSD as integer))
+                      ,sum(CAST(raiseFirstInChance as integer))
+                      ,sum(CAST(raisedFirstIn as integer))
+                      ,sum(CAST(foldBbToStealChance as integer))
+                      ,sum(CAST(foldedBbToSteal as integer))
+                      ,sum(CAST(foldSbToStealChance as integer))
+                      ,sum(CAST(foldedSbToSteal as integer))
+                      ,sum(CAST(street1CBChance as integer))
+                      ,sum(CAST(street1CBDone as integer))
+                      ,sum(CAST(street2CBChance as integer))
+                      ,sum(CAST(street2CBDone as integer))
+                      ,sum(CAST(street3CBChance as integer))
+                      ,sum(CAST(street3CBDone as integer))
+                      ,sum(CAST(street4CBChance as integer))
+                      ,sum(CAST(street4CBDone as integer))
+                      ,sum(CAST(foldToStreet1CBChance as integer))
+                      ,sum(CAST(foldToStreet1CBDone as integer))
+                      ,sum(CAST(foldToStreet2CBChance as integer))
+                      ,sum(CAST(foldToStreet2CBDone as integer))
+                      ,sum(CAST(foldToStreet3CBChance as integer))
+                      ,sum(CAST(foldToStreet3CBDone as integer))
+                      ,sum(CAST(foldToStreet4CBChance as integer))
+                      ,sum(CAST(foldToStreet4CBDone as integer))
+                      ,sum(CAST(callToStreet1CBChance as integer))
+                      ,sum(CAST(callToStreet1CBDone as integer))
+                      ,sum(CAST(callToStreet2CBChance as integer))
+                      ,sum(CAST(callToStreet2CBDone as integer))
+                      ,sum(CAST(callToStreet3CBChance as integer))
+                      ,sum(CAST(callToStreet3CBDone as integer))
+                      ,sum(CAST(callToStreet4CBChance as integer))
+                      ,sum(CAST(callToStreet4CBDone as integer))
+                      ,sum(CAST(raiseToStreet1CBChance as integer))
+                      ,sum(CAST(raiseToStreet1CBDone as integer))
+                      ,sum(CAST(raiseToStreet2CBChance as integer))
+                      ,sum(CAST(raiseToStreet2CBDone as integer))
+                      ,sum(CAST(raiseToStreet3CBChance as integer))
+                      ,sum(CAST(raiseToStreet3CBDone as integer))
+                      ,sum(CAST(raiseToStreet4CBChance as integer))
+                      ,sum(CAST(raiseToStreet4CBDone as integer))
                       ,sum(CAST(common as integer))
                       ,sum(CAST(committed as integer))
                       ,sum(CAST(winnings as integer))
@@ -6945,16 +10618,20 @@ class Sql:
                       ,sum(CAST(street4CheckCallRaiseChance as integer))
                       ,sum(CAST(street4CheckCallDone as integer))
                       ,sum(CAST(street4CheckRaiseDone as integer))
-                      ,sum(CAST(street0Calls as integer))
-                      ,sum(CAST(street1Calls as integer))
-                      ,sum(CAST(street2Calls as integer))
-                      ,sum(CAST(street3Calls as integer))
-                      ,sum(CAST(street4Calls as integer))
-                      ,sum(CAST(street0Bets as integer))
-                      ,sum(CAST(street1Bets as integer))
-                      ,sum(CAST(street2Bets as integer))
-                      ,sum(CAST(street3Bets as integer))
-                      ,sum(CAST(street4Bets as integer))
+                      ,sum(CAST(street1foldToCheckRaiseChance as integer))
+                      ,sum(CAST(street1foldToCheckRaiseDone as integer))
+                      ,sum(CAST(street2foldToCheckRaiseChance as integer))
+                      ,sum(CAST(street2foldToCheckRaiseDone as integer))
+                      ,sum(CAST(street3foldToCheckRaiseChance as integer))
+                      ,sum(CAST(street3foldToCheckRaiseDone as integer))
+                      ,sum(CAST(street4foldToCheckRaiseChance as integer))
+                      ,sum(CAST(street4foldToCheckRaiseDone as integer))
+                      ,sum(CAST(hp.street0Calls as integer))
+                      ,sum(CAST(hp.street1Calls as integer))
+                      ,sum(CAST(hp.street2Calls as integer))
+                      ,sum(CAST(hp.street3Calls as integer))
+                      ,sum(CAST(hp.street4Calls as integer))
+                      
                       ,sum(CAST(hp.street0Raises as integer))
                       ,sum(CAST(hp.street1Raises as integer))
                       ,sum(CAST(hp.street2Raises as integer))
@@ -6963,6 +10640,18 @@ class Sql:
                       ,sum(CAST(street1Discards as integer))
                       ,sum(CAST(street2Discards as integer))
                       ,sum(CAST(street3Discards as integer))
+                      
+                      ,sum(CAST(hp.street0Callers as integer))
+                      ,sum(CAST(hp.street1Callers as integer))
+                      ,sum(CAST(hp.street2Callers as integer))
+                      ,sum(CAST(hp.street3Callers as integer))
+                      ,sum(CAST(hp.street4Callers as integer))
+                      
+                      ,sum(CAST(hp.street0Aggressors as integer))
+                      ,sum(CAST(hp.street1Aggressors as integer))
+                      ,sum(CAST(hp.street2Aggressors as integer))
+                      ,sum(CAST(hp.street3Aggressors as integer))
+                      ,sum(CAST(hp.street4Aggressors as integer))
                 FROM Hands h
                 INNER JOIN HandsPlayers hp ON (h.id = hp.handId<hero_join>)
                 INNER JOIN Gametypes g ON (h.gametypeId = g.id)
@@ -6981,6 +10670,7 @@ class Sql:
                 tourneyTypeId,
                 styleKey,
                 n,
+                
                 street0VPIChance,
                 street0VPI,
                 street0AggrChance,
@@ -7003,6 +10693,66 @@ class Sql:
                 street0_FoldTo4BDone,
                 street0_SqueezeChance,
                 street0_SqueezeDone,
+                street0_FoldToSqueezeChance,
+                street0_FoldToSqueezeDone,
+                
+                street1_2BChance,
+                street1_2BDone,
+                street1_3BChance,
+                street1_3BDone,
+                street1_4BChance,
+                street1_4BDone,
+                street1_C4BChance,
+                street1_C4BDone,
+                street1_FoldTo2BChance,
+                street1_FoldTo2BDone,
+                street1_FoldTo3BChance,
+                street1_FoldTo3BDone,
+                street1_FoldTo4BChance,
+                street1_FoldTo4BDone,
+                street1_SqueezeChance,
+                street1_SqueezeDone,
+                street1_FoldToSqueezeChance,
+                street1_FoldToSqueezeDone,
+                
+                street2_2BChance,
+                street2_2BDone,
+                street2_3BChance,
+                street2_3BDone,
+                street2_4BChance,
+                street2_4BDone,
+                street2_C4BChance,
+                street2_C4BDone,
+                street2_FoldTo2BChance,
+                street2_FoldTo2BDone,
+                street2_FoldTo3BChance,
+                street2_FoldTo3BDone,
+                street2_FoldTo4BChance,
+                street2_FoldTo4BDone,
+                street2_SqueezeChance,
+                street2_SqueezeDone,
+                street2_FoldToSqueezeChance,
+                street2_FoldToSqueezeDone,
+                
+                street3_2BChance,
+                street3_2BDone,
+                street3_3BChance,
+                street3_3BDone,
+                street3_4BChance,
+                street3_4BDone,
+                street3_C4BChance,
+                street3_C4BDone,
+                street3_FoldTo2BChance,
+                street3_FoldTo2BDone,
+                street3_FoldTo3BChance,
+                street3_FoldTo3BDone,
+                street3_FoldTo4BChance,
+                street3_FoldTo4BDone,
+                street3_SqueezeChance,
+                street3_SqueezeDone,
+                street3_FoldToSqueezeChance,
+                street3_FoldToSqueezeDone,
+                
                 raiseToStealChance,
                 raiseToStealDone,
                 stealChance,
@@ -7027,6 +10777,16 @@ class Sql:
                 foldToOtherRaisedStreet2,
                 foldToOtherRaisedStreet3,
                 foldToOtherRaisedStreet4,
+                callToOtherRaisedStreet0,
+                callToOtherRaisedStreet1,
+                callToOtherRaisedStreet2,
+                callToOtherRaisedStreet3,
+                callToOtherRaisedStreet4,
+                raiseToOtherRaisedStreet0,
+                raiseToOtherRaisedStreet1,
+                raiseToOtherRaisedStreet2,
+                raiseToOtherRaisedStreet3,
+                raiseToOtherRaisedStreet4,
                 wonWhenSeenStreet1,
                 wonWhenSeenStreet2,
                 wonWhenSeenStreet3,
@@ -7054,6 +10814,22 @@ class Sql:
                 foldToStreet3CBDone,
                 foldToStreet4CBChance,
                 foldToStreet4CBDone,
+                callToStreet1CBChance,
+                callToStreet1CBDone,
+                callToStreet2CBChance,
+                callToStreet2CBDone,
+                callToStreet3CBChance,
+                callToStreet3CBDone,
+                callToStreet4CBChance,
+                callToStreet4CBDone,
+                raiseToStreet1CBChance,
+                raiseToStreet1CBDone,
+                raiseToStreet2CBChance,
+                raiseToStreet2CBDone,
+                raiseToStreet3CBChance,
+                raiseToStreet3CBDone,
+                raiseToStreet4CBChance,
+                raiseToStreet4CBDone,
                 common,
                 committed,
                 winnings,
@@ -7077,16 +10853,19 @@ class Sql:
                 street4CheckCallRaiseChance,
                 street4CheckCallDone,
                 street4CheckRaiseDone,
+                street1foldToCheckRaiseChance,
+                street1foldToCheckRaiseDone,
+                street2foldToCheckRaiseChance,
+                street2foldToCheckRaiseDone,
+                street3foldToCheckRaiseChance,
+                street3foldToCheckRaiseDone,
+                street4foldToCheckRaiseChance,
+                street4foldToCheckRaiseDone,
                 street0Calls,
                 street1Calls,
                 street2Calls,
                 street3Calls,
                 street4Calls,
-                street0Bets,
-                street1Bets,
-                street2Bets,
-                street3Bets,
-                street4Bets,
                 street0Raises,
                 street1Raises,
                 street2Raises,
@@ -7094,8 +10873,39 @@ class Sql:
                 street4Raises,
                 street1Discards,
                 street2Discards,
-                street3Discards)
+                street3Discards,
+                
+                street0Callers,
+                street1Callers,
+                street2Callers,
+                street3Callers,
+                street4Callers,
+                
+                street0Aggressors,
+                street1Aggressors,
+                street2Aggressors,
+                street3Aggressors,
+                street4Aggressors)
             values (%s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s,
@@ -7124,6 +10934,7 @@ class Sql:
         self.query['update_hudcache'] = """
             UPDATE HudCache SET
             n=n+%s,
+            
             street0VPIChance=street0VPIChance+%s,
             street0VPI=street0VPI+%s,
             street0AggrChance=street0AggrChance+%s,
@@ -7146,6 +10957,66 @@ class Sql:
             street0_FoldTo4BDone=street0_FoldTo4BDone+%s,
             street0_SqueezeChance=street0_SqueezeChance+%s,
             street0_SqueezeDone=street0_SqueezeDone+%s,
+            street0_FoldToSqueezeChance=street0_FoldToSqueezeChance+%s,
+            street0_FoldToSqueezeDone=street0_FoldToSqueezeDone+%s,
+            
+            street1_2BChance=street1_2BChance+%s,
+            street1_2BDone=street1_2BDone+%s,
+            street1_3BChance=street1_3BChance+%s,
+            street1_3BDone=street1_3BDone+%s,
+            street1_4BChance=street1_4BChance+%s,
+            street1_4BDone=street1_4BDone+%s,
+            street1_C4BChance=street1_C4BChance+%s,
+            street1_C4BDone=street1_C4BDone+%s,
+            street1_FoldTo2BChance=street1_FoldTo2BChance+%s,
+            street1_FoldTo2BDone=street1_FoldTo2BDone+%s,
+            street1_FoldTo3BChance=street1_FoldTo3BChance+%s,
+            street1_FoldTo3BDone=street1_FoldTo3BDone+%s,
+            street1_FoldTo4BChance=street1_FoldTo4BChance+%s,
+            street1_FoldTo4BDone=street1_FoldTo4BDone+%s,
+            street1_SqueezeChance=street1_SqueezeChance+%s,
+            street1_SqueezeDone=street1_SqueezeDone+%s,
+            street1_FoldToSqueezeChance=street1_FoldToSqueezeChance+%s,
+            street1_FoldToSqueezeDone=street1_FoldToSqueezeDone+%s,
+            
+            street2_2BChance=street2_2BChance+%s,
+            street2_2BDone=street2_2BDone+%s,
+            street2_3BChance=street2_3BChance+%s,
+            street2_3BDone=street2_3BDone+%s,
+            street2_4BChance=street2_4BChance+%s,
+            street2_4BDone=street2_4BDone+%s,
+            street2_C4BChance=street2_C4BChance+%s,
+            street2_C4BDone=street2_C4BDone+%s,
+            street2_FoldTo2BChance=street2_FoldTo2BChance+%s,
+            street2_FoldTo2BDone=street2_FoldTo2BDone+%s,
+            street2_FoldTo3BChance=street2_FoldTo3BChance+%s,
+            street2_FoldTo3BDone=street2_FoldTo3BDone+%s,
+            street2_FoldTo4BChance=street2_FoldTo4BChance+%s,
+            street2_FoldTo4BDone=street2_FoldTo4BDone+%s,
+            street2_SqueezeChance=street2_SqueezeChance+%s,
+            street2_SqueezeDone=street2_SqueezeDone+%s,
+            street2_FoldToSqueezeChance=street2_FoldToSqueezeChance+%s,
+            street2_FoldToSqueezeDone=street2_FoldToSqueezeDone+%s,
+            
+            street3_2BChance=street3_2BChance+%s,
+            street3_2BDone=street3_2BDone+%s,
+            street3_3BChance=street3_3BChance+%s,
+            street3_3BDone=street3_3BDone+%s,
+            street3_4BChance=street3_4BChance+%s,
+            street3_4BDone=street3_4BDone+%s,
+            street3_C4BChance=street3_C4BChance+%s,
+            street3_C4BDone=street3_C4BDone+%s,
+            street3_FoldTo2BChance=street3_FoldTo2BChance+%s,
+            street3_FoldTo2BDone=street3_FoldTo2BDone+%s,
+            street3_FoldTo3BChance=street3_FoldTo3BChance+%s,
+            street3_FoldTo3BDone=street3_FoldTo3BDone+%s,
+            street3_FoldTo4BChance=street3_FoldTo4BChance+%s,
+            street3_FoldTo4BDone=street3_FoldTo4BDone+%s,
+            street3_SqueezeChance=street3_SqueezeChance+%s,
+            street3_SqueezeDone=street3_SqueezeDone+%s,
+            street3_FoldToSqueezeChance=street3_FoldToSqueezeChance+%s,
+            street3_FoldToSqueezeDone=street3_FoldToSqueezeDone+%s,
+            
             raiseToStealChance=raiseToStealChance+%s,
             raiseToStealDone=raiseToStealDone+%s,
             stealChance=stealChance+%s,
@@ -7170,6 +11041,16 @@ class Sql:
             foldToOtherRaisedStreet2=foldToOtherRaisedStreet2+%s,
             foldToOtherRaisedStreet3=foldToOtherRaisedStreet3+%s,
             foldToOtherRaisedStreet4=foldToOtherRaisedStreet4+%s,
+            callToOtherRaisedStreet0=callToOtherRaisedStreet0+%s,
+            callToOtherRaisedStreet1=callToOtherRaisedStreet1+%s,
+            callToOtherRaisedStreet2=callToOtherRaisedStreet2+%s,
+            callToOtherRaisedStreet3=callToOtherRaisedStreet3+%s,
+            callToOtherRaisedStreet4=callToOtherRaisedStreet4+%s,
+            raiseToOtherRaisedStreet0=raiseToOtherRaisedStreet0+%s,
+            raiseToOtherRaisedStreet1=raiseToOtherRaisedStreet1+%s,
+            raiseToOtherRaisedStreet2=raiseToOtherRaisedStreet2+%s,
+            raiseToOtherRaisedStreet3=raiseToOtherRaisedStreet3+%s,
+            raiseToOtherRaisedStreet4=raiseToOtherRaisedStreet4+%s,
             wonWhenSeenStreet1=wonWhenSeenStreet1+%s,
             wonWhenSeenStreet2=wonWhenSeenStreet2+%s,
             wonWhenSeenStreet3=wonWhenSeenStreet3+%s,
@@ -7197,6 +11078,22 @@ class Sql:
             foldToStreet3CBDone=foldToStreet3CBDone+%s,
             foldToStreet4CBChance=foldToStreet4CBChance+%s,
             foldToStreet4CBDone=foldToStreet4CBDone+%s,
+            callToStreet1CBChance=callToStreet1CBChance+%s,
+            callToStreet1CBDone=callToStreet1CBDone+%s,
+            callToStreet2CBChance=callToStreet2CBChance+%s,
+            callToStreet2CBDone=callToStreet2CBDone+%s,
+            callToStreet3CBChance=callToStreet3CBChance+%s,
+            callToStreet3CBDone=callToStreet3CBDone+%s,
+            callToStreet4CBChance=callToStreet4CBChance+%s,
+            callToStreet4CBDone=callToStreet4CBDone+%s,
+            raiseToStreet1CBChance=raiseToStreet1CBChance+%s,
+            raiseToStreet1CBDone=raiseToStreet1CBDone+%s,
+            raiseToStreet2CBChance=raiseToStreet2CBChance+%s,
+            raiseToStreet2CBDone=raiseToStreet2CBDone+%s,
+            raiseToStreet3CBChance=raiseToStreet3CBChance+%s,
+            raiseToStreet3CBDone=raiseToStreet3CBDone+%s,
+            raiseToStreet4CBChance=raiseToStreet4CBChance+%s,
+            raiseToStreet4CBDone=raiseToStreet4CBDone+%s,
             common=common+%s,
             committed=committed+%s,
             winnings=winnings+%s,
@@ -7220,16 +11117,19 @@ class Sql:
             street4CheckCallRaiseChance=street4CheckCallRaiseChance+%s,
             street4CheckCallDone=street4CheckCallDone+%s,
             street4CheckRaiseDone=street4CheckRaiseDone+%s,
+            street1foldToCheckRaiseChance=street1foldToCheckRaiseChance+%s,
+            street1foldToCheckRaiseDone=street1foldToCheckRaiseDone+%s,
+            street2foldToCheckRaiseChance=street2foldToCheckRaiseChance+%s,
+            street2foldToCheckRaiseDone=street2foldToCheckRaiseDone+%s,
+            street3foldToCheckRaiseChance=street3foldToCheckRaiseChance+%s,
+            street3foldToCheckRaiseDone=street3foldToCheckRaiseDone+%s,
+            street4foldToCheckRaiseChance=street4foldToCheckRaiseChance+%s,
+            street4foldToCheckRaiseDone=street4foldToCheckRaiseDone+%s,
             street0Calls=street0Calls+%s,
             street1Calls=street1Calls+%s,
             street2Calls=street2Calls+%s,
             street3Calls=street3Calls+%s,
             street4Calls=street4Calls+%s,
-            street0Bets=street0Bets+%s, 
-            street1Bets=street1Bets+%s,
-            street2Bets=street2Bets+%s, 
-            street3Bets=street3Bets+%s,
-            street4Bets=street4Bets+%s, 
             street0Raises=street0Raises+%s,
             street1Raises=street1Raises+%s,
             street2Raises=street2Raises+%s,
@@ -7237,7 +11137,19 @@ class Sql:
             street4Raises=street4Raises+%s,            
             street1Discards=street1Discards+%s,
             street2Discards=street2Discards+%s,
-            street3Discards=street3Discards+%s
+            street3Discards=street3Discards+%s,
+             
+            street0Callers=street0Callers+%s,
+            street1Callers=street1Callers+%s,
+            street2Callers=street2Callers+%s,
+            street3Callers=street3Callers+%s,
+            street4Callers=street4Callers+%s,
+            
+            street0Aggressors=street0Aggressors+%s,
+            street1Aggressors=street1Aggressors+%s,
+            street2Aggressors=street2Aggressors+%s,
+            street3Aggressors=street3Aggressors+%s,
+            street4Aggressors=street4Aggressors+%s
         WHERE id=%s"""
             
         self.query['select_hudcache_ring'] = """
@@ -7277,6 +11189,7 @@ class Sql:
                 playerId,
                 startCards,
                 n,
+                
                 street0VPIChance,
                 street0VPI,
                 street0AggrChance,
@@ -7299,6 +11212,66 @@ class Sql:
                 street0_FoldTo4BDone,
                 street0_SqueezeChance,
                 street0_SqueezeDone,
+                street0_FoldToSqueezeChance,
+                street0_FoldToSqueezeDone,
+                
+                street1_2BChance,
+                street1_2BDone,
+                street1_3BChance,
+                street1_3BDone,
+                street1_4BChance,
+                street1_4BDone,
+                street1_C4BChance,
+                street1_C4BDone,
+                street1_FoldTo2BChance,
+                street1_FoldTo2BDone,
+                street1_FoldTo3BChance,
+                street1_FoldTo3BDone,
+                street1_FoldTo4BChance,
+                street1_FoldTo4BDone,
+                street1_SqueezeChance,
+                street1_SqueezeDone,
+                street1_FoldToSqueezeChance,
+                street1_FoldToSqueezeDone,
+                
+                street2_2BChance,
+                street2_2BDone,
+                street2_3BChance,
+                street2_3BDone,
+                street2_4BChance,
+                street2_4BDone,
+                street2_C4BChance,
+                street2_C4BDone,
+                street2_FoldTo2BChance,
+                street2_FoldTo2BDone,
+                street2_FoldTo3BChance,
+                street2_FoldTo3BDone,
+                street2_FoldTo4BChance,
+                street2_FoldTo4BDone,
+                street2_SqueezeChance,
+                street2_SqueezeDone,
+                street2_FoldToSqueezeChance,
+                street2_FoldToSqueezeDone,
+                
+                street3_2BChance,
+                street3_2BDone,
+                street3_3BChance,
+                street3_3BDone,
+                street3_4BChance,
+                street3_4BDone,
+                street3_C4BChance,
+                street3_C4BDone,
+                street3_FoldTo2BChance,
+                street3_FoldTo2BDone,
+                street3_FoldTo3BChance,
+                street3_FoldTo3BDone,
+                street3_FoldTo4BChance,
+                street3_FoldTo4BDone,
+                street3_SqueezeChance,
+                street3_SqueezeDone,
+                street3_FoldToSqueezeChance,
+                street3_FoldToSqueezeDone,
+                
                 raiseToStealChance,
                 raiseToStealDone,
                 stealChance,
@@ -7323,6 +11296,16 @@ class Sql:
                 foldToOtherRaisedStreet2,
                 foldToOtherRaisedStreet3,
                 foldToOtherRaisedStreet4,
+                callToOtherRaisedStreet0,
+                callToOtherRaisedStreet1,
+                callToOtherRaisedStreet2,
+                callToOtherRaisedStreet3,
+                callToOtherRaisedStreet4,
+                raiseToOtherRaisedStreet0,
+                raiseToOtherRaisedStreet1,
+                raiseToOtherRaisedStreet2,
+                raiseToOtherRaisedStreet3,
+                raiseToOtherRaisedStreet4,
                 wonWhenSeenStreet1,
                 wonWhenSeenStreet2,
                 wonWhenSeenStreet3,
@@ -7350,6 +11333,22 @@ class Sql:
                 foldToStreet3CBDone,
                 foldToStreet4CBChance,
                 foldToStreet4CBDone,
+                callToStreet1CBChance,
+                callToStreet1CBDone,
+                callToStreet2CBChance,
+                callToStreet2CBDone,
+                callToStreet3CBChance,
+                callToStreet3CBDone,
+                callToStreet4CBChance,
+                callToStreet4CBDone,
+                raiseToStreet1CBChance,
+                raiseToStreet1CBDone,
+                raiseToStreet2CBChance,
+                raiseToStreet2CBDone,
+                raiseToStreet3CBChance,
+                raiseToStreet3CBDone,
+                raiseToStreet4CBChance,
+                raiseToStreet4CBDone,
                 common,
                 committed,
                 winnings,
@@ -7373,16 +11372,19 @@ class Sql:
                 street4CheckCallRaiseChance,
                 street4CheckCallDone,
                 street4CheckRaiseDone,
+                street1foldToCheckRaiseChance,
+                street1foldToCheckRaiseDone,
+                street2foldToCheckRaiseChance,
+                street2foldToCheckRaiseDone,
+                street3foldToCheckRaiseChance,
+                street3foldToCheckRaiseDone,
+                street4foldToCheckRaiseChance,
+                street4foldToCheckRaiseDone,
                 street0Calls,
                 street1Calls,
                 street2Calls,
                 street3Calls,
                 street4Calls,
-                street0Bets,
-                street1Bets,
-                street2Bets,
-                street3Bets,
-                street4Bets,
                 street0Raises,
                 street1Raises,
                 street2Raises,
@@ -7390,7 +11392,19 @@ class Sql:
                 street4Raises,
                 street1Discards,
                 street2Discards,
-                street3Discards)
+                street3Discards,
+                
+                street0Callers,
+                street1Callers,
+                street2Callers,
+                street3Callers,
+                street4Callers,
+                
+                street0Aggressors,
+                street1Aggressors,
+                street2Aggressors,
+                street3Aggressors,
+                street4Aggressors)
             values (%s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s,
@@ -7415,11 +11429,34 @@ class Sql:
                     %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s,
-                    %s)"""
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s)"""
 
         self.query['update_cardscache'] = """
             UPDATE CardsCache SET
                     n=n+%s,
+                    
                     street0VPIChance=street0VPIChance+%s,
                     street0VPI=street0VPI+%s,
                     street0AggrChance=street0AggrChance+%s,
@@ -7442,6 +11479,66 @@ class Sql:
                     street0_FoldTo4BDone=street0_FoldTo4BDone+%s,
                     street0_SqueezeChance=street0_SqueezeChance+%s,
                     street0_SqueezeDone=street0_SqueezeDone+%s,
+                    street0_FoldToSqueezeChance=street0_FoldToSqueezeChance+%s,
+                    street0_FoldToSqueezeDone=street0_FoldToSqueezeDone+%s,
+                    
+                    street1_2BChance=street1_2BChance+%s,
+                    street1_2BDone=street1_2BDone+%s,
+                    street1_3BChance=street1_3BChance+%s,
+                    street1_3BDone=street1_3BDone+%s,
+                    street1_4BChance=street1_4BChance+%s,
+                    street1_4BDone=street1_4BDone+%s,
+                    street1_C4BChance=street1_C4BChance+%s,
+                    street1_C4BDone=street1_C4BDone+%s,
+                    street1_FoldTo2BChance=street1_FoldTo2BChance+%s,
+                    street1_FoldTo2BDone=street1_FoldTo2BDone+%s,
+                    street1_FoldTo3BChance=street1_FoldTo3BChance+%s,
+                    street1_FoldTo3BDone=street1_FoldTo3BDone+%s,
+                    street1_FoldTo4BChance=street1_FoldTo4BChance+%s,
+                    street1_FoldTo4BDone=street1_FoldTo4BDone+%s,
+                    street1_SqueezeChance=street1_SqueezeChance+%s,
+                    street1_SqueezeDone=street1_SqueezeDone+%s,
+                    street1_FoldToSqueezeChance=street1_FoldToSqueezeChance+%s,
+                    street1_FoldToSqueezeDone=street1_FoldToSqueezeDone+%s,
+                    
+                    street2_2BChance=street2_2BChance+%s,
+                    street2_2BDone=street2_2BDone+%s,
+                    street2_3BChance=street2_3BChance+%s,
+                    street2_3BDone=street2_3BDone+%s,
+                    street2_4BChance=street2_4BChance+%s,
+                    street2_4BDone=street2_4BDone+%s,
+                    street2_C4BChance=street2_C4BChance+%s,
+                    street2_C4BDone=street2_C4BDone+%s,
+                    street2_FoldTo2BChance=street2_FoldTo2BChance+%s,
+                    street2_FoldTo2BDone=street2_FoldTo2BDone+%s,
+                    street2_FoldTo3BChance=street2_FoldTo3BChance+%s,
+                    street2_FoldTo3BDone=street2_FoldTo3BDone+%s,
+                    street2_FoldTo4BChance=street2_FoldTo4BChance+%s,
+                    street2_FoldTo4BDone=street2_FoldTo4BDone+%s,
+                    street2_SqueezeChance=street2_SqueezeChance+%s,
+                    street2_SqueezeDone=street2_SqueezeDone+%s,
+                    street2_FoldToSqueezeChance=street2_FoldToSqueezeChance+%s,
+                    street2_FoldToSqueezeDone=street2_FoldToSqueezeDone+%s,
+                    
+                    street3_2BChance=street3_2BChance+%s,
+                    street3_2BDone=street3_2BDone+%s,
+                    street3_3BChance=street3_3BChance+%s,
+                    street3_3BDone=street3_3BDone+%s,
+                    street3_4BChance=street3_4BChance+%s,
+                    street3_4BDone=street3_4BDone+%s,
+                    street3_C4BChance=street3_C4BChance+%s,
+                    street3_C4BDone=street3_C4BDone+%s,
+                    street3_FoldTo2BChance=street3_FoldTo2BChance+%s,
+                    street3_FoldTo2BDone=street3_FoldTo2BDone+%s,
+                    street3_FoldTo3BChance=street3_FoldTo3BChance+%s,
+                    street3_FoldTo3BDone=street3_FoldTo3BDone+%s,
+                    street3_FoldTo4BChance=street3_FoldTo4BChance+%s,
+                    street3_FoldTo4BDone=street3_FoldTo4BDone+%s,
+                    street3_SqueezeChance=street3_SqueezeChance+%s,
+                    street3_SqueezeDone=street3_SqueezeDone+%s,
+                    street3_FoldToSqueezeChance=street3_FoldToSqueezeChance+%s,
+                    street3_FoldToSqueezeDone=street3_FoldToSqueezeDone+%s,
+            
                     raiseToStealChance=raiseToStealChance+%s,
                     raiseToStealDone=raiseToStealDone+%s,
                     stealChance=stealChance+%s,
@@ -7466,6 +11563,16 @@ class Sql:
                     foldToOtherRaisedStreet2=foldToOtherRaisedStreet2+%s,
                     foldToOtherRaisedStreet3=foldToOtherRaisedStreet3+%s,
                     foldToOtherRaisedStreet4=foldToOtherRaisedStreet4+%s,
+                    callToOtherRaisedStreet0=callToOtherRaisedStreet0+%s,
+                    callToOtherRaisedStreet1=callToOtherRaisedStreet1+%s,
+                    callToOtherRaisedStreet2=callToOtherRaisedStreet2+%s,
+                    callToOtherRaisedStreet3=callToOtherRaisedStreet3+%s,
+                    callToOtherRaisedStreet4=callToOtherRaisedStreet4+%s,
+                    raiseToOtherRaisedStreet0=raiseToOtherRaisedStreet0+%s,
+                    raiseToOtherRaisedStreet1=raiseToOtherRaisedStreet1+%s,
+                    raiseToOtherRaisedStreet2=raiseToOtherRaisedStreet2+%s,
+                    raiseToOtherRaisedStreet3=raiseToOtherRaisedStreet3+%s,
+                    raiseToOtherRaisedStreet4=raiseToOtherRaisedStreet4+%s,
                     wonWhenSeenStreet1=wonWhenSeenStreet1+%s,
                     wonWhenSeenStreet2=wonWhenSeenStreet2+%s,
                     wonWhenSeenStreet3=wonWhenSeenStreet3+%s,
@@ -7493,6 +11600,22 @@ class Sql:
                     foldToStreet3CBDone=foldToStreet3CBDone+%s,
                     foldToStreet4CBChance=foldToStreet4CBChance+%s,
                     foldToStreet4CBDone=foldToStreet4CBDone+%s,
+                    callToStreet1CBChance=callToStreet1CBChance+%s,
+                    callToStreet1CBDone=callToStreet1CBDone+%s,
+                    callToStreet2CBChance=callToStreet2CBChance+%s,
+                    callToStreet2CBDone=callToStreet2CBDone+%s,
+                    callToStreet3CBChance=callToStreet3CBChance+%s,
+                    callToStreet3CBDone=callToStreet3CBDone+%s,
+                    callToStreet4CBChance=callToStreet4CBChance+%s,
+                    callToStreet4CBDone=callToStreet4CBDone+%s,
+                    raiseToStreet1CBChance=raiseToStreet1CBChance+%s,
+                    raiseToStreet1CBDone=raiseToStreet1CBDone+%s,
+                    raiseToStreet2CBChance=raiseToStreet2CBChance+%s,
+                    raiseToStreet2CBDone=raiseToStreet2CBDone+%s,
+                    raiseToStreet3CBChance=raiseToStreet3CBChance+%s,
+                    raiseToStreet3CBDone=raiseToStreet3CBDone+%s,
+                    raiseToStreet4CBChance=raiseToStreet4CBChance+%s,
+                    raiseToStreet4CBDone=raiseToStreet4CBDone+%s,
                     common=common+%s,
                     committed=committed+%s,
                     winnings=winnings+%s,
@@ -7516,16 +11639,19 @@ class Sql:
                     street4CheckCallRaiseChance=street4CheckCallRaiseChance+%s,
                     street4CheckCallDone=street4CheckCallDone+%s,
                     street4CheckRaiseDone=street4CheckRaiseDone+%s,
+                    street1foldToCheckRaiseChance=street1foldToCheckRaiseChance+%s,
+                    street1foldToCheckRaiseDone=street1foldToCheckRaiseDone+%s,
+                    street2foldToCheckRaiseChance=street2foldToCheckRaiseChance+%s,
+                    street2foldToCheckRaiseDone=street2foldToCheckRaiseDone+%s,
+                    street3foldToCheckRaiseChance=street3foldToCheckRaiseChance+%s,
+                    street3foldToCheckRaiseDone=street3foldToCheckRaiseDone+%s,
+                    street4foldToCheckRaiseChance=street4foldToCheckRaiseChance+%s,
+                    street4foldToCheckRaiseDone=street4foldToCheckRaiseDone+%s,
                     street0Calls=street0Calls+%s,
                     street1Calls=street1Calls+%s,
                     street2Calls=street2Calls+%s,
                     street3Calls=street3Calls+%s,
                     street4Calls=street4Calls+%s,
-                    street0Bets=street0Bets+%s, 
-                    street1Bets=street1Bets+%s,
-                    street2Bets=street2Bets+%s, 
-                    street3Bets=street3Bets+%s,
-                    street4Bets=street4Bets+%s, 
                     street0Raises=street0Raises+%s,
                     street1Raises=street1Raises+%s,
                     street2Raises=street2Raises+%s,
@@ -7533,7 +11659,19 @@ class Sql:
                     street4Raises=street4Raises+%s,
                     street1Discards=street1Discards+%s,
                     street2Discards=street2Discards+%s,
-                    street3Discards=street3Discards+%s
+                    street3Discards=street3Discards+%s,
+             
+                    street0Callers=street0Callers+%s,
+                    street1Callers=street1Callers+%s,
+                    street2Callers=street2Callers+%s,
+                    street3Callers=street3Callers+%s,
+                    street4Callers=street4Callers+%s,
+                    
+                    street0Aggressors=street0Aggressors+%s,
+                    street1Aggressors=street1Aggressors+%s,
+                    street2Aggressors=street2Aggressors+%s,
+                    street3Aggressors=street3Aggressors+%s,
+                    street4Aggressors=street4Aggressors+%s
         WHERE     id=%s"""
             
         self.query['select_cardscache_ring'] = """
@@ -7570,6 +11708,7 @@ class Sql:
                 maxPosition,
                 position,
                 n,
+                
                 street0VPIChance,
                 street0VPI,
                 street0AggrChance,
@@ -7592,6 +11731,66 @@ class Sql:
                 street0_FoldTo4BDone,
                 street0_SqueezeChance,
                 street0_SqueezeDone,
+                street0_FoldToSqueezeChance,
+                street0_FoldToSqueezeDone,
+                
+                street1_2BChance,
+                street1_2BDone,
+                street1_3BChance,
+                street1_3BDone,
+                street1_4BChance,
+                street1_4BDone,
+                street1_C4BChance,
+                street1_C4BDone,
+                street1_FoldTo2BChance,
+                street1_FoldTo2BDone,
+                street1_FoldTo3BChance,
+                street1_FoldTo3BDone,
+                street1_FoldTo4BChance,
+                street1_FoldTo4BDone,
+                street1_SqueezeChance,
+                street1_SqueezeDone,
+                street1_FoldToSqueezeChance,
+                street1_FoldToSqueezeDone,
+                
+                street2_2BChance,
+                street2_2BDone,
+                street2_3BChance,
+                street2_3BDone,
+                street2_4BChance,
+                street2_4BDone,
+                street2_C4BChance,
+                street2_C4BDone,
+                street2_FoldTo2BChance,
+                street2_FoldTo2BDone,
+                street2_FoldTo3BChance,
+                street2_FoldTo3BDone,
+                street2_FoldTo4BChance,
+                street2_FoldTo4BDone,
+                street2_SqueezeChance,
+                street2_SqueezeDone,
+                street2_FoldToSqueezeChance,
+                street2_FoldToSqueezeDone,
+                
+                street3_2BChance,
+                street3_2BDone,
+                street3_3BChance,
+                street3_3BDone,
+                street3_4BChance,
+                street3_4BDone,
+                street3_C4BChance,
+                street3_C4BDone,
+                street3_FoldTo2BChance,
+                street3_FoldTo2BDone,
+                street3_FoldTo3BChance,
+                street3_FoldTo3BDone,
+                street3_FoldTo4BChance,
+                street3_FoldTo4BDone,
+                street3_SqueezeChance,
+                street3_SqueezeDone,
+                street3_FoldToSqueezeChance,
+                street3_FoldToSqueezeDone,
+                
                 raiseToStealChance,
                 raiseToStealDone,
                 stealChance,
@@ -7616,6 +11815,16 @@ class Sql:
                 foldToOtherRaisedStreet2,
                 foldToOtherRaisedStreet3,
                 foldToOtherRaisedStreet4,
+                callToOtherRaisedStreet0,
+                callToOtherRaisedStreet1,
+                callToOtherRaisedStreet2,
+                callToOtherRaisedStreet3,
+                callToOtherRaisedStreet4,
+                raiseToOtherRaisedStreet0,
+                raiseToOtherRaisedStreet1,
+                raiseToOtherRaisedStreet2,
+                raiseToOtherRaisedStreet3,
+                raiseToOtherRaisedStreet4,
                 wonWhenSeenStreet1,
                 wonWhenSeenStreet2,
                 wonWhenSeenStreet3,
@@ -7643,6 +11852,22 @@ class Sql:
                 foldToStreet3CBDone,
                 foldToStreet4CBChance,
                 foldToStreet4CBDone,
+                callToStreet1CBChance,
+                callToStreet1CBDone,
+                callToStreet2CBChance,
+                callToStreet2CBDone,
+                callToStreet3CBChance,
+                callToStreet3CBDone,
+                callToStreet4CBChance,
+                callToStreet4CBDone,
+                raiseToStreet1CBChance,
+                raiseToStreet1CBDone,
+                raiseToStreet2CBChance,
+                raiseToStreet2CBDone,
+                raiseToStreet3CBChance,
+                raiseToStreet3CBDone,
+                raiseToStreet4CBChance,
+                raiseToStreet4CBDone,
                 common,
                 committed,
                 winnings,
@@ -7666,16 +11891,19 @@ class Sql:
                 street4CheckCallRaiseChance,
                 street4CheckCallDone,
                 street4CheckRaiseDone,
+                street1foldToCheckRaiseChance,
+                street1foldToCheckRaiseDone,
+                street2foldToCheckRaiseChance,
+                street2foldToCheckRaiseDone,
+                street3foldToCheckRaiseChance,
+                street3foldToCheckRaiseDone,
+                street4foldToCheckRaiseChance,
+                street4foldToCheckRaiseDone,
                 street0Calls,
                 street1Calls,
                 street2Calls,
                 street3Calls,
                 street4Calls,
-                street0Bets,
-                street1Bets,
-                street2Bets,
-                street3Bets,
-                street4Bets,
                 street0Raises,
                 street1Raises,
                 street2Raises,
@@ -7683,7 +11911,19 @@ class Sql:
                 street4Raises,
                 street1Discards,
                 street2Discards,
-                street3Discards)
+                street3Discards,
+                
+                street0Callers,
+                street1Callers,
+                street2Callers,
+                street3Callers,
+                street4Callers,
+                
+                street0Aggressors,
+                street1Aggressors,
+                street2Aggressors,
+                street3Aggressors,
+                street4Aggressors)
             values (%s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s,
@@ -7708,12 +11948,34 @@ class Sql:
                     %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s,
-                    %s, %s, %s
-                    )"""
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s)"""
 
         self.query['update_positionscache'] = """
             UPDATE PositionsCache SET
                     n=n+%s,
+                    
                     street0VPIChance=street0VPIChance+%s,
                     street0VPI=street0VPI+%s,
                     street0AggrChance=street0AggrChance+%s,
@@ -7736,6 +11998,66 @@ class Sql:
                     street0_FoldTo4BDone=street0_FoldTo4BDone+%s,
                     street0_SqueezeChance=street0_SqueezeChance+%s,
                     street0_SqueezeDone=street0_SqueezeDone+%s,
+                    street0_FoldToSqueezeChance=street0_FoldToSqueezeChance+%s,
+                    street0_FoldToSqueezeDone=street0_FoldToSqueezeDone+%s,
+                    
+                    street1_2BChance=street1_2BChance+%s,
+                    street1_2BDone=street1_2BDone+%s,
+                    street1_3BChance=street1_3BChance+%s,
+                    street1_3BDone=street1_3BDone+%s,
+                    street1_4BChance=street1_4BChance+%s,
+                    street1_4BDone=street1_4BDone+%s,
+                    street1_C4BChance=street1_C4BChance+%s,
+                    street1_C4BDone=street1_C4BDone+%s,
+                    street1_FoldTo2BChance=street1_FoldTo2BChance+%s,
+                    street1_FoldTo2BDone=street1_FoldTo2BDone+%s,
+                    street1_FoldTo3BChance=street1_FoldTo3BChance+%s,
+                    street1_FoldTo3BDone=street1_FoldTo3BDone+%s,
+                    street1_FoldTo4BChance=street1_FoldTo4BChance+%s,
+                    street1_FoldTo4BDone=street1_FoldTo4BDone+%s,
+                    street1_SqueezeChance=street1_SqueezeChance+%s,
+                    street1_SqueezeDone=street1_SqueezeDone+%s,
+                    street1_FoldToSqueezeChance=street1_FoldToSqueezeChance+%s,
+                    street1_FoldToSqueezeDone=street1_FoldToSqueezeDone+%s,
+                    
+                    street2_2BChance=street2_2BChance+%s,
+                    street2_2BDone=street2_2BDone+%s,
+                    street2_3BChance=street2_3BChance+%s,
+                    street2_3BDone=street2_3BDone+%s,
+                    street2_4BChance=street2_4BChance+%s,
+                    street2_4BDone=street2_4BDone+%s,
+                    street2_C4BChance=street2_C4BChance+%s,
+                    street2_C4BDone=street2_C4BDone+%s,
+                    street2_FoldTo2BChance=street2_FoldTo2BChance+%s,
+                    street2_FoldTo2BDone=street2_FoldTo2BDone+%s,
+                    street2_FoldTo3BChance=street2_FoldTo3BChance+%s,
+                    street2_FoldTo3BDone=street2_FoldTo3BDone+%s,
+                    street2_FoldTo4BChance=street2_FoldTo4BChance+%s,
+                    street2_FoldTo4BDone=street2_FoldTo4BDone+%s,
+                    street2_SqueezeChance=street2_SqueezeChance+%s,
+                    street2_SqueezeDone=street2_SqueezeDone+%s,
+                    street2_FoldToSqueezeChance=street2_FoldToSqueezeChance+%s,
+                    street2_FoldToSqueezeDone=street2_FoldToSqueezeDone+%s,
+                    
+                    street3_2BChance=street3_2BChance+%s,
+                    street3_2BDone=street3_2BDone+%s,
+                    street3_3BChance=street3_3BChance+%s,
+                    street3_3BDone=street3_3BDone+%s,
+                    street3_4BChance=street3_4BChance+%s,
+                    street3_4BDone=street3_4BDone+%s,
+                    street3_C4BChance=street3_C4BChance+%s,
+                    street3_C4BDone=street3_C4BDone+%s,
+                    street3_FoldTo2BChance=street3_FoldTo2BChance+%s,
+                    street3_FoldTo2BDone=street3_FoldTo2BDone+%s,
+                    street3_FoldTo3BChance=street3_FoldTo3BChance+%s,
+                    street3_FoldTo3BDone=street3_FoldTo3BDone+%s,
+                    street3_FoldTo4BChance=street3_FoldTo4BChance+%s,
+                    street3_FoldTo4BDone=street3_FoldTo4BDone+%s,
+                    street3_SqueezeChance=street3_SqueezeChance+%s,
+                    street3_SqueezeDone=street3_SqueezeDone+%s,
+                    street3_FoldToSqueezeChance=street3_FoldToSqueezeChance+%s,
+                    street3_FoldToSqueezeDone=street3_FoldToSqueezeDone+%s,
+            
                     raiseToStealChance=raiseToStealChance+%s,
                     raiseToStealDone=raiseToStealDone+%s,
                     stealChance=stealChance+%s,
@@ -7760,6 +12082,16 @@ class Sql:
                     foldToOtherRaisedStreet2=foldToOtherRaisedStreet2+%s,
                     foldToOtherRaisedStreet3=foldToOtherRaisedStreet3+%s,
                     foldToOtherRaisedStreet4=foldToOtherRaisedStreet4+%s,
+                    callToOtherRaisedStreet0=callToOtherRaisedStreet0+%s,
+                    callToOtherRaisedStreet1=callToOtherRaisedStreet1+%s,
+                    callToOtherRaisedStreet2=callToOtherRaisedStreet2+%s,
+                    callToOtherRaisedStreet3=callToOtherRaisedStreet3+%s,
+                    callToOtherRaisedStreet4=callToOtherRaisedStreet4+%s,
+                    raiseToOtherRaisedStreet0=raiseToOtherRaisedStreet0+%s,
+                    raiseToOtherRaisedStreet1=raiseToOtherRaisedStreet1+%s,
+                    raiseToOtherRaisedStreet2=raiseToOtherRaisedStreet2+%s,
+                    raiseToOtherRaisedStreet3=raiseToOtherRaisedStreet3+%s,
+                    raiseToOtherRaisedStreet4=raiseToOtherRaisedStreet4+%s,
                     wonWhenSeenStreet1=wonWhenSeenStreet1+%s,
                     wonWhenSeenStreet2=wonWhenSeenStreet2+%s,
                     wonWhenSeenStreet3=wonWhenSeenStreet3+%s,
@@ -7787,6 +12119,22 @@ class Sql:
                     foldToStreet3CBDone=foldToStreet3CBDone+%s,
                     foldToStreet4CBChance=foldToStreet4CBChance+%s,
                     foldToStreet4CBDone=foldToStreet4CBDone+%s,
+                    callToStreet1CBChance=callToStreet1CBChance+%s,
+                    callToStreet1CBDone=callToStreet1CBDone+%s,
+                    callToStreet2CBChance=callToStreet2CBChance+%s,
+                    callToStreet2CBDone=callToStreet2CBDone+%s,
+                    callToStreet3CBChance=callToStreet3CBChance+%s,
+                    callToStreet3CBDone=callToStreet3CBDone+%s,
+                    callToStreet4CBChance=callToStreet4CBChance+%s,
+                    callToStreet4CBDone=callToStreet4CBDone+%s,
+                    raiseToStreet1CBChance=raiseToStreet1CBChance+%s,
+                    raiseToStreet1CBDone=raiseToStreet1CBDone+%s,
+                    raiseToStreet2CBChance=raiseToStreet2CBChance+%s,
+                    raiseToStreet2CBDone=raiseToStreet2CBDone+%s,
+                    raiseToStreet3CBChance=raiseToStreet3CBChance+%s,
+                    raiseToStreet3CBDone=raiseToStreet3CBDone+%s,
+                    raiseToStreet4CBChance=raiseToStreet4CBChance+%s,
+                    raiseToStreet4CBDone=raiseToStreet4CBDone+%s,
                     common=common+%s,
                     committed=committed+%s,
                     winnings=winnings+%s,
@@ -7810,16 +12158,19 @@ class Sql:
                     street4CheckCallRaiseChance=street4CheckCallRaiseChance+%s,
                     street4CheckCallDone=street4CheckCallDone+%s,
                     street4CheckRaiseDone=street4CheckRaiseDone+%s,
+                    street1foldToCheckRaiseChance=street1foldToCheckRaiseChance+%s,
+                    street1foldToCheckRaiseDone=street1foldToCheckRaiseDone+%s,
+                    street2foldToCheckRaiseChance=street2foldToCheckRaiseChance+%s,
+                    street2foldToCheckRaiseDone=street2foldToCheckRaiseDone+%s,
+                    street3foldToCheckRaiseChance=street3foldToCheckRaiseChance+%s,
+                    street3foldToCheckRaiseDone=street3foldToCheckRaiseDone+%s,
+                    street4foldToCheckRaiseChance=street4foldToCheckRaiseChance+%s,
+                    street4foldToCheckRaiseDone=street4foldToCheckRaiseDone+%s,
                     street0Calls=street0Calls+%s,
                     street1Calls=street1Calls+%s,
                     street2Calls=street2Calls+%s,
                     street3Calls=street3Calls+%s,
-                    street4Calls=street4Calls+%s,
-                    street0Bets=street0Bets+%s, 
-                    street1Bets=street1Bets+%s,
-                    street2Bets=street2Bets+%s, 
-                    street3Bets=street3Bets+%s,
-                    street4Bets=street4Bets+%s, 
+                    street4Calls=street4Calls+%s, 
                     street0Raises=street0Raises+%s,
                     street1Raises=street1Raises+%s,
                     street2Raises=street2Raises+%s,
@@ -7827,7 +12178,19 @@ class Sql:
                     street4Raises=street4Raises+%s,
                     street1Discards=street1Discards+%s,
                     street2Discards=street2Discards+%s,
-                    street3Discards=street3Discards+%s
+                    street3Discards=street3Discards+%s,
+             
+                    street0Callers=street0Callers+%s,
+                    street1Callers=street1Callers+%s,
+                    street2Callers=street2Callers+%s,
+                    street3Callers=street3Callers+%s,
+                    street4Callers=street4Callers+%s,
+                    
+                    street0Aggressors=street0Aggressors+%s,
+                    street1Aggressors=street1Aggressors+%s,
+                    street2Aggressors=street2Aggressors+%s,
+                    street3Aggressors=street3Aggressors+%s,
+                    street4Aggressors=street4Aggressors+%s
         WHERE id=%s"""
             
         self.query['select_positionscache_ring'] = """
@@ -7918,6 +12281,7 @@ class Sql:
                     startTime,
                     endTime,
                     n,
+                    
                     street0VPIChance,
                     street0VPI,
                     street0AggrChance,
@@ -7940,6 +12304,66 @@ class Sql:
                     street0_FoldTo4BDone,
                     street0_SqueezeChance,
                     street0_SqueezeDone,
+                    street0_FoldToSqueezeChance,
+                    street0_FoldToSqueezeDone,
+                    
+                    street1_2BChance,
+                    street1_2BDone,
+                    street1_3BChance,
+                    street1_3BDone,
+                    street1_4BChance,
+                    street1_4BDone,
+                    street1_C4BChance,
+                    street1_C4BDone,
+                    street1_FoldTo2BChance,
+                    street1_FoldTo2BDone,
+                    street1_FoldTo3BChance,
+                    street1_FoldTo3BDone,
+                    street1_FoldTo4BChance,
+                    street1_FoldTo4BDone,
+                    street1_SqueezeChance,
+                    street1_SqueezeDone,
+                    street1_FoldToSqueezeChance,
+                    street1_FoldToSqueezeDone,
+                    
+                    street2_2BChance,
+                    street2_2BDone,
+                    street2_3BChance,
+                    street2_3BDone,
+                    street2_4BChance,
+                    street2_4BDone,
+                    street2_C4BChance,
+                    street2_C4BDone,
+                    street2_FoldTo2BChance,
+                    street2_FoldTo2BDone,
+                    street2_FoldTo3BChance,
+                    street2_FoldTo3BDone,
+                    street2_FoldTo4BChance,
+                    street2_FoldTo4BDone,
+                    street2_SqueezeChance,
+                    street2_SqueezeDone,
+                    street2_FoldToSqueezeChance,
+                    street2_FoldToSqueezeDone,
+                    
+                    street3_2BChance,
+                    street3_2BDone,
+                    street3_3BChance,
+                    street3_3BDone,
+                    street3_4BChance,
+                    street3_4BDone,
+                    street3_C4BChance,
+                    street3_C4BDone,
+                    street3_FoldTo2BChance,
+                    street3_FoldTo2BDone,
+                    street3_FoldTo3BChance,
+                    street3_FoldTo3BDone,
+                    street3_FoldTo4BChance,
+                    street3_FoldTo4BDone,
+                    street3_SqueezeChance,
+                    street3_SqueezeDone,
+                    street3_FoldToSqueezeChance,
+                    street3_FoldToSqueezeDone,
+                
                     raiseToStealChance,
                     raiseToStealDone,
                     stealChance,
@@ -7964,6 +12388,16 @@ class Sql:
                     foldToOtherRaisedStreet2,
                     foldToOtherRaisedStreet3,
                     foldToOtherRaisedStreet4,
+                    callToOtherRaisedStreet0,
+                    callToOtherRaisedStreet1,
+                    callToOtherRaisedStreet2,
+                    callToOtherRaisedStreet3,
+                    callToOtherRaisedStreet4,
+                    raiseToOtherRaisedStreet0,
+                    raiseToOtherRaisedStreet1,
+                    raiseToOtherRaisedStreet2,
+                    raiseToOtherRaisedStreet3,
+                    raiseToOtherRaisedStreet4,
                     wonWhenSeenStreet1,
                     wonWhenSeenStreet2,
                     wonWhenSeenStreet3,
@@ -7991,6 +12425,22 @@ class Sql:
                     foldToStreet3CBDone,
                     foldToStreet4CBChance,
                     foldToStreet4CBDone,
+                    callToStreet1CBChance,
+                    callToStreet1CBDone,
+                    callToStreet2CBChance,
+                    callToStreet2CBDone,
+                    callToStreet3CBChance,
+                    callToStreet3CBDone,
+                    callToStreet4CBChance,
+                    callToStreet4CBDone,
+                    raiseToStreet1CBChance,
+                    raiseToStreet1CBDone,
+                    raiseToStreet2CBChance,
+                    raiseToStreet2CBDone,
+                    raiseToStreet3CBChance,
+                    raiseToStreet3CBDone,
+                    raiseToStreet4CBChance,
+                    raiseToStreet4CBDone,
                     common,
                     committed,
                     winnings,
@@ -8014,16 +12464,19 @@ class Sql:
                     street4CheckCallRaiseChance,
                     street4CheckCallDone,
                     street4CheckRaiseDone,
+                    street1foldToCheckRaiseChance,
+                    street1foldToCheckRaiseDone,
+                    street2foldToCheckRaiseChance,
+                    street2foldToCheckRaiseDone,
+                    street3foldToCheckRaiseChance,
+                    street3foldToCheckRaiseDone,
+                    street4foldToCheckRaiseChance,
+                    street4foldToCheckRaiseDone,
                     street0Calls,
                     street1Calls,
                     street2Calls,
                     street3Calls,
                     street4Calls,
-                    street0Bets,
-                    street1Bets,
-                    street2Bets,
-                    street3Bets,
-                    street4Bets,
                     street0Raises,
                     street1Raises,
                     street2Raises,
@@ -8031,7 +12484,19 @@ class Sql:
                     street4Raises,
                     street1Discards,
                     street2Discards,
-                    street3Discards
+                    street3Discards,
+                
+                    street0Callers,
+                    street1Callers,
+                    street2Callers,
+                    street3Callers,
+                    street4Callers,
+                    
+                    street0Aggressors,
+                    street1Aggressors,
+                    street2Aggressors,
+                    street3Aggressors,
+                    street4Aggressors
                     FROM SessionsCache
                     WHERE endTime>=%s
                     AND startTime<=%s
@@ -8070,6 +12535,7 @@ class Sql:
                     gametypeId,
                     playerId,
                     n,
+                    
                     street0VPIChance,
                     street0VPI,
                     street0AggrChance,
@@ -8092,6 +12558,66 @@ class Sql:
                     street0_FoldTo4BDone,
                     street0_SqueezeChance,
                     street0_SqueezeDone,
+                    street0_FoldToSqueezeChance,
+                    street0_FoldToSqueezeDone,
+                    
+                    street1_2BChance,
+                    street1_2BDone,
+                    street1_3BChance,
+                    street1_3BDone,
+                    street1_4BChance,
+                    street1_4BDone,
+                    street1_C4BChance,
+                    street1_C4BDone,
+                    street1_FoldTo2BChance,
+                    street1_FoldTo2BDone,
+                    street1_FoldTo3BChance,
+                    street1_FoldTo3BDone,
+                    street1_FoldTo4BChance,
+                    street1_FoldTo4BDone,
+                    street1_SqueezeChance,
+                    street1_SqueezeDone,
+                    street1_FoldToSqueezeChance,
+                    street1_FoldToSqueezeDone,
+                    
+                    street2_2BChance,
+                    street2_2BDone,
+                    street2_3BChance,
+                    street2_3BDone,
+                    street2_4BChance,
+                    street2_4BDone,
+                    street2_C4BChance,
+                    street2_C4BDone,
+                    street2_FoldTo2BChance,
+                    street2_FoldTo2BDone,
+                    street2_FoldTo3BChance,
+                    street2_FoldTo3BDone,
+                    street2_FoldTo4BChance,
+                    street2_FoldTo4BDone,
+                    street2_SqueezeChance,
+                    street2_SqueezeDone,
+                    street2_FoldToSqueezeChance,
+                    street2_FoldToSqueezeDone,
+                    
+                    street3_2BChance,
+                    street3_2BDone,
+                    street3_3BChance,
+                    street3_3BDone,
+                    street3_4BChance,
+                    street3_4BDone,
+                    street3_C4BChance,
+                    street3_C4BDone,
+                    street3_FoldTo2BChance,
+                    street3_FoldTo2BDone,
+                    street3_FoldTo3BChance,
+                    street3_FoldTo3BDone,
+                    street3_FoldTo4BChance,
+                    street3_FoldTo4BDone,
+                    street3_SqueezeChance,
+                    street3_SqueezeDone,
+                    street3_FoldToSqueezeChance,
+                    street3_FoldToSqueezeDone,
+                    
                     raiseToStealChance,
                     raiseToStealDone,
                     stealChance,
@@ -8116,6 +12642,16 @@ class Sql:
                     foldToOtherRaisedStreet2,
                     foldToOtherRaisedStreet3,
                     foldToOtherRaisedStreet4,
+                    callToOtherRaisedStreet0,
+                    callToOtherRaisedStreet1,
+                    callToOtherRaisedStreet2,
+                    callToOtherRaisedStreet3,
+                    callToOtherRaisedStreet4,
+                    raiseToOtherRaisedStreet0,
+                    raiseToOtherRaisedStreet1,
+                    raiseToOtherRaisedStreet2,
+                    raiseToOtherRaisedStreet3,
+                    raiseToOtherRaisedStreet4,
                     wonWhenSeenStreet1,
                     wonWhenSeenStreet2,
                     wonWhenSeenStreet3,
@@ -8143,6 +12679,22 @@ class Sql:
                     foldToStreet3CBDone,
                     foldToStreet4CBChance,
                     foldToStreet4CBDone,
+                    callToStreet1CBChance,
+                    callToStreet1CBDone,
+                    callToStreet2CBChance,
+                    callToStreet2CBDone,
+                    callToStreet3CBChance,
+                    callToStreet3CBDone,
+                    callToStreet4CBChance,
+                    callToStreet4CBDone,
+                    raiseToStreet1CBChance,
+                    raiseToStreet1CBDone,
+                    raiseToStreet2CBChance,
+                    raiseToStreet2CBDone,
+                    raiseToStreet3CBChance,
+                    raiseToStreet3CBDone,
+                    raiseToStreet4CBChance,
+                    raiseToStreet4CBDone,
                     common,
                     committed,
                     winnings,
@@ -8166,16 +12718,19 @@ class Sql:
                     street4CheckCallRaiseChance,
                     street4CheckCallDone,
                     street4CheckRaiseDone,
+                    street1foldToCheckRaiseChance,
+                    street1foldToCheckRaiseDone,
+                    street2foldToCheckRaiseChance,
+                    street2foldToCheckRaiseDone,
+                    street3foldToCheckRaiseChance,
+                    street3foldToCheckRaiseDone,
+                    street4foldToCheckRaiseChance,
+                    street4foldToCheckRaiseDone,
                     street0Calls,
                     street1Calls,
                     street2Calls,
                     street3Calls,
                     street4Calls,
-                    street0Bets,
-                    street1Bets,
-                    street2Bets,
-                    street3Bets,
-                    street4Bets,
                     street0Raises,
                     street1Raises,
                     street2Raises,
@@ -8183,7 +12738,19 @@ class Sql:
                     street4Raises,
                     street1Discards,
                     street2Discards,
-                    street3Discards
+                    street3Discards,
+                
+                    street0Callers,
+                    street1Callers,
+                    street2Callers,
+                    street3Callers,
+                    street4Callers,
+                    
+                    street0Aggressors,
+                    street1Aggressors,
+                    street2Aggressors,
+                    street3Aggressors,
+                    street4Aggressors
                     )
                     values (%s, %s, %s, %s, %s,
                             %s, %s, %s, %s, %s,
@@ -8208,7 +12775,26 @@ class Sql:
                             %s, %s, %s, %s, %s,
                             %s, %s, %s, %s, %s,
                             %s, %s, %s, %s, %s,
-                            %s, %s, %s, %s, %s)"""
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s)"""
                             
         self.query['insert_TC'] = """insert into TourneysCache (
                     sessionId,
@@ -8217,6 +12803,7 @@ class Sql:
                     tourneyId,
                     playerId,
                     n,
+                    
                     street0VPIChance,
                     street0VPI,
                     street0AggrChance,
@@ -8239,6 +12826,66 @@ class Sql:
                     street0_FoldTo4BDone,
                     street0_SqueezeChance,
                     street0_SqueezeDone,
+                    street0_FoldToSqueezeChance,
+                    street0_FoldToSqueezeDone,
+                    
+                    street1_2BChance,
+                    street1_2BDone,
+                    street1_3BChance,
+                    street1_3BDone,
+                    street1_4BChance,
+                    street1_4BDone,
+                    street1_C4BChance,
+                    street1_C4BDone,
+                    street1_FoldTo2BChance,
+                    street1_FoldTo2BDone,
+                    street1_FoldTo3BChance,
+                    street1_FoldTo3BDone,
+                    street1_FoldTo4BChance,
+                    street1_FoldTo4BDone,
+                    street1_SqueezeChance,
+                    street1_SqueezeDone,
+                    street1_FoldToSqueezeChance,
+                    street1_FoldToSqueezeDone,
+                    
+                    street2_2BChance,
+                    street2_2BDone,
+                    street2_3BChance,
+                    street2_3BDone,
+                    street2_4BChance,
+                    street2_4BDone,
+                    street2_C4BChance,
+                    street2_C4BDone,
+                    street2_FoldTo2BChance,
+                    street2_FoldTo2BDone,
+                    street2_FoldTo3BChance,
+                    street2_FoldTo3BDone,
+                    street2_FoldTo4BChance,
+                    street2_FoldTo4BDone,
+                    street2_SqueezeChance,
+                    street2_SqueezeDone,
+                    street2_FoldToSqueezeChance,
+                    street2_FoldToSqueezeDone,
+                    
+                    street3_2BChance,
+                    street3_2BDone,
+                    street3_3BChance,
+                    street3_3BDone,
+                    street3_4BChance,
+                    street3_4BDone,
+                    street3_C4BChance,
+                    street3_C4BDone,
+                    street3_FoldTo2BChance,
+                    street3_FoldTo2BDone,
+                    street3_FoldTo3BChance,
+                    street3_FoldTo3BDone,
+                    street3_FoldTo4BChance,
+                    street3_FoldTo4BDone,
+                    street3_SqueezeChance,
+                    street3_SqueezeDone,
+                    street3_FoldToSqueezeChance,
+                    street3_FoldToSqueezeDone,
+                    
                     raiseToStealChance,
                     raiseToStealDone,
                     stealChance,
@@ -8263,6 +12910,16 @@ class Sql:
                     foldToOtherRaisedStreet2,
                     foldToOtherRaisedStreet3,
                     foldToOtherRaisedStreet4,
+                    callToOtherRaisedStreet0,
+                    callToOtherRaisedStreet1,
+                    callToOtherRaisedStreet2,
+                    callToOtherRaisedStreet3,
+                    callToOtherRaisedStreet4,
+                    raiseToOtherRaisedStreet0,
+                    raiseToOtherRaisedStreet1,
+                    raiseToOtherRaisedStreet2,
+                    raiseToOtherRaisedStreet3,
+                    raiseToOtherRaisedStreet4,
                     wonWhenSeenStreet1,
                     wonWhenSeenStreet2,
                     wonWhenSeenStreet3,
@@ -8290,6 +12947,22 @@ class Sql:
                     foldToStreet3CBDone,
                     foldToStreet4CBChance,
                     foldToStreet4CBDone,
+                    callToStreet1CBChance,
+                    callToStreet1CBDone,
+                    callToStreet2CBChance,
+                    callToStreet2CBDone,
+                    callToStreet3CBChance,
+                    callToStreet3CBDone,
+                    callToStreet4CBChance,
+                    callToStreet4CBDone,
+                    raiseToStreet1CBChance,
+                    raiseToStreet1CBDone,
+                    raiseToStreet2CBChance,
+                    raiseToStreet2CBDone,
+                    raiseToStreet3CBChance,
+                    raiseToStreet3CBDone,
+                    raiseToStreet4CBChance,
+                    raiseToStreet4CBDone,
                     common,
                     committed,
                     winnings,
@@ -8313,16 +12986,19 @@ class Sql:
                     street4CheckCallRaiseChance,
                     street4CheckCallDone,
                     street4CheckRaiseDone,
+                    street1foldToCheckRaiseChance,
+                    street1foldToCheckRaiseDone,
+                    street2foldToCheckRaiseChance,
+                    street2foldToCheckRaiseDone,
+                    street3foldToCheckRaiseChance,
+                    street3foldToCheckRaiseDone,
+                    street4foldToCheckRaiseChance,
+                    street4foldToCheckRaiseDone,
                     street0Calls,
                     street1Calls,
                     street2Calls,
                     street3Calls,
                     street4Calls,
-                    street0Bets,
-                    street1Bets,
-                    street2Bets,
-                    street3Bets,
-                    street4Bets,
                     street0Raises,
                     street1Raises,
                     street2Raises,
@@ -8330,7 +13006,19 @@ class Sql:
                     street4Raises,
                     street1Discards,
                     street2Discards,
-                    street3Discards
+                    street3Discards,
+                
+                    street0Callers,
+                    street1Callers,
+                    street2Callers,
+                    street3Callers,
+                    street4Callers,
+                    
+                    street0Aggressors,
+                    street1Aggressors,
+                    street2Aggressors,
+                    street3Aggressors,
+                    street4Aggressors
                     )
                     values (%s, %s, %s, %s, %s,
                             %s, %s, %s, %s, %s,
@@ -8355,7 +13043,26 @@ class Sql:
                             %s, %s, %s, %s, %s,
                             %s, %s, %s, %s, %s,
                             %s, %s, %s, %s, %s,
-                            %s, %s, %s, %s, %s)"""
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s)"""
                     
         ####################################
         # update
@@ -8380,6 +13087,7 @@ class Sql:
                     startTime=%s,
                     endTime=%s,
                     n=n+%s,
+                    
                     street0VPIChance=street0VPIChance+%s,
                     street0VPI=street0VPI+%s,
                     street0AggrChance=street0AggrChance+%s,
@@ -8402,6 +13110,66 @@ class Sql:
                     street0_FoldTo4BDone=street0_FoldTo4BDone+%s,
                     street0_SqueezeChance=street0_SqueezeChance+%s,
                     street0_SqueezeDone=street0_SqueezeDone+%s,
+                    street0_FoldToSqueezeChance=street0_FoldToSqueezeChance+%s,
+                    street0_FoldToSqueezeDone=street0_FoldToSqueezeDone+%s,
+                    
+                    street1_2BChance=street1_2BChance+%s,
+                    street1_2BDone=street1_2BDone+%s,
+                    street1_3BChance=street1_3BChance+%s,
+                    street1_3BDone=street1_3BDone+%s,
+                    street1_4BChance=street1_4BChance+%s,
+                    street1_4BDone=street1_4BDone+%s,
+                    street1_C4BChance=street1_C4BChance+%s,
+                    street1_C4BDone=street1_C4BDone+%s,
+                    street1_FoldTo2BChance=street1_FoldTo2BChance+%s,
+                    street1_FoldTo2BDone=street1_FoldTo2BDone+%s,
+                    street1_FoldTo3BChance=street1_FoldTo3BChance+%s,
+                    street1_FoldTo3BDone=street1_FoldTo3BDone+%s,
+                    street1_FoldTo4BChance=street1_FoldTo4BChance+%s,
+                    street1_FoldTo4BDone=street1_FoldTo4BDone+%s,
+                    street1_SqueezeChance=street1_SqueezeChance+%s,
+                    street1_SqueezeDone=street1_SqueezeDone+%s,
+                    street1_FoldToSqueezeChance=street1_FoldToSqueezeChance+%s,
+                    street1_FoldToSqueezeDone=street1_FoldToSqueezeDone+%s,
+                    
+                    street2_2BChance=street2_2BChance+%s,
+                    street2_2BDone=street2_2BDone+%s,
+                    street2_3BChance=street2_3BChance+%s,
+                    street2_3BDone=street2_3BDone+%s,
+                    street2_4BChance=street2_4BChance+%s,
+                    street2_4BDone=street2_4BDone+%s,
+                    street2_C4BChance=street2_C4BChance+%s,
+                    street2_C4BDone=street2_C4BDone+%s,
+                    street2_FoldTo2BChance=street2_FoldTo2BChance+%s,
+                    street2_FoldTo2BDone=street2_FoldTo2BDone+%s,
+                    street2_FoldTo3BChance=street2_FoldTo3BChance+%s,
+                    street2_FoldTo3BDone=street2_FoldTo3BDone+%s,
+                    street2_FoldTo4BChance=street2_FoldTo4BChance+%s,
+                    street2_FoldTo4BDone=street2_FoldTo4BDone+%s,
+                    street2_SqueezeChance=street2_SqueezeChance+%s,
+                    street2_SqueezeDone=street2_SqueezeDone+%s,
+                    street2_FoldToSqueezeChance=street2_FoldToSqueezeChance+%s,
+                    street2_FoldToSqueezeDone=street2_FoldToSqueezeDone+%s,
+                    
+                    street3_2BChance=street3_2BChance+%s,
+                    street3_2BDone=street3_2BDone+%s,
+                    street3_3BChance=street3_3BChance+%s,
+                    street3_3BDone=street3_3BDone+%s,
+                    street3_4BChance=street3_4BChance+%s,
+                    street3_4BDone=street3_4BDone+%s,
+                    street3_C4BChance=street3_C4BChance+%s,
+                    street3_C4BDone=street3_C4BDone+%s,
+                    street3_FoldTo2BChance=street3_FoldTo2BChance+%s,
+                    street3_FoldTo2BDone=street3_FoldTo2BDone+%s,
+                    street3_FoldTo3BChance=street3_FoldTo3BChance+%s,
+                    street3_FoldTo3BDone=street3_FoldTo3BDone+%s,
+                    street3_FoldTo4BChance=street3_FoldTo4BChance+%s,
+                    street3_FoldTo4BDone=street3_FoldTo4BDone+%s,
+                    street3_SqueezeChance=street3_SqueezeChance+%s,
+                    street3_SqueezeDone=street3_SqueezeDone+%s,
+                    street3_FoldToSqueezeChance=street3_FoldToSqueezeChance+%s,
+                    street3_FoldToSqueezeDone=street3_FoldToSqueezeDone+%s,
+            
                     raiseToStealChance=raiseToStealChance+%s,
                     raiseToStealDone=raiseToStealDone+%s,
                     stealChance=stealChance+%s,
@@ -8426,6 +13194,16 @@ class Sql:
                     foldToOtherRaisedStreet2=foldToOtherRaisedStreet2+%s,
                     foldToOtherRaisedStreet3=foldToOtherRaisedStreet3+%s,
                     foldToOtherRaisedStreet4=foldToOtherRaisedStreet4+%s,
+                    callToOtherRaisedStreet0=callToOtherRaisedStreet0+%s,
+                    callToOtherRaisedStreet1=callToOtherRaisedStreet1+%s,
+                    callToOtherRaisedStreet2=callToOtherRaisedStreet2+%s,
+                    callToOtherRaisedStreet3=callToOtherRaisedStreet3+%s,
+                    callToOtherRaisedStreet4=callToOtherRaisedStreet4+%s,
+                    raiseToOtherRaisedStreet0=raiseToOtherRaisedStreet0+%s,
+                    raiseToOtherRaisedStreet1=raiseToOtherRaisedStreet1+%s,
+                    raiseToOtherRaisedStreet2=raiseToOtherRaisedStreet2+%s,
+                    raiseToOtherRaisedStreet3=raiseToOtherRaisedStreet3+%s,
+                    raiseToOtherRaisedStreet4=raiseToOtherRaisedStreet4+%s,
                     wonWhenSeenStreet1=wonWhenSeenStreet1+%s,
                     wonWhenSeenStreet2=wonWhenSeenStreet2+%s,
                     wonWhenSeenStreet3=wonWhenSeenStreet3+%s,
@@ -8453,6 +13231,22 @@ class Sql:
                     foldToStreet3CBDone=foldToStreet3CBDone+%s,
                     foldToStreet4CBChance=foldToStreet4CBChance+%s,
                     foldToStreet4CBDone=foldToStreet4CBDone+%s,
+                    callToStreet1CBChance=callToStreet1CBChance+%s,
+                    callToStreet1CBDone=callToStreet1CBDone+%s,
+                    callToStreet2CBChance=callToStreet2CBChance+%s,
+                    callToStreet2CBDone=callToStreet2CBDone+%s,
+                    callToStreet3CBChance=callToStreet3CBChance+%s,
+                    callToStreet3CBDone=callToStreet3CBDone+%s,
+                    callToStreet4CBChance=callToStreet4CBChance+%s,
+                    callToStreet4CBDone=callToStreet4CBDone+%s,
+                    raiseToStreet1CBChance=raiseToStreet1CBChance+%s,
+                    raiseToStreet1CBDone=raiseToStreet1CBDone+%s,
+                    raiseToStreet2CBChance=raiseToStreet2CBChance+%s,
+                    raiseToStreet2CBDone=raiseToStreet2CBDone+%s,
+                    raiseToStreet3CBChance=raiseToStreet3CBChance+%s,
+                    raiseToStreet3CBDone=raiseToStreet3CBDone+%s,
+                    raiseToStreet4CBChance=raiseToStreet4CBChance+%s,
+                    raiseToStreet4CBDone=raiseToStreet4CBDone+%s,
                     common=common+%s,
                     committed=committed+%s,
                     winnings=winnings+%s,
@@ -8476,16 +13270,19 @@ class Sql:
                     street4CheckCallRaiseChance=street4CheckCallRaiseChance+%s,
                     street4CheckCallDone=street4CheckCallDone+%s,
                     street4CheckRaiseDone=street4CheckRaiseDone+%s,
+                    street1foldToCheckRaiseChance=street1foldToCheckRaiseChance+%s,
+                    street1foldToCheckRaiseDone=street1foldToCheckRaiseDone+%s,
+                    street2foldToCheckRaiseChance=street2foldToCheckRaiseChance+%s,
+                    street2foldToCheckRaiseDone=street2foldToCheckRaiseDone+%s,
+                    street3foldToCheckRaiseChance=street3foldToCheckRaiseChance+%s,
+                    street3foldToCheckRaiseDone=street3foldToCheckRaiseDone+%s,
+                    street4foldToCheckRaiseChance=street4foldToCheckRaiseChance+%s,
+                    street4foldToCheckRaiseDone=street4foldToCheckRaiseDone+%s,
                     street0Calls=street0Calls+%s,
                     street1Calls=street1Calls+%s,
                     street2Calls=street2Calls+%s,
                     street3Calls=street3Calls+%s,
                     street4Calls=street4Calls+%s,
-                    street0Bets=street0Bets+%s, 
-                    street1Bets=street1Bets+%s,
-                    street2Bets=street2Bets+%s, 
-                    street3Bets=street3Bets+%s,
-                    street4Bets=street4Bets+%s, 
                     street0Raises=street0Raises+%s,
                     street1Raises=street1Raises+%s,
                     street2Raises=street2Raises+%s,
@@ -8493,13 +13290,26 @@ class Sql:
                     street4Raises=street4Raises+%s,
                     street1Discards=street1Discards+%s,
                     street2Discards=street2Discards+%s,
-                    street3Discards=street3Discards+%s
+                    street3Discards=street3Discards+%s,
+             
+                    street0Callers=street0Callers+%s,
+                    street1Callers=street1Callers+%s,
+                    street2Callers=street2Callers+%s,
+                    street3Callers=street3Callers+%s,
+                    street4Callers=street4Callers+%s,
+                    
+                    street0Aggressors=street0Aggressors+%s,
+                    street1Aggressors=street1Aggressors+%s,
+                    street2Aggressors=street2Aggressors+%s,
+                    street3Aggressors=street3Aggressors+%s,
+                    street4Aggressors=street4Aggressors+%s
                     WHERE id=%s"""
                     
         self.query['update_TC'] = """
                     UPDATE TourneysCache SET
                     <UPDATE>
                     n=n+%s,
+                    
                     street0VPIChance=street0VPIChance+%s,
                     street0VPI=street0VPI+%s,
                     street0AggrChance=street0AggrChance+%s,
@@ -8522,6 +13332,66 @@ class Sql:
                     street0_FoldTo4BDone=street0_FoldTo4BDone+%s,
                     street0_SqueezeChance=street0_SqueezeChance+%s,
                     street0_SqueezeDone=street0_SqueezeDone+%s,
+                    street0_FoldToSqueezeChance=street0_FoldToSqueezeChance+%s,
+                    street0_FoldToSqueezeDone=street0_FoldToSqueezeDone+%s,
+                    
+                    street1_2BChance=street1_2BChance+%s,
+                    street1_2BDone=street1_2BDone+%s,
+                    street1_3BChance=street1_3BChance+%s,
+                    street1_3BDone=street1_3BDone+%s,
+                    street1_4BChance=street1_4BChance+%s,
+                    street1_4BDone=street1_4BDone+%s,
+                    street1_C4BChance=street1_C4BChance+%s,
+                    street1_C4BDone=street1_C4BDone+%s,
+                    street1_FoldTo2BChance=street1_FoldTo2BChance+%s,
+                    street1_FoldTo2BDone=street1_FoldTo2BDone+%s,
+                    street1_FoldTo3BChance=street1_FoldTo3BChance+%s,
+                    street1_FoldTo3BDone=street1_FoldTo3BDone+%s,
+                    street1_FoldTo4BChance=street1_FoldTo4BChance+%s,
+                    street1_FoldTo4BDone=street1_FoldTo4BDone+%s,
+                    street1_SqueezeChance=street1_SqueezeChance+%s,
+                    street1_SqueezeDone=street1_SqueezeDone+%s,
+                    street1_FoldToSqueezeChance=street1_FoldToSqueezeChance+%s,
+                    street1_FoldToSqueezeDone=street1_FoldToSqueezeDone+%s,
+                    
+                    street2_2BChance=street2_2BChance+%s,
+                    street2_2BDone=street2_2BDone+%s,
+                    street2_3BChance=street2_3BChance+%s,
+                    street2_3BDone=street2_3BDone+%s,
+                    street2_4BChance=street2_4BChance+%s,
+                    street2_4BDone=street2_4BDone+%s,
+                    street2_C4BChance=street2_C4BChance+%s,
+                    street2_C4BDone=street2_C4BDone+%s,
+                    street2_FoldTo2BChance=street2_FoldTo2BChance+%s,
+                    street2_FoldTo2BDone=street2_FoldTo2BDone+%s,
+                    street2_FoldTo3BChance=street2_FoldTo3BChance+%s,
+                    street2_FoldTo3BDone=street2_FoldTo3BDone+%s,
+                    street2_FoldTo4BChance=street2_FoldTo4BChance+%s,
+                    street2_FoldTo4BDone=street2_FoldTo4BDone+%s,
+                    street2_SqueezeChance=street2_SqueezeChance+%s,
+                    street2_SqueezeDone=street2_SqueezeDone+%s,
+                    street2_FoldToSqueezeChance=street2_FoldToSqueezeChance+%s,
+                    street2_FoldToSqueezeDone=street2_FoldToSqueezeDone+%s,
+                    
+                    street3_2BChance=street3_2BChance+%s,
+                    street3_2BDone=street3_2BDone+%s,
+                    street3_3BChance=street3_3BChance+%s,
+                    street3_3BDone=street3_3BDone+%s,
+                    street3_4BChance=street3_4BChance+%s,
+                    street3_4BDone=street3_4BDone+%s,
+                    street3_C4BChance=street3_C4BChance+%s,
+                    street3_C4BDone=street3_C4BDone+%s,
+                    street3_FoldTo2BChance=street3_FoldTo2BChance+%s,
+                    street3_FoldTo2BDone=street3_FoldTo2BDone+%s,
+                    street3_FoldTo3BChance=street3_FoldTo3BChance+%s,
+                    street3_FoldTo3BDone=street3_FoldTo3BDone+%s,
+                    street3_FoldTo4BChance=street3_FoldTo4BChance+%s,
+                    street3_FoldTo4BDone=street3_FoldTo4BDone+%s,
+                    street3_SqueezeChance=street3_SqueezeChance+%s,
+                    street3_SqueezeDone=street3_SqueezeDone+%s,
+                    street3_FoldToSqueezeChance=street3_FoldToSqueezeChance+%s,
+                    street3_FoldToSqueezeDone=street3_FoldToSqueezeDone+%s,
+            
                     raiseToStealChance=raiseToStealChance+%s,
                     raiseToStealDone=raiseToStealDone+%s,
                     stealChance=stealChance+%s,
@@ -8546,6 +13416,16 @@ class Sql:
                     foldToOtherRaisedStreet2=foldToOtherRaisedStreet2+%s,
                     foldToOtherRaisedStreet3=foldToOtherRaisedStreet3+%s,
                     foldToOtherRaisedStreet4=foldToOtherRaisedStreet4+%s,
+                    callToOtherRaisedStreet0=callToOtherRaisedStreet0+%s,
+                    callToOtherRaisedStreet1=callToOtherRaisedStreet1+%s,
+                    callToOtherRaisedStreet2=callToOtherRaisedStreet2+%s,
+                    callToOtherRaisedStreet3=callToOtherRaisedStreet3+%s,
+                    callToOtherRaisedStreet4=callToOtherRaisedStreet4+%s,
+                    raiseToOtherRaisedStreet0=raiseToOtherRaisedStreet0+%s,
+                    raiseToOtherRaisedStreet1=raiseToOtherRaisedStreet1+%s,
+                    raiseToOtherRaisedStreet2=raiseToOtherRaisedStreet2+%s,
+                    raiseToOtherRaisedStreet3=raiseToOtherRaisedStreet3+%s,
+                    raiseToOtherRaisedStreet4=raiseToOtherRaisedStreet4+%s,
                     wonWhenSeenStreet1=wonWhenSeenStreet1+%s,
                     wonWhenSeenStreet2=wonWhenSeenStreet2+%s,
                     wonWhenSeenStreet3=wonWhenSeenStreet3+%s,
@@ -8573,6 +13453,22 @@ class Sql:
                     foldToStreet3CBDone=foldToStreet3CBDone+%s,
                     foldToStreet4CBChance=foldToStreet4CBChance+%s,
                     foldToStreet4CBDone=foldToStreet4CBDone+%s,
+                    callToStreet1CBChance=callToStreet1CBChance+%s,
+                    callToStreet1CBDone=callToStreet1CBDone+%s,
+                    callToStreet2CBChance=callToStreet2CBChance+%s,
+                    callToStreet2CBDone=callToStreet2CBDone+%s,
+                    callToStreet3CBChance=callToStreet3CBChance+%s,
+                    callToStreet3CBDone=callToStreet3CBDone+%s,
+                    callToStreet4CBChance=callToStreet4CBChance+%s,
+                    callToStreet4CBDone=callToStreet4CBDone+%s,
+                    raiseToStreet1CBChance=raiseToStreet1CBChance+%s,
+                    raiseToStreet1CBDone=raiseToStreet1CBDone+%s,
+                    raiseToStreet2CBChance=raiseToStreet2CBChance+%s,
+                    raiseToStreet2CBDone=raiseToStreet2CBDone+%s,
+                    raiseToStreet3CBChance=raiseToStreet3CBChance+%s,
+                    raiseToStreet3CBDone=raiseToStreet3CBDone+%s,
+                    raiseToStreet4CBChance=raiseToStreet4CBChance+%s,
+                    raiseToStreet4CBDone=raiseToStreet4CBDone+%s,
                     common=common+%s,
                     committed=committed+%s,
                     winnings=winnings+%s,
@@ -8596,16 +13492,19 @@ class Sql:
                     street4CheckCallRaiseChance=street4CheckCallRaiseChance+%s,
                     street4CheckCallDone=street4CheckCallDone+%s,
                     street4CheckRaiseDone=street4CheckRaiseDone+%s,
+                    street1foldToCheckRaiseChance=street1foldToCheckRaiseChance+%s,
+                    street1foldToCheckRaiseDone=street1foldToCheckRaiseDone+%s,
+                    street2foldToCheckRaiseChance=street2foldToCheckRaiseChance+%s,
+                    street2foldToCheckRaiseDone=street2foldToCheckRaiseDone+%s,
+                    street3foldToCheckRaiseChance=street3foldToCheckRaiseChance+%s,
+                    street3foldToCheckRaiseDone=street3foldToCheckRaiseDone+%s,
+                    street4foldToCheckRaiseChance=street4foldToCheckRaiseChance+%s,
+                    street4foldToCheckRaiseDone=street4foldToCheckRaiseDone+%s,
                     street0Calls=street0Calls+%s,
                     street1Calls=street1Calls+%s,
                     street2Calls=street2Calls+%s,
                     street3Calls=street3Calls+%s,
-                    street4Calls=street4Calls+%s,
-                    street0Bets=street0Bets+%s, 
-                    street1Bets=street1Bets+%s,
-                    street2Bets=street2Bets+%s, 
-                    street3Bets=street3Bets+%s,
-                    street4Bets=street4Bets+%s, 
+                    street4Calls=street4Calls+%s, 
                     street0Raises=street0Raises+%s,
                     street1Raises=street1Raises+%s,
                     street2Raises=street2Raises+%s,
@@ -8613,7 +13512,19 @@ class Sql:
                     street4Raises=street4Raises+%s,
                     street1Discards=street1Discards+%s,
                     street2Discards=street2Discards+%s,
-                    street3Discards=street3Discards+%s
+                    street3Discards=street3Discards+%s,
+             
+                    street0Callers=street0Callers+%s,
+                    street1Callers=street1Callers+%s,
+                    street2Callers=street2Callers+%s,
+                    street3Callers=street3Callers+%s,
+                    street4Callers=street4Callers+%s,
+                    
+                    street0Aggressors=street0Aggressors+%s,
+                    street1Aggressors=street1Aggressors+%s,
+                    street2Aggressors=street2Aggressors+%s,
+                    street3Aggressors=street3Aggressors+%s,
+                    street4Aggressors=street4Aggressors+%s
                     WHERE tourneyId=%s
                     AND playerId=%s"""
                     
@@ -9025,6 +13936,24 @@ class Sql:
                                             playersAtStreet3,
                                             playersAtStreet4,
                                             playersAtShowdown,
+                                            
+                                            street0Callers,
+                                            street1Callers,
+                                            street2Callers,
+                                            street3Callers,
+                                            street4Callers,
+                                            
+                                            street0Aggressors,
+                                            street1Aggressors,
+                                            street2Aggressors,
+                                            street3Aggressors,
+                                            street4Aggressors,
+                                            
+                                            street0Calls,
+                                            street1Calls,
+                                            street2Calls,
+                                            street3Calls,
+                                            street4Calls,
                                             street0Raises,
                                             street1Raises,
                                             street2Raises,
@@ -9041,14 +13970,20 @@ class Sql:
                                               (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
                                                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
                                                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
-                                               %s, %s)"""
+                                               %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+                                               %s, %s, %s, %s, %s, %s)"""
 
 
         self.query['store_hands_players'] = """insert into HandsPlayers (
                 handId,
                 playerId,
                 startCash,
+                bigblind,
                 effStack,
+                effActiveStack,
+                effMzone,
+                effActiveMzone,
+                tableMzone,
                 startBounty,
                 endBounty,
                 seatNo,
@@ -9082,8 +14017,10 @@ class Sql:
                 rakeWeighted,
                 totalProfit,
                 allInEV,
+                
                 street0VPIChance,
                 street0VPI,
+                
                 street1Seen,
                 street2Seen,
                 street3Seen,
@@ -9096,12 +14033,14 @@ class Sql:
                 street3AllIn,
                 street4AllIn,
                 wentAllIn,
+                
                 street0AggrChance,
                 street0Aggr,
                 street1Aggr,
                 street2Aggr,
                 street3Aggr,
                 street4Aggr,
+                
                 street1CBChance,
                 street2CBChance,
                 street3CBChance,
@@ -9128,8 +14067,10 @@ class Sql:
                 street4FirstToAct,
                 tourneysPlayersId,
                 startCards,
+                
                 street0CalledRaiseChance,
                 street0CalledRaiseDone,
+                
                 street0_2BChance,
                 street0_2BDone,
                 street0_3BChance,
@@ -9146,6 +14087,66 @@ class Sql:
                 street0_FoldTo4BDone,
                 street0_SqueezeChance,
                 street0_SqueezeDone,
+                street0_FoldToSqueezeChance,
+                street0_FoldToSqueezeDone,
+                
+                street1_2BChance,
+                street1_2BDone,
+                street1_3BChance,
+                street1_3BDone,
+                street1_4BChance,
+                street1_4BDone,
+                street1_C4BChance,
+                street1_C4BDone,
+                street1_FoldTo2BChance,
+                street1_FoldTo2BDone,
+                street1_FoldTo3BChance,
+                street1_FoldTo3BDone,
+                street1_FoldTo4BChance,
+                street1_FoldTo4BDone,
+                street1_SqueezeChance,
+                street1_SqueezeDone,
+                street1_FoldToSqueezeChance,
+                street1_FoldToSqueezeDone,
+                
+                street2_2BChance,
+                street2_2BDone,
+                street2_3BChance,
+                street2_3BDone,
+                street2_4BChance,
+                street2_4BDone,
+                street2_C4BChance,
+                street2_C4BDone,
+                street2_FoldTo2BChance,
+                street2_FoldTo2BDone,
+                street2_FoldTo3BChance,
+                street2_FoldTo3BDone,
+                street2_FoldTo4BChance,
+                street2_FoldTo4BDone,
+                street2_SqueezeChance,
+                street2_SqueezeDone,
+                street2_FoldToSqueezeChance,
+                street2_FoldToSqueezeDone,
+                
+                street3_2BChance,
+                street3_2BDone,
+                street3_3BChance,
+                street3_3BDone,
+                street3_4BChance,
+                street3_4BDone,
+                street3_C4BChance,
+                street3_C4BDone,
+                street3_FoldTo2BChance,
+                street3_FoldTo2BDone,
+                street3_FoldTo3BChance,
+                street3_FoldTo3BDone,
+                street3_FoldTo4BChance,
+                street3_FoldTo4BDone,
+                street3_SqueezeChance,
+                street3_SqueezeDone,
+                street3_FoldToSqueezeChance,
+                street3_FoldToSqueezeDone,
+                
                 raiseToStealChance,
                 raiseToStealDone,
                 stealChance,
@@ -9161,6 +14162,16 @@ class Sql:
                 foldToOtherRaisedStreet2,
                 foldToOtherRaisedStreet3,
                 foldToOtherRaisedStreet4,
+                callToOtherRaisedStreet0,
+                callToOtherRaisedStreet1,
+                callToOtherRaisedStreet2,
+                callToOtherRaisedStreet3,
+                callToOtherRaisedStreet4,
+                raiseToOtherRaisedStreet0,
+                raiseToOtherRaisedStreet1,
+                raiseToOtherRaisedStreet2,
+                raiseToOtherRaisedStreet3,
+                raiseToOtherRaisedStreet4,
                 raiseFirstInChance,
                 raisedFirstIn,
                 foldBbToStealChance,
@@ -9175,6 +14186,22 @@ class Sql:
                 foldToStreet3CBDone,
                 foldToStreet4CBChance,
                 foldToStreet4CBDone,
+                callToStreet1CBChance,
+                callToStreet1CBDone,
+                callToStreet2CBChance,
+                callToStreet2CBDone,
+                callToStreet3CBChance,
+                callToStreet3CBDone,
+                callToStreet4CBChance,
+                callToStreet4CBDone,
+                raiseToStreet1CBChance,
+                raiseToStreet1CBDone,
+                raiseToStreet2CBChance,
+                raiseToStreet2CBDone,
+                raiseToStreet3CBChance,
+                raiseToStreet3CBDone,
+                raiseToStreet4CBChance,
+                raiseToStreet4CBDone,
                 street1CheckCallRaiseChance,
                 street1CheckCallDone,
                 street1CheckRaiseDone,
@@ -9187,16 +14214,19 @@ class Sql:
                 street4CheckCallRaiseChance,
                 street4CheckCallDone,
                 street4CheckRaiseDone,
+                street1foldToCheckRaiseChance,
+                street1foldToCheckRaiseDone,
+                street2foldToCheckRaiseChance,
+                street2foldToCheckRaiseDone,
+                street3foldToCheckRaiseChance,
+                street3foldToCheckRaiseDone,
+                street4foldToCheckRaiseChance,
+                street4foldToCheckRaiseDone,
                 street0Calls,
                 street1Calls,
                 street2Calls,
                 street3Calls,
                 street4Calls,
-                street0Bets,
-                street1Bets,
-                street2Bets,
-                street3Bets,
-                street4Bets,
                 street0Raises,
                 street1Raises,
                 street2Raises,
@@ -9205,6 +14235,19 @@ class Sql:
                 street1Discards,
                 street2Discards,
                 street3Discards,
+                
+                street0Callers,
+                street1Callers,
+                street2Callers,
+                street3Callers,
+                street4Callers,
+                
+                street0Aggressors,
+                street1Aggressors,
+                street2Aggressors,
+                street3Aggressors,
+                street4Aggressors,
+                    
                 handString
                )
                values (
@@ -9240,8 +14283,27 @@ class Sql:
                     %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s,
-                    %s
-                )"""
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s,
+                    %s)"""
 
         self.query['store_hands_actions'] = """insert into HandsActions (
                         handId,
